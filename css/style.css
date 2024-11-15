@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/*-- Variaveis de cores CSS*/
+:root{
+    --color0: #F3F4F0;
+    --color1: #CED8D0;
+    --color2: #96A5A0;
+    --color3: #4F5C55;
+    --color4: #517709;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color0);
+}
+
+h1{
+    font-weight: bold;
+    background-color: var(--color3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color:  white;
+}
+
+section {
+    background-color: var(--color1);
+    height: 561px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+footer{
+    display: block;
+    background-color: var(--color4);
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+
