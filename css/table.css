@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/*Configurações gerais das tabelas*/
+
+table {
+    width: 400px;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+thead, tfoot {
+    background-color: gray;
+    color: white;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid;
+    border-color: black;
+    padding: 4px;  
+    text-align: center;    
+}
+
+/*Efeito zebrado na tabela*/
+tbody > tr:nth-child(2n) {
+    background-color: whitesmoke;
+}
