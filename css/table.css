@@ -8,7 +8,7 @@ table {
     font-size: 13px;
 }
 
-thead, tfoot {
+thead {
     background-color: gray;
     color: white;
     font-size: 14px;
