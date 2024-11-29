@@ -7,6 +7,18 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
+
+    <style>
+        a.link{
+            color: green;
+            font-weight: bold;                      
+        }
+        iframe{
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+        }
+    </style>
 </head>
 <body>
     <hearder>
@@ -14,6 +26,8 @@
     </hearder>
     <main>
         <section>
+            <P><a href="register.html" class="link" target="frame">CADASTRAR</a></P>
+            <P><a href="edit.html" class="link" target="frame">EDITAR</a></P>
             <table>
                 <caption>Relação de operadoras</caption>
                 <thead>
@@ -43,32 +57,13 @@
                         <td>https://insulartc.com.br/est/wp/</td>
                         <td>EDITAR</td>
                         <td>EXCLUIR</td>
-                    </tr>
-                    <tr>
-                        <td>Imperatriz</td>
-                        <td>Santo Amaro da Imperatriz</td>
-                        <td>https://www.tcimperatriz.com.br/</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
-                    </tr>
-                    <tr>
-                        <td>Jotur</td>
-                        <td>Palhoça</td>
-                        <td>https://www.jotur.com.br/</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
-                    </tr>
-                    <tr>
-                        <td>Santa Terezinha</td>
-                        <td>Palhoça</td>
-                        <td>https://santaterezinha.com/?area=linhas</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
-                    </tr>
+                    </tr>                    
                 </tbody>                
             </table>
             <br> 
-            <p>Total de operadoras cadastradas: 00</p>             
+            <p>Total de operadoras cadastradas: 00</p>  
+            <br>
+            <iframe src="register.html" name="frame"></iframe>           
         </section>
     </main>
     <footer>
