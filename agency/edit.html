@@ -9,17 +9,24 @@
 <body>
     <section>
         <h1>Editar operadora</h1>
-        <form action="#" method="get">
+        <form action="#" method="get" autocomplete="off">
+            <fieldset>
+                <p>
+                    <label for="id_nome">Nome:</label>
+                    <input type="text" name="nome" id="id_nome" required>
+                </p>
+                <p>
+                    <label for="id_cidade">Cidade:</label>
+                    <input type="text" name="cidade" id="id_cidade" required>
+                </p>
+                <p>
+                    <label for="id_url">Site:</label>
+                    <input type="text" name="url" id="id_url" required>
+                </p>
+            </fieldset>
             <p>
-                Nome:
-                <input type="text" name="nome" id="nome">
-                Cidade:
-                <input type="text" name="cidade" id="cidade">
-                Site:
-                <input type="text" name="url" id="url">
-                <br>
-                <input type="submit" value="Editar">
-            </p>
+                <input type="submit" value="EDITAR">
+            </p>           
         </form>
     </section>
     
