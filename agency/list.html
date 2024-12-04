@@ -18,6 +18,13 @@
             height: 300px;
             border: 2px solid black;
         }
+        dialog{
+            margin: auto;
+        }
+        dialog::backdrop{
+            background-color: var(--color3);
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -26,8 +33,13 @@
     </hearder>
     <main>
         <section>
-            <P><a href="register.html" class="link" target="frame">CADASTRAR</a></P>
-            <P><a href="edit.html" class="link" target="frame">EDITAR</a></P>
+            <button id="btn-cad">
+                <a href="register.html" class="link" target="frame">CADASTRAR</a>
+            </button>
+            <button id="btn-edit">
+                <a href="edit.html" class="link" target="frame">EDITAR</a>
+            </button>
+
             <table>
                 <caption>Relação de operadoras</caption>
                 <thead>
@@ -63,11 +75,16 @@
             <br> 
             <p>Total de operadoras cadastradas: 00</p>  
             <br>
-            <iframe src="register.html" name="frame"></iframe>           
+            <dialog>
+                <iframe src="register.html" name="frame"></iframe>
+                <br>
+                <button>FECHAR</button>
+            </dialog>           
         </section>
     </main>
     <footer>
         <p><a href="../index.html">< Voltar</a></p>
     </footer>
 </body>
+<script src="../js/modal.js"></script>
 </html>
