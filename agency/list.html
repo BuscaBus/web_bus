@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,39 +8,19 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-
-    <style>
-        a.link{
-            color: green;
-            font-weight: bold;                      
-        }
-        iframe{
-            width: 400px;
-            height: 300px;
-            border: 2px solid black;
-        }
-        dialog{
-            margin: auto;
-        }
-        dialog::backdrop{
-            background-color: var(--color3);
-            opacity: 0.6;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/agency.css">    
 </head>
+
 <body>
     <hearder>
         <h1>Operadoras</h1>
     </hearder>
     <main>
         <section>
-            <button id="btn-cad">
-                <a href="register.html" class="link" target="frame">CADASTRAR</a>
+            <button class="btn-cadastrar" id="btn-cad">
+                <a href="register.html" class="link" target="frame">+ CADASTRAR</a>
             </button>
-            <button id="btn-edit">
-                <a href="edit.html" class="link" target="frame">EDITAR</a>
-            </button>
-
+            
             <table>
                 <caption>Relação de operadoras</caption>
                 <thead>
@@ -53,22 +34,40 @@
                         <td>Consórcio Fênix</td>
                         <td>Florianópolis</td>
                         <td>https://www.consorciofenix.com.br/</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
+                        <td>
+                            <button class="btn-editar" id="btn-edit">
+                                <a href="edit.html" class="link" target="frame">EDITAR</a>
+                            </button>
+                        </td>
+                        <td>
+                            <Button class="btn-excluir">EXCLUIR</Button>                               
+                        </td>
                     </tr>
                     <tr>
                         <td>Biguaçu</td>
                         <td>Biguaçu</td>
                         <td>https://www.tcbiguacu.com.br/</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
+                        <td>
+                            <button class="btn-editar" id="btn-edit">
+                                <a href="edit.html" class="link" target="frame">EDITAR</a>
+                            </button>
+                         </td>
+                        <td>
+                            <Button class="btn-excluir">EXCLUIR</Button>                               
+                        </td>
                     </tr>
                     <tr>
                         <td>Estrela</td>
                         <td>Florianópolis</td>
                         <td>https://insulartc.com.br/est/wp/</td>
-                        <td>EDITAR</td>
-                        <td>EXCLUIR</td>
+                        <td>
+                            <button class="btn-editar" id="btn-edit">
+                                <a href="edit.html" class="link" target="frame">EDITAR</a>
+                            </button>
+                        </td>
+                        <td>
+                            <Button class="btn-excluir">EXCLUIR</Button>                               
+                        </td>
                     </tr>                    
                 </tbody>                
             </table>
@@ -78,7 +77,7 @@
             <dialog>
                 <iframe src="register.html" name="frame"></iframe>
                 <br>
-                <button>FECHAR</button>
+                <button class="btn-fechar">FECHAR</button>
             </dialog>           
         </section>
     </main>
@@ -86,5 +85,5 @@
         <p><a href="../index.html">< Voltar</a></p>
     </footer>
 </body>
-<script src="../js/modal.js"></script>
+<script src="../js/modal-agency.js"></script>
 </html>

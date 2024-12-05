@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+a.link{
+     font-weight: bold;                      
+}
+
+button.btn-cadastrar{
+    background-color: var(--color3);
+    color: var(--color0);
+    font-weight: bold;
+    padding: 3px;
+}
+
+button.btn-editar{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+button.btn-excluir{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+iframe{
+    width: 400px;
+    height: 300px;    
+}
+
+dialog{
+    margin: auto;
+    padding: 10px;
+}
+
+.btn-fechar{
+    background-color: var(--color4);
+    color: white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+dialog::backdrop{
+    background-color: var(--color3);
+    opacity: 0.6;
+}

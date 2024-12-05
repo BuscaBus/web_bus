@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de linhas</title>
+</head>
+
+<body>
+    <section>
+        <h1>Cadastrar linha</h1>
+        <form action="#" method="get" autocomplete="off">
+            <hr>
+            <p>
+                <label for="id_nome">Operadora:</label>
+                <input type="text" name="nome" id="id_nome" required>
+            </p>
+            <p>
+                <label for="id_cod">Código:</label>
+                <input type="text" name="codigo" id="id_cod" required>
+            </p>
+            <p>
+                <label for="id_linha">Linha:</label>
+                <input type="text" name="linha" id="id_linha" required>
+            </p>
+            <p>
+                <label for="id_desc">Descrição:</label>
+                <textarea name="descricao" id="id_desc"></textarea>
+            </p>
+            <p>
+                <label for="id_tipo">Tipo</label>
+                <select name="tipo" id="id_tipo">
+                    <option value="conv">Convencionais</option>
+                    <option value="exec">Executivo</option>
+                    <option value="soc">Social</option>
+                </select>                
+            </p>
+            <p>
+                <label for="id_tarifa">Tarifa</label>
+                <select name="tarifa" id="id_tarifa">
+                    <option value="tarifa1">6,00</option>
+                    <option value="tarifa2">15,00</option>
+                    <option value="tarifa3">3,25</option>
+                </select>
+            </p>
+            <p>
+                <label for="id_status">Status</label>
+                <input type="radio" name="status" id="id_status_a"> <label for="id_status_a">Ativa</label>
+                <input type="radio" name="status" id="id_status_i"> <label for="id_status_i">Inativa</label>
+            </p>
+
+            <hr>
+            <p>
+                <input type="submit" value="CADASTRAR">
+            </p>
+
+        </form>
+    </section>
+
+</body>
+
+</html>

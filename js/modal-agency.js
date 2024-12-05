@@ -1,4 +1,4 @@
-/*Script para abrir o modal cadastrar*/
+/*Script para abrir o modal cadastrar operadora*/
 const btn_cad = document.querySelector("#btn-cad")
 const modal_cad = document.querySelector("dialog")
 
@@ -7,7 +7,7 @@ btn_cad.onclick = function ()
     modal_cad.showModal()
 }
 
-/*Script para abrir o modal editar*/
+/*Script para abrir o modal editar operadora*/
 const btn_edit = document.querySelector("#btn-edit")
 const modal_edit = document.querySelector("dialog")
 
@@ -19,7 +19,9 @@ btn_edit.onclick = function ()
 /*Script para fechar os modais*/
 const buttonClose = document.querySelector("dialog button")
 
-buttonClose.onclick = function(){
+buttonClose.onclick = function()
+{
     modal_cad.close()
     modal_edit.close()
 }
+
