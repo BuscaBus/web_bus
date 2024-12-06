@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de linhas</title>
+    <title>Editar linha</title>
     <link rel="stylesheet" href="../css/route.css">
 </head>
 
 <body>
     <section>
-        <h1>Cadastrar linha</h1>
+        <h1>Editar linha</h1>
         <form action="#" method="get" autocomplete="off">
-            <hr>
+            <hr>  
             <p>
                 <label for="id-nome">Operadora:</label>
-                <input type="text" name="nome" id="id-nome" required>
-            </p>
+                <input type="text" name="nome" id="id-nome" required disabled>
+            </p>          
             <p>
                 <label for="id-cod">Código:</label>
-                <input type="text" name="codigo" id="id-cod" required>
+                <input type="text" name="codigo" id="id-cod" required disabled>
             </p>
             <p>
                 <label for="id-linha">Linha:</label>
@@ -39,7 +39,7 @@
             </p>
             <p>
                 <label for="id-tp-tarifa">Tipo de Tarifa:</label>
-                <select name="tp_tarifa" id="id-tp-tarifa">
+                <select name="tp_tarifa" id="id-tp-tarifa" disabled>
                     <option value="conv">Convencional</option>
                     <option value="Exec">Executiva</option>
                     <option value="soc">Social</option>
@@ -61,7 +61,7 @@
 
             <hr>
             <p>
-                <input type="submit" value="CADASTRAR">
+                <input type="submit" value="EDITAR">
             </p>
 
         </form>

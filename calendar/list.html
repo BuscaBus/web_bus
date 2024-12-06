@@ -8,12 +8,12 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/agency.css">    
+    <link rel="stylesheet" href="../css/calendar.css">    
 </head>
 
 <body>
     <hearder>
-        <h1>Operadoras</h1>
+        <h1>Calendários</h1>
     </hearder>
     <main>
         <section>
@@ -22,18 +22,32 @@
             </button>
             
             <table>
-                <caption>Relação de operadoras</caption>
+                <caption>Relação de calendários</caption>
                 <thead>
-                    <th>Operadora</th>
-                    <th>Cidade</th>
-                    <th>Site</th>
+                    <th>Dia tipo</th>
+                    <th>Inicio da vigência</th>
+                    <th>Término da vigência</th>
+                    <th>Seg</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sab</th>
+                    <th>Dom</th>
                     <th colspan="2">Ações</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Consórcio Fênix</td>
-                        <td>Florianópolis</td>
-                        <td>https://www.consorciofenix.com.br/</td>
+                        <td>Dias Ulteis</td>
+                        <td>01/01/2025</td>
+                        <td>31/12/2025</td>
+                        <td>S</td>
+                        <td>S</td>
+                        <td>S</td>
+                        <td>S</td>
+                        <td>S</td>
+                        <td>N</td>
+                        <td>N</td>
                         <td>
                             <button class="btn-editar" id="btn-edit">
                                 <a href="edit.html" class="link" target="frame">EDITAR</a>
@@ -44,9 +58,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Biguaçu</td>
-                        <td>Biguaçu</td>
-                        <td>https://www.tcbiguacu.com.br/</td>
+                        <td>Sábados</td>
+                        <td>01/01/2025</td>
+                        <td>31/12/2025</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>S</td>
+                        <td>N</td>
                         <td>
                             <button class="btn-editar" id="btn-edit">
                                 <a href="edit.html" class="link" target="frame">EDITAR</a>
@@ -57,9 +78,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Estrela</td>
-                        <td>Florianópolis</td>
-                        <td>https://insulartc.com.br/est/wp/</td>
+                        <td>Domingos</td>
+                        <td>01/01/2025</td>
+                        <td>31/12/2025</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td>S</td>
                         <td>
                             <button class="btn-editar" id="btn-edit">
                                 <a href="edit.html" class="link" target="frame">EDITAR</a>
@@ -70,9 +98,7 @@
                         </td>
                     </tr>                    
                 </tbody>                
-            </table>
-            <br> 
-            <p>Total de operadoras cadastradas: 00</p>  
+            </table>             
             <br>
             <dialog>
                 <iframe src="register.html" name="frame"></iframe>
@@ -85,5 +111,5 @@
         <p><a href="../index.html">< Voltar</a></p>
     </footer>
 </body>
-<script src="../js/modal-agency.js"></script>
+<script src="../js/modal-calendar.js"></script>
 </html>

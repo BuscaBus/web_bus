@@ -16,7 +16,7 @@ caption {
 
 thead {
     background-color: gray;
-    color: white;
+    color: var(--color0);
     font-size: 14px;
 }
 

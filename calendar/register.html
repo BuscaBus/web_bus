@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de calendário</title>
+    <link rel="stylesheet" href="../css/calendar.css">  
+</head>
+
+<body>
+    <section>
+        <h1>Cadastrar calendário</h1>
+        <form action="#" method="get" autocomplete="off">
+            <hr>
+            <p>
+                <label for="id-dia-tp">Dia tipo:</label>
+                <input type="text" name="dia_tipo" id="id-dia-tp" required>
+            </p>
+            <p>
+                <label for="id-inicio-vig">Inicio da vigência:</label>
+                <input type="date" name="inicio_vigencia" id="id-inicio-vig" required>            
+            </p>
+            <p>
+                <label for="id-term-vig">Término da vigência:</label>
+                <input type="date" name="term_vigencia" id="id-term-vig" required>            
+            </p>
+            <input type="checkbox" name="chec-seg" id="id-chec-seg"> Segunda
+            <input type="checkbox" name="chec-ter" id="id-chec-ter"> Terça
+            <input type="checkbox" name="chec-qua" id="id-chec-qua"> Quarta
+            <input type="checkbox" name="chec-qui" id="id-chec-qui"> Quinta
+            <input type="checkbox" name="chec-sex" id="id-chec-sex"> Sexta
+            <input type="checkbox" name="chec-sab" id="id-chec-sab"> Sábado
+            <input type="checkbox" name="chec-dom" id="id-chec-dom"> Domingo
+            <br>
+            <hr>
+            <p>
+                <input type="submit" value="CADASTRAR">
+            </p>
+        </form>
+    </section>
+</body>
+
+</html>

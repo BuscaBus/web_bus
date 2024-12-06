@@ -1,4 +1,4 @@
-/*Script para abrir o modal cadastrar operadora*/
+/*Script para abrir o modal cadastrar calendário*/
 const btn_cad = document.querySelector("#btn-cad")
 const modal_cad = document.querySelector("dialog")
 
@@ -7,7 +7,7 @@ btn_cad.onclick = function ()
     modal_cad.showModal()
 }
 
-/*Script para abrir o modal editar operadora*/
+/*Script para abrir o modal editar calendário*/
 const btn_edit = document.querySelector("#btn-edit")
 const modal_edit = document.querySelector("dialog")
 
@@ -24,5 +24,3 @@ buttonClose.onclick = function()
     modal_cad.close()
     modal_edit.close()
 }
-
-
