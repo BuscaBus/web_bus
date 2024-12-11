@@ -5,7 +5,7 @@
 table {
     width: 400px;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 13px;   
 }
 
 caption {
@@ -23,11 +23,14 @@ thead {
 th, td {
     border: 1px solid;
     border-color: black;
-    padding: 4px;  
-    text-align: center;    
+    padding: 4px 3px 4px 7px;
+    text-align: left; 
+
 }
 
 /*Efeito zebrado na tabela*/
 tbody > tr:nth-child(2n) {
     background-color: whitesmoke;
 }
+
+

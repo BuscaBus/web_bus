@@ -29,6 +29,7 @@ button.btn-editar{
     font-size: 10px;
     font-weight: bold;
     padding: 3px 6px 3px 6px;
+    margin-right: 1px;
     border-radius: 5px;
 }
 
@@ -67,4 +68,39 @@ dialog::backdrop{
 }
 
 /*Configurações da tabela da página*/
+.th1{
+    padding-right: 100px;
+}
 
+.th2{
+    padding-right: 30px;
+}
+
+.th3{
+    padding-right: 200px;
+}
+
+.th4{
+    padding-right: 75px;    
+}
+
+/*Configurações da tela de cadastro*/
+.p_form{
+    text-align: left;
+}
+    
+.lb_nome{
+    margin-right: 10px;
+}
+
+.lb_senha{
+    margin-right: 6px;
+}
+
+.lb_email{
+    margin-right: 7px;
+}
+
+.inp_nome, .inp_senha, .inp_email{
+    width: 315px;
+}

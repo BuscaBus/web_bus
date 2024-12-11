@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/*Configurações gerais da página*/
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -19,7 +20,7 @@ button.btn-cadastrar{
     font-weight: bold;
     padding: 5px 10px 5px 10px;
     border-radius: 6px;
-    margin-bottom: 15px;
+    margin-bottom: 15px;   
 }
 
 button.btn-viagem{
@@ -29,6 +30,7 @@ button.btn-viagem{
     font-weight: bold;
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
+    margin-right: 2px;
 }
 
 button.btn-editar{
@@ -38,6 +40,7 @@ button.btn-editar{
     font-weight: bold;
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
+    margin-right: 2px;
 }
 
 button.btn-excluir{
@@ -50,6 +53,7 @@ button.btn-excluir{
     border-radius: 6px;
 }
 
+/*Configurações do Iframe e do Dialog*/
 iframe{
     width: 500px;
     height: 470px;    
@@ -73,5 +77,34 @@ dialog::backdrop{
     opacity: 0.6;
 }
 
-/*Configuração para tabela em Rote*/
+/*Configurações da tabela da página*/
+.th1{
+    padding-right: 100px;
+}
 
+.th2{
+    padding-right: 10px;
+}
+
+.th3{
+    padding-right: 300px;
+}
+.th4{
+    padding-right: 150px;
+}
+
+.th5{
+    padding-right: 10px;
+}
+
+.th6{
+    padding-right: 5px;
+}
+
+.th7{
+    text-align: center;
+}
+
+.th8{
+    padding-right: 136px;
+}
