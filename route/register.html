@@ -13,55 +13,47 @@
         <h1>Cadastrar linha</h1>
         <form action="#" method="get" autocomplete="off">
             <hr>
-            <p>
-                <label for="id-nome">Operadora:</label>
-                <input type="text" name="nome" id="id-nome" required>
+            <p class="p1">
+                <label for="id-nome" class="lb1">Operadora:</label>
+                <input type="text" name="nome" class="inpt1" id="id-nome" required>
             </p>
-            <p>
-                <label for="id-cod">Código:</label>
-                <input type="text" name="codigo" id="id-cod" required>
+            <p class="p1">
+                <label for="id-cod" class="lb2">Código:</label>
+                <input type="text" name="codigo" class="inpt2" id="id-cod" required>
             </p>
-            <p>
-                <label for="id-linha">Linha:</label>
-                <input type="text" name="linha" id="id-linha" required>
+            <p class="p1">
+                <label for="id-linha" class="lb3">Linha:</label>
+                <input type="text" name="linha" class="inpt3" id="id-linha" required>
             </p>
-            <p>
-                <label for="id-desc">Descrição:</label>
-                <textarea name="descricao" id="id-desc"></textarea>
+            <p class="p1">
+                <label for="id-desc" class="lb4">Descrição:</label>
+                <textarea name="descricao" id="id-desc" class="tx_area1"></textarea>
             </p>
-            <p>
-                <label for="id-cat">Categoria:</label>
-                <select name="tipo" id="id-cat">
+            <p class="p1">
+                <label for="id-grp" class="lb5">Grupo:</label>
+                <select name="tipo" id="id-grp" class="selc1">
                     <option value="conv">Convencionais</option>
                     <option value="exec">Executivo</option>
                     <option value="soc">Social</option>
                 </select>                
-            </p>
-            <p>
-                <label for="id-tp-tarifa">Tipo de Tarifa:</label>
-                <select name="tp_tarifa" id="id-tp-tarifa">
-                    <option value="conv">Convencional</option>
-                    <option value="Exec">Executiva</option>
-                    <option value="soc">Social</option>
-                </select>
-            </p>
-            <p>
-                <label for="id-tarifa">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa">
+            </p>            
+            <p class="p1">
+                <label for="id-tarifa" class="lb6">Tarifa:</label>
+                <select name="tarifa" id="id-tarifa" class="selc2">
                     <option value="tarifa1">6,00</option>
                     <option value="tarifa2">15,00</option>
                     <option value="tarifa3">3,25</option>
                 </select>
             </p>
-            <p>
-                <label for="id-status">Status:</label>
-                <input type="radio" name="status" id="id-status-a"> <label for="id-status-a">Ativa</label>
-                <input type="radio" name="status" id="id-status-i"> <label for="id-status-i">Inativa</label>
+            <p class="p1">
+                <label for="id-status" class="lb7">Status:</label>
+                <input type="radio" name="status"  class="inpt4" id="id-status-a"> <label for="id-status-a">Ativa</label>
+                <input type="radio" name="status" class="inpt5" id="id-status-i"> <label for="id-status-i">Inativa</label>
             </p>
 
             <hr>
             <p>
-                <input type="submit" value="CADASTRAR">
+                <input type="submit" value="CADASTRAR" class="inpt_btn_reg">
             </p>
 
         </form>

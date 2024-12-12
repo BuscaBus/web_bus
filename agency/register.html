@@ -13,21 +13,32 @@
         <h1>Cadastrar operadora</h1>
         <form action="#" method="get" autocomplete="off">
             <hr>
-            <p>
-                <label for="id-nome">Nome:</label>
-                <input type="text" name="nome" id="id-nome" required>
+            <p class="p1">
+                <label for="id-nome" class="lb1">Nome:</label>
+                <input type="text" name="nome" class="inpt1" id="id-nome" placeholder="insira o nome da operadora..." required>
             </p>
-            <p>
-                <label for="id-cidade">Cidade:</label>
-                <input type="text" name="cidade" id="id-cidade" required>
-            </p>
-            <p>
-                <label for="id-url">Site:</label>
-                <input type="text" name="url" id="id-url" required>
+            <p class="p1">
+                <label for="id-cid" class="lb2">Cidade:</label>
+                <select name="cidade" class="selc1" id="id-cid">
+                    <option value="select">Selecione uma cidade..</option>
+                    <option value="aguas_mornas">Águas Mornas</option>
+                    <option value="antonio_carlos">Antônio Carlos</option>
+                    <option value="biguacu">Biguaçu</option>
+                    <option value="Florianpolis">Florianópolis</option>
+                    <option value="gov_celso_ramos">Governador Celso Ramos</option>
+                    <option value="palhoca">Palhoça</option>
+                    <option value="sto_amaro_imp">Santo Amaro da Imperatriz</option>
+                    <option value="sao_jose">São José</option>
+                    <option value="sao_pedro-alc">São Pedro de Alcântara</option>
+                </select>                
+            </p>            
+            <p class="p1">
+                <label for="id-url" class="lb3">Site:</label>
+                <input type="text" name="url" class="inpt2" id="id-url" placeholder="insira o site da operadora..." required>
             </p>
             <hr>
             <p>
-                <input type="submit" value="CADASTRAR">
+                <input type="submit" value="CADASTRAR" class="inpt_btn_reg">
             </p>
 
         </form>
