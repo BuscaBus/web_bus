@@ -13,55 +13,55 @@
         <h1>Editar linha</h1>
         <form action="#" method="get" autocomplete="off">
             <hr>  
-            <p>
-                <label for="id-nome">Operadora:</label>
-                <input type="text" name="nome" id="id-nome" required disabled>
-            </p>          
-            <p>
-                <label for="id-cod">Código:</label>
-                <input type="text" name="codigo" id="id-cod" required disabled>
+            <p class="p1">
+                <label for="id-grp" class="lb-op">Operadora:</label>
+                <select name="nome" id="id-grp" class="selc" required disabled>                    
+                    <option value="cfenix">Consórcio Fênix</option>
+                    <option value="biguacu">Biguaçu</option>
+                    <option value="estrela">Estrela</option>
+                    <option value="Imperatriz">Imperatriz</option>
+                    <option value="jotur">Jotur</option>
+                    <option value="sterezinha">Santa Terezinha</option>
+                </select>
+            </p>               
+            <p class="p1">
+                <label for="id-cod" class="lb-cod">Código:</label>
+                <input type="text" name="codigo" class="inpt-cod" id="id-cod" required disabled>
             </p>
-            <p>
-                <label for="id-linha">Linha:</label>
-                <input type="text" name="linha" id="id-linha" required>
+            <p class="p1">
+                <label for="id-linha" class="lb-linha">Linha:</label>
+                <input type="text" name="linha" class="inpt-linha" id="id-linha" required>
             </p>
-            <p>
-                <label for="id-desc">Descrição:</label>
-                <textarea name="descricao" id="id-desc"></textarea>
+            <p class="p1">
+                <label for="id-desc" class="lb-desc">Descrição:</label>
+                <textarea name="descricao" id="id-desc" class="tx_area1"></textarea>
             </p>
-            <p>
-                <label for="id-cat">Categoria:</label>
-                <select name="tipo" id="id-cat">
+            <p class="p1">
+                <label for="id-grp" class="lb-grupo">Grupo:</label>
+                <select name="tipo" id="id-grp" class="selc">
+                    <option value="select">Selecione um grupo de linha</option>
                     <option value="conv">Convencionais</option>
                     <option value="exec">Executivo</option>
                     <option value="soc">Social</option>
                 </select>                
-            </p>
-            <p>
-                <label for="id-tp-tarifa">Tipo de Tarifa:</label>
-                <select name="tp_tarifa" id="id-tp-tarifa" disabled>
-                    <option value="conv">Convencional</option>
-                    <option value="Exec">Executiva</option>
-                    <option value="soc">Social</option>
+            </p>            
+            <p class="p1">
+                <label for="id-tarifa" class="lb-tarifa">Tarifa:</label>
+                <select name="tarifa" id="id-tarifa" class="selc">
+                    <option value="select">Selecione uma tarifa</option>
+                    <option value="tarifa1">R$ 6,00</option>
+                    <option value="tarifa2">R$ 15,00</option>
+                    <option value="tarifa3">R$ 3,25</option>
                 </select>
             </p>
-            <p>
-                <label for="id-tarifa">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa">
-                    <option value="tarifa1">6,00</option>
-                    <option value="tarifa2">15,00</option>
-                    <option value="tarifa3">3,25</option>
-                </select>
-            </p>
-            <p>
-                <label for="id-status">Status:</label>
-                <input type="radio" name="status" id="id-status-a"> <label for="id-status-a">Ativa</label>
+            <p class="p1">
+                <label for="id-status" class="lb-status">Status:</label>
+                <input type="radio" name="status"  id="id-status-a"> <label for="id-status-a">Ativa</label>
                 <input type="radio" name="status" id="id-status-i"> <label for="id-status-i">Inativa</label>
             </p>
-
             <hr>
             <p>
-                <input type="submit" value="EDITAR">
+                <input type="submit" value="EDITAR" class="inpt_btn_edt">
             </p>
 
         </form>

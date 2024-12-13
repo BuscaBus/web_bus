@@ -13,42 +13,52 @@
         <h1>Cadastrar linha</h1>
         <form action="#" method="get" autocomplete="off">
             <hr>
+            <p  class="p1">
+                <label for="id-grp" class="lb-op">Operadora:</label>
+                <select name="nome" id="id-grp" class="selc">
+                    <option value="select">Selecione uma operadora</option>
+                    <option value="cfenix">Consórcio Fênix</option>
+                    <option value="biguacu">Biguaçu</option>
+                    <option value="estrela">Estrela</option>
+                    <option value="Imperatriz">Imperatriz</option>
+                    <option value="jotur">Jotur</option>
+                    <option value="sterezinha">Santa Terezinha</option>
+                </select>
+            </p>      
             <p class="p1">
-                <label for="id-nome" class="lb1">Operadora:</label>
-                <input type="text" name="nome" class="inpt1" id="id-nome" required>
+                <label for="id-cod" class="lb-cod">Código:</label>
+                <input type="text" name="codigo" class="inpt-cod" id="id-cod" placeholder="insira o código da linha..." required>
             </p>
             <p class="p1">
-                <label for="id-cod" class="lb2">Código:</label>
-                <input type="text" name="codigo" class="inpt2" id="id-cod" required>
+                <label for="id-linha" class="lb-linha">Linha:</label>
+                <input type="text" name="linha" class="inpt-linha" id="id-linha" placeholder="insira o nome da linha..." required>
             </p>
             <p class="p1">
-                <label for="id-linha" class="lb3">Linha:</label>
-                <input type="text" name="linha" class="inpt3" id="id-linha" required>
+                <label for="id-desc" class="lb-desc">Descrição:</label>
+                <textarea name="descricao" id="id-desc" class="tx_area1" placeholder="insira uma descrição..."></textarea>
             </p>
             <p class="p1">
-                <label for="id-desc" class="lb4">Descrição:</label>
-                <textarea name="descricao" id="id-desc" class="tx_area1"></textarea>
-            </p>
-            <p class="p1">
-                <label for="id-grp" class="lb5">Grupo:</label>
-                <select name="tipo" id="id-grp" class="selc1">
+                <label for="id-grp" class="lb-grupo">Grupo:</label>
+                <select name="tipo" id="id-grp" class="selc">
+                    <option value="select">Selecione um grupo de linha</option>
                     <option value="conv">Convencionais</option>
                     <option value="exec">Executivo</option>
                     <option value="soc">Social</option>
                 </select>                
             </p>            
             <p class="p1">
-                <label for="id-tarifa" class="lb6">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa" class="selc2">
-                    <option value="tarifa1">6,00</option>
-                    <option value="tarifa2">15,00</option>
-                    <option value="tarifa3">3,25</option>
+                <label for="id-tarifa" class="lb-tarifa">Tarifa:</label>
+                <select name="tarifa" id="id-tarifa" class="selc">
+                    <option value="select">Selecione uma tarifa</option>
+                    <option value="tarifa1">R$ 6,00</option>
+                    <option value="tarifa2">R$ 15,00</option>
+                    <option value="tarifa3">R$ 3,25</option>
                 </select>
             </p>
             <p class="p1">
-                <label for="id-status" class="lb7">Status:</label>
-                <input type="radio" name="status"  class="inpt4" id="id-status-a"> <label for="id-status-a">Ativa</label>
-                <input type="radio" name="status" class="inpt5" id="id-status-i"> <label for="id-status-i">Inativa</label>
+                <label for="id-status" class="lb-status">Status:</label>
+                <input type="radio" name="status"  id="id-status-a"> <label for="id-status-a">Ativa</label>
+                <input type="radio" name="status" id="id-status-i"> <label for="id-status-i">Inativa</label>
             </p>
 
             <hr>

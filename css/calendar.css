@@ -46,10 +46,11 @@ button.btn-excluir{
 /*Configurações do Iframe e do Dialog*/
 iframe{
     width: 600px;
-    height: 300px;    
+    height: 325px;    
 }
 
 dialog{
+    background-color: #CED8D0;
     margin: 2% 60% 50% 30%;
     padding: 10px;
 }
@@ -58,8 +59,9 @@ dialog{
     background-color: var(--color4);
     color: var(--color0);
     font-weight: bold;
-    padding: 3px 7px 3px 7px;
+    padding: 5px 12px 5px 12px;
     border-radius: 6px;
+    margin-bottom: 20px;
 }
 
 dialog::backdrop{
@@ -114,4 +116,59 @@ dialog::backdrop{
 
 .th11{
     padding-right: 75px;
+}
+
+/*Configurações da tela de cadastro*/
+
+.p1{
+    text-align: left;
+}
+   
+.lb-dia-tp{
+    margin-right: 94px;
+}
+
+.lb-inicio-vig{
+    margin-right: 25px;
+}
+
+.lb-term-vig{
+    margin-right: 5px;
+}
+
+.inpt-dia-tp{
+    background-color: #F3F4F0;
+    width: 412px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-inicio-vig{
+    background-color: #F3F4F0;
+    width: 412px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-term-vig{
+    background-color: #F3F4F0;
+    width: 412px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt_btn_reg{
+    background-color: #4F5C55;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 30px 3px 30px;
+}
+
+.inpt_btn_edt{
+    background-color: #4F5C55;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 30px 3px 30px;
 }

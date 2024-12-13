@@ -117,35 +117,35 @@ dialog::backdrop{
     text-align: left;
 }
     
-.lb1{
-    margin-right: 10px;
+.lb-op{
+    margin-right: 12px;
 }
 
-.lb2{
+.lb-cod{
     margin-right: 36px;
 }
 
-.lb3{
+.lb-linha{
     margin-right: 48px;
 }
 
-.lb4{
+.lb-desc{
     margin-right: 16px;    
 }
 
-.lb5{
+.lb-grupo{
     margin-right: 44px;
 }
 
-.lb6{
+.lb-tarifa{
     margin-right: 50px;
 }
 
-.lb7{
+.lb-status{
     margin-right: 40px;
 }
 
-.inpt1, .inpt2, .inpt3{
+.inpt-cod, .inpt-linha{
     background-color: #F3F4F0;
     width: 375px;
     border-radius: 5px;
@@ -161,7 +161,7 @@ dialog::backdrop{
     padding: 3px 5px 3px 5px;
 }
 
-.selc1, .selc2{
+.selc{
     background-color: #F3F4F0;
     width: 382px;
     border-radius: 5px;
