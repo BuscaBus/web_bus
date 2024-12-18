@@ -45,7 +45,7 @@ section {
 footer{
     display: block;
     background-color: var(--color4);    
-    text-align: center;
+    text-align: center;  
     color: white;
     padding: 10px;
 }

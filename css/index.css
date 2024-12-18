@@ -21,12 +21,12 @@ li{
 }
 
 main{            
-    display: flex;
+    display: flex;   
     margin: auto;
     height: 83.5vh;
 }
 
-main > nav{
+nav{
     background-color: var(--color2);
     font-size: 20px;
     width: 250px;
@@ -35,15 +35,18 @@ main > nav{
     padding-right: 15px;
 }
 
-main > section{
+section{
     background-color: var(--color1);
     width: 100vw;
-    height: 80.5vh;           
+    height: 80.5vh;
+    /*Centralizando*/
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;  
+    align-items: center;         
 }
 
-main > section > article{
-    background-color: var(--color1);
+.p-titulo{
     font-size: 45px;
-    width: 450px;
-    font-weight: bold;         
-}        
+    font-weight: bold;  
+}
