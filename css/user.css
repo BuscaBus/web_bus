@@ -7,14 +7,18 @@ body{
 }
 
 section{
-    text-align: center;   
+    text-align: center;  
+    background-color: var(--color1);    
+    height: 560.5px;
+    padding-top: 20px;
+    padding-left: 30px; 
 }
 
 table{
     margin: auto;
 }
 
-button.btn-cadastrar{
+.btn-cadastrar{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 11px;
@@ -24,7 +28,7 @@ button.btn-cadastrar{
     margin-bottom: 15px;
 }
 
-button.btn-editar{
+.btn-editar{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 10px;
@@ -34,7 +38,7 @@ button.btn-editar{
     border-radius: 5px;
 }
 
-button.btn-excluir{
+.btn-excluir{
     background-color: red;
     color: var(--color0);
     font-size: 10px;
@@ -47,13 +51,13 @@ button.btn-excluir{
 /*Configurações do Iframe e do Dialog*/
 iframe{
     width: 400px;
-    height: 280px;    
+    height: 280px;       
 }
 
 dialog{
     background-color: #CED8D0; 
     margin: 2% 75% 50% 37.5%;
-    padding: 10px 10px 30px 10px;   
+    padding: 10px 10px 30px 10px;       
 }
 
 .btn-fechar{
@@ -125,3 +129,4 @@ dialog::backdrop{
     border-radius: 6px;
     padding: 3px 30px 3px 30px;
 }
+

@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+*{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
 a{
     text-decoration: none;
 }
@@ -20,12 +26,6 @@ li{
     padding-bottom: 5px;
 }
 
-main{            
-    display: flex;   
-    margin: auto;
-    height: 83.5vh;
-}
-
 nav{
     background-color: var(--color2);
     font-size: 20px;
@@ -38,12 +38,12 @@ nav{
 section{
     background-color: var(--color1);
     width: 100vw;
-    height: 80.5vh;
+    height: 83.5vh;
     /*Centralizando*/
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;  
-    align-items: center;         
+    align-items: center;        
 }
 
 .p-titulo{

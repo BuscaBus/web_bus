@@ -1,12 +1,11 @@
 @charset "UTF-8";
 
 /*Configurações gerais das tabelas*/
-
 table {
     width: 400px;
     border-collapse: collapse;
-    font-size: 13px;   
-}
+    font-size: 13px;     
+}        
 
 caption {
     font-size: 20px;

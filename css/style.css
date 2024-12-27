@@ -22,32 +22,35 @@ body{
     background-color: var(--color0);
 }
 
-h1{
-    font-weight: bold;
-    background-color: var(--color3);
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
 a{
     text-decoration: none;
     color:  white;
 }
 
-section {
-    background-color: var(--color1);    
-    height: 560.5px;
-    padding-top: 20px;
-    padding-left: 30px;
+div{
+    display: flex;
+    flex-direction: column;
 }
 
-footer{
-    display: block;
+h1{
+    font-weight: bold;
+    background-color: var(--color3);
+    color: white;
+    padding: 20px;
+    text-align: center;     
+}
+
+main{            
+    display: flex;
+    justify-content: center;     
+}
+
+footer{   
     background-color: var(--color4);    
     text-align: center;  
     color: white;
     padding: 10px;
+    
 }
 
 
