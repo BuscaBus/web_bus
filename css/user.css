@@ -50,18 +50,18 @@ table{
 
 /*Configurações do Iframe e do Dialog*/
 iframe{
-    width: 400px;
-    height: 280px;       
+    width: 430px;
+    height: 300px;       
 }
 
 dialog{
-    background-color: #CED8D0; 
+    background-color: #CED8D0;
     margin: 2% 75% 50% 37.5%;
     padding: 10px 10px 30px 10px;       
 }
 
 .btn-fechar{
-    background-color: var(--color4);
+    background-color: var(--color4);    
     color: var(--color0);
     font-weight: bold;
     padding: 5px 12px 5px 12px;
@@ -91,6 +91,13 @@ dialog::backdrop{
 }
 
 /*Configurações da tela de cadastro*/
+
+#section-iframe{
+    text-align: center;
+    height: 200px;
+    padding: 10px;
+}
+
 .p1{
     text-align: left;
 }
