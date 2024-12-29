@@ -90,8 +90,7 @@ dialog::backdrop{
     padding-right: 75px;    
 }
 
-/*Configurações da tela de cadastro*/
-
+/*Configurações da tela de cadastro e editar*/
 #section-iframe{
     text-align: center;
     height: 200px;

@@ -50,8 +50,8 @@ table{
 
 /*Configurações do Iframe e do Dialog*/
 iframe{
-    width: 600px;
-    height: 325px;    
+    width: 650px;
+    height: 345px;    
 }
 
 dialog{
@@ -123,7 +123,12 @@ dialog::backdrop{
     padding-right: 75px;
 }
 
-/*Configurações da tela de cadastro*/
+/*Configurações da tela de cadastro e editar*/
+#section-iframe{
+    text-align: center;
+    height: 200px;
+    padding: 10px;
+}
 
 .p1{
     text-align: left;
