@@ -24,3 +24,4 @@ buttonClose.onclick = function()
     modal_cad.close()
     modal_edit.close()
 }
+
