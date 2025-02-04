@@ -4,7 +4,7 @@ const modal_cad = document.querySelector("dialog")
 
 btn_cad.onclick = function ()
 {
-    modal_cad.showModal()
+    modal_cad.showModal()    
 }
 
 /*Script para abrir o modal editar usuário*/
@@ -22,6 +22,6 @@ const buttonClose = document.querySelector("dialog button")
 buttonClose.onclick = function()
 {
     modal_cad.close()
-    modal_edit.close()
+    modal_edit.close()    
 }
 

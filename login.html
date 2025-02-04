@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acessar</title>
     <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/user.css">      
+    <link rel="stylesheet" href="css/user.css">
     <style>
-        .p-login{
+        .p-login {
             text-align: center;
         }
-    </style> 
+
+        :root {
+            --color0: #F3F4F0;
+            --color1: #CED8D0;
+            --color2: #96A5A0;
+            --color3: #4F5C55;
+            --color4: #517709;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
     <section>
         <h1>Acessar</h1>
@@ -23,13 +38,14 @@
             </p>
             <p class="p-login">
                 <label for="id-senha" class="lb2">Senha:</label>
-                <input type="password" name="senha" class="inpt2" id="id-senha" placeholder="insira uma senha..." required>                
+                <input type="password" name="senha" class="inpt2" id="id-senha" placeholder="insira uma senha..."
+                    required>
             </p>
             <p class="p-login">
                 <label for="id-email" class="lb3">E-Mail:</label>
-                <input type="email" name="email" class="inpt3" id="id-email" placeholder="insira um e-mail..." required>                
+                <input type="email" name="email" class="inpt3" id="id-email" placeholder="insira um e-mail..." required>
             </p>
-            <hr>            
+            <hr>
             <p>
                 <input type="submit" value="ENTRAR" class="inpt_btn_reg">
             </p>
@@ -44,7 +60,8 @@
             <br>
             <button class="btn-fechar">FECHAR</button>
         </dialog>
-    </section>    
+    </section>
 </body>
 <script src="js/modal-user.js"></script>
+
 </html>
