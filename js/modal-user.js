@@ -19,7 +19,7 @@ btn_edit.onclick = function ()
 /*Script para fechar os modais*/
 const buttonClose = document.querySelector("dialog button")
 
-buttonClose.onclick = function()
+buttonClose.onclick = function ()
 {
     modal_cad.close()
     modal_edit.close()    
