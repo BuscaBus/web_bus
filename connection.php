@@ -3,12 +3,12 @@
     $host = 'localhost';
     $user = 'root';
     $pass = '';
-    $db = 'web_bus_db';  
+    $db = 'web_bus_bd';  
 
-    $conectar = new mysqli($host, $user, $pass, $db); 
+    $conexao = mysqli_connect($host, $user, $pass, $db); 
    
-    If($conectar->error){
-        die("Falha ao conectar ao banco de dados: ". $conectar->error);
+    If($conexao->error){
+        die("Falha ao conectar ao banco de dados: ".mysqli_connect_errno());
     }
 
 ?>
