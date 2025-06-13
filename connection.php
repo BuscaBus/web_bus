@@ -1,14 +1,21 @@
 <?php
 
-    $host = 'localhost';
-    $user = 'root';
-    $pass = '';
-    $db = 'web_bus_bd'; 
+    $server = "localhost";
+    $user = "root";
+    $password = "";
+    $dbname = "web_bus_bd"; 
+    
+    // criar conexão 
+    $conexao = new mysqli($server, $user, $password, $dbname);
 
-    $conexao = mysqli_connect($host, $user, $pass, $db); 
-   
-    If($conexao->error){
-        die("Falha ao conectar ao banco de dados: ".mysqli_connect_errno());
+    // verificar conexão
+    if ($conexao->connect_errno) {
+       echo "Conexão falhou: (" . $conexao->connect_errno . ")" . $conexao->connect_errno;
     }
+    else
+       echo "Conexão bem-sucedida!";
+     
+    // fechar conexão
+    $conexao->close();
 
 ?>
