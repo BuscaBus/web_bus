@@ -1,3 +1,16 @@
+<?php
+    include("../connection.php");
+
+    $sql = "SELECT agency_name, agency_city, agency_url FROM agency";
+    $result = mysqli_query($conexao, $sql);
+
+    if (mysqli_num_rows($result)){
+        
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
