@@ -1,14 +1,10 @@
 <?php
     include("../connection.php");
 
-    $sql = "SELECT agency_name, agency_city, agency_url FROM agency";
+   // Consulta no banco de dados
+    $sql = "SELECT * FROM agency";
     $result = mysqli_query($conexao, $sql);
-
-    if (mysqli_num_rows($result)){
-        
-    }
-
-
+  
 ?>
 
 <!DOCTYPE html>
@@ -43,50 +39,41 @@
                         <th class="th3">Site</th>
                         <th class="th4">Ações</th>
                     </thead>
+                    <?php
+                        // Laço de repetição para trazer dados do banco
+                        while($sql_result = mysqli_fetch_array($result)){
+                            $id = $sql_result['agency_id'];
+                            $nome = $sql_result['agency_name'];
+                            $cidade = $sql_result['agency_city'];
+                            $url = $sql_result['agency_url'];                         
+                    ?>
                     <tbody>
                         <tr>
-                            <td>Consórcio Fênix</td>
-                            <td>Florianópolis</td>
-                            <td>https://www.consorciofenix.com.br/</td>
+                            <td><?php echo $nome ?></td>
+                            <td><?php echo $cidade ?></td>
+                            <td><?php echo $url ?></td>
                             <td>
-                                <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.html" class="link" target="frame">EDITAR</a>
-                                </button>
-                                <Button class="btn-excluir">EXCLUIR</Button>
+                                <form action="delete.php" method ="POST">
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <button class="btn-editar" id="btn-edit">
+                                        <a href="edit.html" class="link" target="frame">EDITAR</a>
+                                    </button>                                
+                                    <Button class="btn-excluir">EXCLUIR</Button>
+                                </form>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Biguaçu</td>
-                            <td>Biguaçu</td>
-                            <td>https://www.tcbiguacu.com.br/</td>
-                            <td>
-                                <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.html" class="link" target="frame">EDITAR</a>
-                                </button>
-                                <Button class="btn-excluir">EXCLUIR</Button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Estrela</td>
-                            <td>Florianópolis</td>
-                            <td>https://insulartc.com.br/est/wp/</td>
-                            <td>
-                                <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.html" class="link" target="frame">EDITAR</a>
-                                </button>
-                                <Button class="btn-excluir">EXCLUIR</Button>
-                            </td>
-                        </tr>
+                        </tr> 
+                    <?php }; ?>                           
                     </tbody>
                 </table>
+
                 <br>
                 <p>Total de operadoras cadastradas: 00</p>
                 <br>
                 <dialog>
                     <iframe src="register.html" name="frame"></iframe>
                     <br>
-                    <button class="btn-fechar">FECHAR</button>
-                </dialog>
+                    <button class="btn-fechar">FECHAR</button>                   
+                </dialog>                
             </section>
         </main>
         <footer>

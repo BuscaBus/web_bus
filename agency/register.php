@@ -16,7 +16,7 @@
        echo "Erro ao cadastrar".mysqli_connect_error($conexao);
     }
     
-    mysqli_close($conexao);
+   mysqli_close($conexao);
     
 ?>
     
