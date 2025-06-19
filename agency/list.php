@@ -2,7 +2,7 @@
     include("../connection.php");
 
    // Consulta no banco de dados
-    $sql = "SELECT * FROM agency";
+    $sql = "SELECT * FROM agency ORDER BY agency_name ASC";
     $result = mysqli_query($conexao, $sql);
   
 ?>
@@ -56,7 +56,7 @@
                                 <form action="delete.php" method ="POST">
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <button class="btn-editar" id="btn-edit">
-                                        <a href="edit.html" class="link" target="frame">EDITAR</a>
+                                        <a href="edit.php?id=<?=$sql_result['agency_id']?>" class="link" target="frame">EDITAR</a>
                                     </button>                                
                                     <Button class="btn-excluir">EXCLUIR</Button>
                                 </form>
