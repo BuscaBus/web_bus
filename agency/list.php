@@ -7,6 +7,16 @@
   
 ?>
 
+<!--Script para confirmar a exclusão-->
+<script>
+    function deletar() {
+        if(confirm("Deseja exluir esse item?"))
+            document.forms[0].submit();
+        else
+            return false
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -58,16 +68,24 @@
                                     <button class="btn-editar" id="btn-edit">
                                         <a href="edit.php?id=<?=$sql_result['agency_id']?>" class="link" target="frame">EDITAR</a>
                                     </button>                                
-                                    <Button class="btn-excluir">EXCLUIR</Button>
+                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
                                 </form>
                             </td>
                         </tr> 
                     <?php }; ?>                           
                     </tbody>
                 </table>
-
                 <br>
-                <p>Total de operadoras cadastradas: 00</p>
+                <!--Consulta no banco de dados a quantidade de registros-->
+                <?php
+                    $sql = "SELECT COUNT(*) AS total FROM agency";
+                    $result = mysqli_query($conexao, $sql);
+
+                     $row = mysqli_fetch_assoc($result);
+                     $total_registros = $row['total'];                    
+                ?>
+                <!-- Mostra a quantidade de registros-->
+                <p>Total de operadoras cadastradas: <?php echo $total_registros;?></p>
                 <br>
                 <dialog>
                     <iframe src="register.html" name="frame"></iframe>
