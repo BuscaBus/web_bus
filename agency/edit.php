@@ -14,7 +14,13 @@
     mysqli_close($conexao);
     
 ?>
-   
+<!--Script para confirmar a edição-->
+<script>
+    function editar() {
+    return confirm("Tem certeza que deseja salvar as alterações?");
+}
+</script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -23,6 +29,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de operadoras</title>
     <link rel="stylesheet" href="../css/agency.css"> 
+     <style>
+        .p1 {
+            text-align: center;
+        }        
+    </style>
 </head>
 
 <body>
@@ -46,7 +57,7 @@
             </p>
             <hr>
             <p>
-                <input type="submit" value="EDITAR" class="inpt_btn_edt">                        
+                <Button class="inpt_btn_edt" onclick="return editar()">EDITAR</Button>                       
             </p>
         </form>
     </section>

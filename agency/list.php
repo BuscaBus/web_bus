@@ -1,8 +1,15 @@
 <?php
     include("../connection.php");
+   
+    // Código para filtrar após pesquisar
+    $filtro_sql = "";
+    if($_POST != NULL){
+        $filtro = $_POST["pesquisar"];
+        $filtro_sql = "WHERE agency_name ='$filtro'";
+    }
 
-   // Consulta no banco de dados
-    $sql = "SELECT * FROM agency ORDER BY agency_name ASC";
+    // Consulta no banco de dados para exibir na tabela
+    $sql = "SELECT * FROM agency $filtro_sql ORDER BY agency_name ASC";
     $result = mysqli_query($conexao, $sql);
   
 ?>
@@ -38,9 +45,26 @@
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.html" class="link" target="frame">+ CADASTRAR</a>
+                    <a href="register.html" class="link">+ CADASTRAR</a>
                 </button>
-        
+                <br> 
+                <!-- Select no banco de dados para filtrar uma operadora--> 
+                <form method="POST" action="list.php">
+                    <select name="pesquisar" class="selc1">
+                        <option>Selecione uma operadora</option>;
+                        <?php
+                            $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
+                            $result_selec = mysqli_query($conexao, $sql_select);
+
+                            while($dados = mysqli_fetch_array($result_selec)){
+                                $id = $dados['agency_id']; 
+                                $operadoras = $dados['agency_name'];                            
+                                echo "<option value='$operadoras'>$operadoras</option>";
+                            }
+                        ?>                          
+                    </select> 
+                    <button type="submit" class="btn-cadastrar">PESQUISAR</button> 
+                </form>                 
                 <table>
                     <caption>Relação de operadoras</caption>
                     <thead>
@@ -66,7 +90,7 @@
                                 <form action="delete.php" method ="POST">
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <button class="btn-editar" id="btn-edit">
-                                        <a href="edit.php?id=<?=$sql_result['agency_id']?>" class="link" target="frame">EDITAR</a>
+                                        <a href="edit.php?id=<?=$sql_result['agency_id']?>" class="link">EDITAR</a>
                                     </button>                                
                                     <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
                                 </form>
@@ -87,11 +111,11 @@
                 <!-- Mostra a quantidade de registros-->
                 <p>Total de operadoras cadastradas: <?php echo $total_registros;?></p>
                 <br>
-                <dialog>
+                <!--<dialog>
                     <iframe src="register.html" name="frame"></iframe>
                     <br>
                     <button class="btn-fechar">FECHAR</button>                   
-                </dialog>                
+                </dialog>-->                
             </section>
         </main>
         <footer>
@@ -100,4 +124,5 @@
     </div>
 </body>
 <script src="../js/modal-agency.js"></script>
+<script src="../js/agency.js"></script>
 </html>

@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+/*-- Variaveis de cores CSS*/
+:root{
+    --color0: #F3F4F0;
+    --color1: #CED8D0;
+    --color2: #96A5A0;
+    --color3: #4F5C55;
+    --color4: #517709;
+}
+
 /*Configurações gerais da página*/
 body{
     font-family: Arial, Helvetica, sans-serif;
@@ -23,6 +32,16 @@ table{
 }
 
 .btn-cadastrar{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+#btn-pesq{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 11px;
@@ -103,7 +122,7 @@ dialog::backdrop{
 }
 
 .p1{
-    text-align: left;
+    text-align: left;    
 }
     
 .lb1{

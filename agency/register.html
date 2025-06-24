@@ -1,3 +1,11 @@
+
+<!--Script para confirmar a edição-->
+<script>
+    function cadastrar() {
+    return confirm("Deseja cadastrar essa operadora?");
+}
+</script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,6 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de operadoras</title>
     <link rel="stylesheet" href="../css/agency.css"> 
+    <style>
+        .p1 {
+            text-align: center;
+        }        
+    </style>
 </head>
 
 <body>
@@ -38,7 +51,7 @@
             </p>
             <hr>
             <p>
-                <input type="submit" value="CADASTRAR" class="inpt_btn_reg">
+                <Button class="inpt_btn_reg" onclick="return cadastrar()">CADASTRAR</Button>  
             </p>
 
         </form>
