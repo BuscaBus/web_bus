@@ -166,3 +166,25 @@ dialog::backdrop{
     border-radius: 6px;
     padding: 3px 30px 3px 30px;
 }
+
+/*Configuração da navegação da página*/
+.paginacao {
+  display: flex;
+  list-style: none; /* Remove os marcadores de lista */
+  padding: 0;
+  margin: 0;
+  gap: 10px; /* Espaçamento entre os itens (opcional) */
+}
+
+.nav-pag a {
+  text-decoration: none;
+  padding: 8px 12px;
+  background-color:black;
+  border: 1px solid #ccc;
+  color: #333;
+  border-radius: 4px;
+}
+
+.nav-pag a:hover {
+  background-color: #ddd;
+}

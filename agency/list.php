@@ -6,13 +6,25 @@
     if($_POST != NULL){
         $filtro = $_POST["pesquisar"];
         $filtro_sql = "WHERE agency_name ='$filtro'";
-    }
+    }    
+
+    // Paginação
+    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
+
+    $sql_itens = "SELECT * FROM agency";
+    $result_itens = mysqli_query($conexao, $sql_itens);
+    $total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
+    $quant_paginas = 10; // Setar quantidade de itens por página
+    $num_pagina = ceil($total_itens/$quant_paginas); // Calcula o numero de páginas necessárias
+    $inicio = ($quant_paginas*$pagina)-$quant_paginas; // Calcula o inicio da visualização
 
     // Consulta no banco de dados para exibir na tabela
-    $sql = "SELECT * FROM agency $filtro_sql ORDER BY agency_name ASC";
+    $sql = "SELECT * FROM agency $filtro_sql ORDER BY agency_name ASC LIMIT $inicio, $quant_paginas";
     $result = mysqli_query($conexao, $sql);
-  
-?>
+    
+    $total_itens = mysqli_num_rows($result_itens);   
+    
+    ?>
 
 <!--Script para confirmar a exclusão-->
 <script>
@@ -99,6 +111,39 @@
                     <?php }; ?>                           
                     </tbody>
                 </table>
+                                
+                 <?php
+                    // Verificar pagina anterior e posterior
+                    $pagina_ant = $pagina - 1;
+                    $pagina_post = $pagina + 1;
+                 ?>
+
+                 <!-- Navegação da páginação-->
+                <nav class="nav-pag" aria-label="Page navigation example">
+                    <ul class="paginacao">
+                        <li class="nav-pag"> 
+                            <?php
+                                if($pagina_ant != 0){ ?>
+                                    <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"><</a>
+                            <?php } else{?>
+                                <span><</span>
+                            <?php } ?>    
+                        </li>
+                        <?php
+                            for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
+                                <li class="nav-pag"><a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                        <?php } ?>  
+                        <li class="nav-pag">
+                             <?php
+                                if($pagina_post <= $num_pagina){ ?>
+                                    <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>">></a>
+                            <?php } else{?>
+                                <span>></span>
+                            <?php } ?>
+                        </li>                      
+                    </ul>
+                </nav>
+                
                 <br>
                 <!--Consulta no banco de dados a quantidade de registros-->
                 <?php
