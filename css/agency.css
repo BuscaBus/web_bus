@@ -41,7 +41,7 @@ table{
     margin-bottom: 15px;
 }
 
-#btn-pesq{
+.btn-pesq{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 11px;
@@ -168,23 +168,11 @@ dialog::backdrop{
 }
 
 /*Configuração da navegação da página*/
-.paginacao {
-  display: flex;
-  list-style: none; /* Remove os marcadores de lista */
-  padding: 0;
-  margin: 0;
-  gap: 10px; /* Espaçamento entre os itens (opcional) */
-}
-
-.nav-pag a {
-  text-decoration: none;
-  padding: 8px 12px;
-  background-color:black;
-  border: 1px solid #ccc;
-  color: #333;
-  border-radius: 4px;
-}
-
+.nav-pag {
+    color: black;
+    font-weight: bold;           
+} 
 .nav-pag a:hover {
-  background-color: #ddd;
+    color: green; 
+    font-weight: bold;            
 }

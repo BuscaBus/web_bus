@@ -46,7 +46,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/agency.css">    
+    <link rel="stylesheet" href="../css/agency.css?v=1.3">    
 </head>
 
 <body>
@@ -75,7 +75,7 @@
                             }
                         ?>                          
                     </select> 
-                    <button type="submit" class="btn-cadastrar">PESQUISAR</button> 
+                    <button type="submit" class="btn-pesq">PESQUISAR</button> 
                 </form>                 
                 <table>
                     <caption>Relação de operadoras</caption>
@@ -111,39 +111,33 @@
                     <?php }; ?>                           
                     </tbody>
                 </table>
-                                
-                 <?php
+                <br>                
+                <?php
                     // Verificar pagina anterior e posterior
                     $pagina_ant = $pagina - 1;
                     $pagina_post = $pagina + 1;
-                 ?>
-
+                ?>
                  <!-- Navegação da páginação-->
                 <nav class="nav-pag" aria-label="Page navigation example">
-                    <ul class="paginacao">
-                        <li class="nav-pag"> 
-                            <?php
-                                if($pagina_ant != 0){ ?>
-                                    <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"><</a>
-                            <?php } else{?>
-                                <span><</span>
-                            <?php } ?>    
-                        </li>
+                    <ul class="paginacao">                       
+                        <?php
+                            if($pagina_ant != 0){ ?>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> << </a>
+                        <?php } else{?>
+                            <span> << </span>
+                        <?php } ?>  
                         <?php
                             for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
-                                <li class="nav-pag"><a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
                         <?php } ?>  
-                        <li class="nav-pag">
-                             <?php
-                                if($pagina_post <= $num_pagina){ ?>
-                                    <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>">></a>
-                            <?php } else{?>
-                                <span>></span>
-                            <?php } ?>
-                        </li>                      
+                        <?php
+                            if($pagina_post <= $num_pagina){ ?>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>"> >> </a>
+                        <?php } else{?>
+                            <span> >> </span>
+                        <?php } ?>                                        
                     </ul>
-                </nav>
-                
+                </nav>                 
                 <br>
                 <!--Consulta no banco de dados a quantidade de registros-->
                 <?php
