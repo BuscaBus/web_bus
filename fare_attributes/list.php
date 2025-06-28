@@ -46,7 +46,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.1">    
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.2">    
 </head>
 
 <body>
@@ -62,7 +62,7 @@
                 <br> 
                 <!-- Select no banco de dados para filtrar uma operadora--> 
                 <form method="POST" action="list.php">
-                    <select name="pesquisar" class="selc1">
+                    <select name="pesquisar" class="selc2">
                         <option>Selecione um tipo de tarifa</option>;
                         <?php
                             $sql_select = "SELECT * FROM fare_attributes";

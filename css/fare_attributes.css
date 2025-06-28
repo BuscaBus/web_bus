@@ -92,6 +92,14 @@ table{
     padding-right: 75px; 
 }
 
+.selc2{
+    background-color: #F3F4F0;
+    margin-left: 30px;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
 /*Configurações da tela de cadastro e editar*/
 #section-iframe{
     text-align: center;
@@ -104,18 +112,44 @@ table{
 }
     
 .lb1{
-    margin-right: 10px;
+    margin-right: 100px;
+    margin-left: 15px;
+    text-align: left;
 }
 
 .lb2{
-    margin-right: 3px;
+    margin-right: 110px;
+    margin-left: 15px;
+    text-align: left;
 }
 
 .lb3{
-    margin-right: 25px;
+    margin-right: 85px;
+    margin-left: 105px;
+    text-align: left;
 }
 
-.inpt1, .inpt2{
+.lb4{
+    margin-right: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.inpt1{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt2{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt3{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
@@ -124,7 +158,9 @@ table{
 
 .selc1{
     background-color: #F3F4F0;
-    width: 318px;
+    margin-right: 90px;
+    margin-left: 30px;
+    width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
