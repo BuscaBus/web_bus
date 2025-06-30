@@ -27,7 +27,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de tarifas</title>
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.3"> 
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4"> 
     <style>
         .p1 {
             text-align: center;
@@ -42,7 +42,7 @@
             <hr>
             <p class="p1">
                 <label for="id-codigo" class="lb1">Código:</label>
-                <input type="text" name="codigo" class="inpt1" id="id-codigo" value="<?=$result_id['fare_id']?>" disabled>
+                <input type="text" name="codigo" class="inpt1" id="id-codigo" value="<?=$result_id['fare_id']?>">
             </p>
             <p class="p1">
                 <label for="id-tarifa" class="lb2">Tarifa:</label>
@@ -50,11 +50,11 @@
             </p>
             <p class="p1">
                 <label for="id-tipo" class="lb3">Tipo:</label>
-                <input type="text" name="tipo" class="selc1" id="id-tipo" value="<?=$result_id['route_group']?>" disabled>
+                <input type="text" name="tipo" class="inpt3" id="id-tipo" value="<?=$result_id['route_group']?>">
             </p>            
             <p class="p1">
                 <label for="id-data" class="lb4">Data de Atualização:</label>
-                <input type="date" name="data" class="inpt3" id="id-data" value="<?=$result_id['update_date']?>">
+                <input type="date" name="data" class="inpt4" id="id-data" value="<?=$result_id['update_date']?>">
             </p>
             <hr>
             <p>

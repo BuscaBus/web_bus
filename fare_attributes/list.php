@@ -46,7 +46,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.2">    
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.3">    
 </head>
 
 <body>
@@ -102,7 +102,7 @@
                             <td><?php echo $data ?></td>
                             <td>
                                 <form action="delete.php" method ="POST">
-                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <input type="hidden" name="codigo" value="<?php echo $id ?>">
                                     <button class="btn-editar" id="btn-edit">
                                         <a href="edit.php?id=<?=$sql_result['fare_id']?>" class="link">EDITAR</a>
                                     </button>                                

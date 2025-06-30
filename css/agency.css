@@ -39,6 +39,7 @@ table{
     padding: 5px 10px 5px 10px;
     border-radius: 6px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .btn-pesq{
@@ -49,6 +50,7 @@ table{
     padding: 5px 10px 5px 10px;
     border-radius: 6px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .btn-editar{
@@ -59,6 +61,7 @@ table{
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
     margin-right: 1px;
+    cursor: pointer;
 }
 
 .btn-excluir{
@@ -69,6 +72,7 @@ table{
     padding: 3px;
     padding: 3px 6px 3px 6px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 /*Configurações do Iframe e do Dialog*/
@@ -157,6 +161,7 @@ dialog::backdrop{
     font-weight: bold;
     border-radius: 6px;
     padding: 3px 30px 3px 30px;
+    cursor: pointer;
 }
 
 .inpt_btn_edt{
@@ -165,6 +170,7 @@ dialog::backdrop{
     font-weight: bold;
     border-radius: 6px;
     padding: 3px 30px 3px 30px;
+    cursor: pointer;
 }
 
 /*Configuração da navegação da página*/
