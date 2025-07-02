@@ -2,6 +2,13 @@
     include("../connection.php");
 ?>
 
+<!--Script para confirmar o cadastro-->
+<script>
+    function cadastrar() {
+    return confirm("Deseja cadastrar essa operadora?");
+}
+</script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de linhas</title>
-    <link rel="stylesheet" href="../css/route.css?v=1.1">
+    <link rel="stylesheet" href="../css/route.css?v=1.2">
     <style>
         .p1 {
             text-align: center;
@@ -20,11 +27,11 @@
 <body>
     <section id="section-iframe">
         <h1>Cadastrar linha</h1>
-        <form action="#" method="POST" autocomplete="off">
+        <form action="result_register.php" method="POST" autocomplete="off">
             <hr>
             <p  class="p1">
                 <label for="id-grp" class="lb-op">Operadora:</label>
-                <select name="nome" id="id-grp" class="selc">
+                <select name="operadora" id="id-grp" class="selc">
                     <option>Selecione uma operadora</option>;
                     <?php
                         $sql_select = "SELECT agency_id, agency_name FROM agency ORDER BY agency_name ASC";
@@ -33,7 +40,7 @@
                         while($dados = mysqli_fetch_array($result_selec)){
                             $id = $dados['agency_id']; 
                             $operadoras = $dados['agency_name'];                            
-                            echo "<option value='$operadoras'>$operadoras</option>";
+                            echo "<option value='$id'>$operadoras</option>";
                             }
                     ?>       
                 </select>
@@ -61,7 +68,7 @@
                         while($dados = mysqli_fetch_array($result_selec)){
                             $id = $dados['fare_id']; 
                             $tipo = $dados['route_group'];                            
-                            echo "<option value='$tipo'>$tipo</option>";
+                            echo "<option value='$id'>$tipo</option>";
                             }
                     ?>       
                 </select>                
@@ -84,13 +91,15 @@
             </p>
             <p class="p1">
                 <label for="id-status" class="lb-status">Status:</label>
-                <input type="radio" name="status"  id="id-status-a"> <label for="id-status-a">Ativa</label>
-                <input type="radio" name="status" id="id-status-i"> <label for="id-status-i">Inativa</label>
+                <input type="radio" name="status"  id="id-status-a" value="A"> 
+                <label for="id-status-a">Ativa</label>
+                <input type="radio" name="status" id="id-status-i" value="I"> 
+                <label for="id-status-i">Inativa</label>
             </p>
 
             <hr>
             <p>
-                <input type="submit" value="CADASTRAR" class="inpt_btn_reg">
+                <Button class="inpt_btn_reg" onclick="return cadastrar()">CADASTRAR</Button>  
             </p>
 
         </form>

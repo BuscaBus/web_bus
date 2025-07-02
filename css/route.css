@@ -128,8 +128,7 @@ dialog::backdrop{
 }
     
 .lb-op{
-    margin-right: 12px;
-    margin-left: 0px;
+    margin-right: 10px;    
 }
 
 .lb-cod{
@@ -141,15 +140,17 @@ dialog::backdrop{
 }
 
 .lb-desc{
-    margin-right: 16px;    
+    margin-right: 16px;       
 }
 
 .lb-grupo{
-    margin-right: 44px;
+    margin-right: 40px;
+    margin-left: 5px;
 }
 
 .lb-tarifa{
-    margin-right: 50px;
+    margin-right: 45px;
+    margin-left: 5px;
 }
 
 .lb-status{
@@ -175,7 +176,7 @@ dialog::backdrop{
 
 .selc{
     background-color: #F3F4F0;
-    width: 382px;
+    width: 375px;
     border-radius: 5px;
     padding: 4px;
 }
