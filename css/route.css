@@ -97,7 +97,7 @@ dialog::backdrop{
     padding-right: 300px;
 }
 .th4{
-    padding-right: 150px;
+    padding-right: 250px;
 }
 
 .th5{
@@ -129,6 +129,7 @@ dialog::backdrop{
     
 .lb-op{
     margin-right: 12px;
+    margin-left: 0px;
 }
 
 .lb-cod{
@@ -152,7 +153,8 @@ dialog::backdrop{
 }
 
 .lb-status{
-    margin-right: 40px;
+    margin-right: 15px;
+    margin-left: 10px;
 }
 
 .inpt-cod, .inpt-linha{
