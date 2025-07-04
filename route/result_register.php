@@ -8,8 +8,7 @@
     $descricao = $_POST['descricao'];
     $tipo = $_POST['tipo'];
     $tarifa = $_POST['tarifa'];
-    $status = $_POST['status'];
-
+    
     // Altera no banco de dados
     $sql = "INSERT INTO routes (
                 agency_id, 
@@ -17,8 +16,7 @@
                 route_long_name,
                 route_desc,
                 route_group,
-                price,
-                route_status
+                price                
             ) 
             VALUES (
                 '$operadora', 
@@ -26,8 +24,7 @@
                 '$linha',
                 '$descricao',
                 '$tipo',
-                '$tarifa',
-                '$status'
+                '$tarifa'                
             )";
     $query = mysqli_query($conexao, $sql);
 

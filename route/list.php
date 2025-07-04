@@ -26,12 +26,12 @@
                 fare_attributes.route_group,
                 routes.route_id,
                 routes.route_short_name,
-                routes.route_long_name,                       
+                routes.route_long_name,
+                routes.route_desc,                       
                 routes.route_status,
                 CASE 
                     WHEN routes.route_status = 'A' THEN 'Ativa'
-                    WHEN routes.route_status = 'I' THEN 'Inativa'
-                    ELSE 'Desconhecido' 
+                    WHEN routes.route_status = 'I' THEN 'Inativa'                    
                 END AS status_format,
                 routes.update_date,
                 DATE_FORMAT(routes.update_date, '%d/%m/%Y') AS data_format
@@ -68,7 +68,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.0">
+    <link rel="stylesheet" href="../css/route.css?v=1.1">
     <link rel="stylesheet" href="../css/table.css">
 </head>
 
@@ -100,7 +100,8 @@
                             $id = $sql_result['route_id'];
                             $id_op = $sql_result['agency_name'];
                             $codigo = $sql_result['route_short_name'];
-                            $linha = $sql_result['route_long_name'];  
+                            $linha = $sql_result['route_long_name']; 
+                            $desc = $sql_result['route_desc']; 
                             $id_tipo = $sql_result['route_group']; 
                             $id_tarifa = $sql_result['price_format']; 
                             $status = $sql_result['status_format'];  
@@ -112,13 +113,13 @@
                             <td><?php echo $codigo ?></td>
                             <td><?php echo $linha ?></td>
                             <td><?php echo $id_tipo ?></td>
-                            <td><?php echo $id_tarifa ?></td>
+                            <td>R$ <?php echo $id_tarifa ?></td>
                             <td><?php echo $status ?></td>
                             <td><?php echo $data ?></td>
                             <td>
                                 <Button class="btn-viagem">VIAGENS</Button>
                                 <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.html" class="link" target="frame">EDITAR</a>
+                                    <a href="edit.php?id=<?=$sql_result['route_id']?>" class="link">EDITAR</a>
                                 </button>
                                 <Button class="btn-excluir">EXCLUIR</Button>
                             </td>

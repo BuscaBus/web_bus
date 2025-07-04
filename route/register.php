@@ -2,13 +2,6 @@
     include("../connection.php");
 ?>
 
-<!--Script para confirmar o cadastro-->
-<script>
-    function cadastrar() {
-    return confirm("Deseja cadastrar essa operadora?");
-}
-</script>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -84,22 +77,14 @@
                         while($dados = mysqli_fetch_array($result_selec)){
                             $id = $dados['fare_id']; 
                             $tarifa = $dados['price_format'];                            
-                            echo "<option value='$tarifa'>$tarifa</option>";
+                            echo "<option value='$tarifa'>R$ $tarifa</option>";
                             }
                         ?>       
                 </select>
             </p>
-            <p class="p1">
-                <label for="id-status" class="lb-status">Status:</label>
-                <input type="radio" name="status"  id="id-status-a" value="A"> 
-                <label for="id-status-a">Ativa</label>
-                <input type="radio" name="status" id="id-status-i" value="I"> 
-                <label for="id-status-i">Inativa</label>
-            </p>
-
             <hr>
             <p>
-                <Button class="inpt_btn_reg" onclick="return cadastrar()">CADASTRAR</Button>  
+                <Button class="inpt_btn_reg">CADASTRAR</Button>  
             </p>
 
         </form>

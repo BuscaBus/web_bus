@@ -122,9 +122,9 @@
                     <ul class="paginacao">                       
                         <?php
                             if($pagina_ant != 0){ ?>
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> << </a>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> Páginas: << </a>
                         <?php } else{?>
-                            <span> << </span>
+                            <span> Páginas: << </span>
                         <?php } ?>  
                         <?php
                             for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
@@ -149,12 +149,7 @@
                 ?>
                 <!-- Mostra a quantidade de registros-->
                 <p>Total de operadoras cadastradas: <?php echo $total_registros;?></p>
-                <br>
-                <!--<dialog>
-                    <iframe src="register.html" name="frame"></iframe>
-                    <br>
-                    <button class="btn-fechar">FECHAR</button>                   
-                </dialog>-->                
+                <br>                           
             </section>
         </main>
         <footer>
