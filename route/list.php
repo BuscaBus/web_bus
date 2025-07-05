@@ -11,7 +11,28 @@
     // Paginação
     $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
 
-    $sql_itens = "SELECT * FROM routes";
+    $sql_itens = "SELECT 
+                agency.agency_name,
+                fare_attributes.price,
+                FORMAT(fare_attributes.price, 2) AS price_format,
+                fare_attributes.route_group,
+                routes.route_id,
+                routes.route_short_name,
+                routes.route_long_name,
+                routes.route_desc,                       
+                routes.route_status,
+                CASE 
+                    WHEN routes.route_status = 'A' THEN 'Ativa'
+                    WHEN routes.route_status = 'I' THEN 'Inativa'                    
+                END AS status_format,
+                routes.update_date,
+                DATE_FORMAT(routes.update_date, '%d/%m/%Y') AS data_format
+            FROM 
+                routes
+            JOIN 
+                agency ON agency.agency_id = routes.agency_id
+            JOIN
+                fare_attributes ON fare_attributes.fare_id = routes.route_group";                  
     $result_itens = mysqli_query($conexao, $sql_itens);
     $total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
     $quant_paginas = 10; // Setar quantidade de itens por página
@@ -40,9 +61,7 @@
             JOIN 
                 agency ON agency.agency_id = routes.agency_id
             JOIN
-                fare_attributes ON fare_attributes.fare_id = routes.route_group    
-            
-
+                fare_attributes ON fare_attributes.fare_id = routes.route_group   
             $filtro_sql ORDER BY routes.route_id ASC LIMIT $inicio, $quant_paginas";
             $result = mysqli_query($conexao, $sql);    
     $total_itens = mysqli_num_rows($result_itens);   
@@ -68,7 +87,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.1">
+    <link rel="stylesheet" href="../css/route.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css">
 </head>
 
@@ -127,6 +146,33 @@
                     <?php }; ?>                           
                     </tbody>
                 </table>
+                <br>
+                <?php
+                    // Verificar pagina anterior e posterior
+                    $pagina_ant = $pagina - 1;
+                    $pagina_post = $pagina + 1;
+                ?>
+                 <!-- Navegação da páginação-->
+                <nav class="nav-pag" aria-label="Page navigation example">
+                    <ul class="paginacao">                       
+                        <?php
+                            if($pagina_ant != 0){ ?>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> Páginas: << </a>
+                        <?php } else{?>
+                            <span> Páginas: << </span>
+                        <?php } ?>  
+                        <?php
+                            for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        <?php } ?>  
+                        <?php
+                            if($pagina_post <= $num_pagina){ ?>
+                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>"> >> </a>
+                        <?php } else{?>
+                            <span> >> </span>
+                        <?php } ?>                                        
+                    </ul>
+                </nav>        
                 <br>
                 <!--Consulta no banco de dados a quantidade de registros-->
                 <?php

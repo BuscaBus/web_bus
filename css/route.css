@@ -128,7 +128,7 @@ dialog::backdrop{
 }
     
 .lb-op{
-    margin-right: 10px;    
+    margin-right: 20px;    
 }
 
 .lb-cod{
@@ -160,7 +160,7 @@ dialog::backdrop{
 
 .inpt-cod, .inpt-linha{
     background-color: #F3F4F0;
-    width: 375px;
+    width: 372px;
     border-radius: 5px;
     padding: 4px;
 }
@@ -176,7 +176,7 @@ dialog::backdrop{
 
 .selc{
     background-color: #F3F4F0;
-    width: 375px;
+    width: 378px;
     border-radius: 5px;
     padding: 4px;
 }
@@ -195,5 +195,15 @@ dialog::backdrop{
     font-weight: bold;
     border-radius: 6px;
     padding: 3px 30px 3px 30px;
+}
+
+/*Configuração da navegação da página*/
+.nav-pag {
+    color: black;
+    font-weight: bold;           
+} 
+.nav-pag a:hover {
+    color: green; 
+    font-weight: bold;            
 }
 

@@ -6,15 +6,13 @@
     $linha = $_POST['linha'];
     $descricao = $_POST['descricao'];
     $tipo = $_POST['tipo'];
-    $tarifa = $_POST['tarifa'];
     $status = $_POST['status'];
 
     // Altera no banco de dados
     $sql = "UPDATE routes SET 
                route_long_name = '$linha', 
                route_desc = '$descricao', 
-               route_group = '$tipo', 
-               price = '$tarifa',
+               route_group = '$tipo',                
                route_status = '$status',
                update_date = NOW()
             WHERE 
