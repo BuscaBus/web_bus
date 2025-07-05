@@ -86,7 +86,7 @@
             </p>                   
             <p class="p1">
                 <label for="id-tarifa" class="lb-tarifa">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa" class="selc">                   
+                <select name="tarifa" id="id-tarifa" class="selc" disabled>                   
                         <?php
                             // Converte o valor da tarifa salva para número com 2 casas decimais, usando ponto como separador decimal 
                             $tarifa_salva_valor = number_format((float)$result_id['price'], 2, '.', '');

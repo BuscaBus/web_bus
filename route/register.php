@@ -52,7 +52,7 @@
             </p>
             <p class="p1">
                 <label for="id-grp" class="lb-grupo">Grupo:</label>
-                <select name="tipo" id="id-grp" class="selc">
+                <select name="tipo" id="select-grupo" class="selc">
                     <option>Selecione um grupo de linha</option>;
                     <?php
                         $sql_select = "SELECT fare_id, route_group FROM fare_attributes ORDER BY route_group ASC";
@@ -68,10 +68,10 @@
             </p>            
             <p class="p1">
                 <label for="id-tarifa" class="lb-tarifa">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa" class="selc">
-                    <option>Selecione uma tarifa</option>;
+                <select name="tarifa" id="select-tarifa" class="selc" disabled>
+                    <option>Aguardando ...</option>;
                     <?php
-                        $sql_select = "SELECT fare_id, price, FORMAT(fare_attributes.price, 2) AS price_format FROM fare_attributes ORDER BY price ASC";
+                        $sql_select = "SELECT fare_id, price, FORMAT(fare_attributes.price, 2) AS price_format FROM fare_attributes  ORDER BY price ASC";
                         $result_selec = mysqli_query($conexao, $sql_select);
 
                         while($dados = mysqli_fetch_array($result_selec)){
@@ -79,7 +79,7 @@
                             $tarifa = $dados['price_format'];                            
                             echo "<option value='$tarifa'>R$ $tarifa</option>";
                             }
-                        ?>       
+                    ?>       
                 </select>
             </p>
             <hr>
@@ -93,3 +93,23 @@
 </body>
 
 </html>
+<!-- JS para tratar a tarifa com base no tipo de linha escolhido-->
+<script>
+document.getElementById('select-grupo').addEventListener('change', function () {
+    const grupoId = this.value;
+    const tarifaSelect = document.getElementById('select-tarifa');
+
+    // Limpa o select de tarifa enquanto carrega
+    tarifaSelect.innerHTML = '<option>Carregando...</option>';
+
+    fetch('get_tarifas.php?fare_id=' + grupoId)
+        .then(response => response.text())
+        .then(data => {
+            tarifaSelect.innerHTML = data;
+        })
+        .catch(error => {
+            tarifaSelect.innerHTML = '<option>Erro ao carregar</option>';
+            console.error('Erro:', error);
+        });
+});
+</script>

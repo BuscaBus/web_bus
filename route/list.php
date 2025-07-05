@@ -9,30 +9,9 @@
     }    
 
     // Paginação
-    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
+    $pagina = (isset($_GET['pagina']))? (int) $_GET['pagina'] : 1; //Verificar se está passando na URL a página
 
-    $sql_itens = "SELECT 
-                agency.agency_name,
-                fare_attributes.price,
-                FORMAT(fare_attributes.price, 2) AS price_format,
-                fare_attributes.route_group,
-                routes.route_id,
-                routes.route_short_name,
-                routes.route_long_name,
-                routes.route_desc,                       
-                routes.route_status,
-                CASE 
-                    WHEN routes.route_status = 'A' THEN 'Ativa'
-                    WHEN routes.route_status = 'I' THEN 'Inativa'                    
-                END AS status_format,
-                routes.update_date,
-                DATE_FORMAT(routes.update_date, '%d/%m/%Y') AS data_format
-            FROM 
-                routes
-            JOIN 
-                agency ON agency.agency_id = routes.agency_id
-            JOIN
-                fare_attributes ON fare_attributes.fare_id = routes.route_group";                  
+    $sql_itens = "SELECT * FROM routes";                
     $result_itens = mysqli_query($conexao, $sql_itens);
     $total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
     $quant_paginas = 10; // Setar quantidade de itens por página
@@ -63,7 +42,8 @@
             JOIN
                 fare_attributes ON fare_attributes.fare_id = routes.route_group   
             $filtro_sql ORDER BY routes.route_id ASC LIMIT $inicio, $quant_paginas";
-            $result = mysqli_query($conexao, $sql);    
+            $result = mysqli_query($conexao, $sql);  
+
     $total_itens = mysqli_num_rows($result_itens);   
     
 ?>
@@ -71,7 +51,7 @@
 <!--Script para confirmar a exclusão-->
 <script>
     function deletar() {
-        if(confirm("Deseja exluir esse item?"))
+        if(confirm("Deseja exluir essa linha"))
             document.forms[0].submit();
         else
             return false
@@ -87,7 +67,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.2">
+    <link rel="stylesheet" href="../css/route.css?v=1.3">
     <link rel="stylesheet" href="../css/table.css">
 </head>
 
@@ -101,6 +81,24 @@
                 <button class="btn-cadastrar" id="btn-cad">
                     <a href="register.php" class="link">+ CADASTRAR</a>
                 </button>
+                <br> 
+                <!-- Select no banco de dados para filtrar uma operadora--> 
+                <form method="POST" action="list.php">
+                    <select name="pesquisar" class="selc1">
+                        <option>Selecione uma operadora</option>;
+                        <?php
+                            $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
+                            $result_selec = mysqli_query($conexao, $sql_select);
+
+                            while($dados = mysqli_fetch_array($result_selec)){
+                                $id = $dados['agency_id']; 
+                                $operadoras = $dados['agency_name'];                            
+                                echo "<option value='$operadoras'>$operadoras</option>";
+                            }
+                        ?>                          
+                    </select> 
+                    <button type="submit" class="btn-pesq">PESQUISAR</button> 
+                </form>                 
                 <table>
                     <caption>Relação de linhas</caption>
                     <thead>
@@ -136,11 +134,14 @@
                             <td><?php echo $status ?></td>
                             <td><?php echo $data ?></td>
                             <td>
-                                <Button class="btn-viagem">VIAGENS</Button>
-                                <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.php?id=<?=$sql_result['route_id']?>" class="link">EDITAR</a>
-                                </button>
-                                <Button class="btn-excluir">EXCLUIR</Button>
+                                <form action="delete.php" method ="POST">
+                                    <Button class="btn-viagem">VIAGENS</Button>
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <button class="btn-editar" id="btn-edit">
+                                        <a href="edit.php?id=<?=$sql_result['route_id']?>" class="link">EDITAR</a>
+                                    </button>
+                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
+                                </form>
                             </td>
                         </tr> 
                     <?php }; ?>                           
