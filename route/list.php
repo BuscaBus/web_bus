@@ -1,12 +1,18 @@
 <?php
     include("../connection.php");
    
-    // Código para filtrar após pesquisar
+    // Código para filtrar após pesquisar no Select
     $filtro_sql = "";
     if($_POST != NULL){
         $filtro = $_POST["pesquisar"];
         $filtro_sql = "WHERE agency_name ='$filtro'";
-    }    
+    }  
+    
+    // Código para buscar pelo imput 
+    if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
+        $pesquisa = mysqli_real_escape_string($conexao, $_GET['buscar']);
+        $filtro_sql .= " AND routes.route_long_name LIKE '%$pesquisa%'";
+    }
 
     // Paginação
     $pagina = (isset($_GET['pagina']))? (int) $_GET['pagina'] : 1; //Verificar se está passando na URL a página
@@ -67,7 +73,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.3">
+    <link rel="stylesheet" href="../css/route.css?v=1.4">
     <link rel="stylesheet" href="../css/table.css">
 </head>
 
@@ -81,24 +87,30 @@
                 <button class="btn-cadastrar" id="btn-cad">
                     <a href="register.php" class="link">+ CADASTRAR</a>
                 </button>
-                <br> 
-                <!-- Select no banco de dados para filtrar uma operadora--> 
-                <form method="POST" action="list.php">
-                    <select name="pesquisar" class="selc1">
-                        <option>Selecione uma operadora</option>;
-                        <?php
-                            $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
-                            $result_selec = mysqli_query($conexao, $sql_select);
-
-                            while($dados = mysqli_fetch_array($result_selec)){
-                                $id = $dados['agency_id']; 
-                                $operadoras = $dados['agency_name'];                            
-                                echo "<option value='$operadoras'>$operadoras</option>";
-                            }
-                        ?>                          
-                    </select> 
-                    <button type="submit" class="btn-pesq">PESQUISAR</button> 
-                </form>                 
+                <br>                  
+                <nav class="nav-style">
+                    <!-- Select no banco de dados para filtrar uma operadora-->
+                    <form method="POST" action="list.php">
+                        <select name="pesquisar" class="selc1">
+                            <option>Pesquise por operadora</option>;
+                            <?php
+                                $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
+                                $result_selec = mysqli_query($conexao, $sql_select);
+                                while($dados = mysqli_fetch_array($result_selec)){
+                                    $id = $dados['agency_id'];
+                                    $operadoras = $dados['agency_name'];
+                                    echo "<option value='$operadoras'>$operadoras</option>";
+                                }
+                            ?>
+                        </select>
+                        <button type="submit" class="btn-pesq">PESQUISAR</button>
+                    </form>
+                    <!-- Imput para buscar dados e filtrar por linha -->
+                    <form method="GET">
+                       <input name="buscar"  class="impt-buscar"  value="<?php if(isset($_GET['buscar'])) echo $_GET['buscar'];?>" placeholder="Pesquise por linha" type="text">
+                       <button type="submit" class="btn-buscar">PESQUISAR</button>
+                    </form>
+                </nav>      
                 <table>
                     <caption>Relação de linhas</caption>
                     <thead>

@@ -28,6 +28,13 @@ table{
     margin-bottom: 15px;   
 }
 
+.selc1{
+    background-color: #F3F4F0;
+    width: 250px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
 .btn-pesq{
     background-color: var(--color4);
     color: var(--color0);
@@ -36,7 +43,31 @@ table{
     padding: 5px 10px 5px 10px;
     border-radius: 6px;
     margin-bottom: 15px;
+    margin-right: 20px;
     cursor: pointer;
+}
+
+.btn-buscar{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.nav-style{
+    display: flex;
+    justify-content: center;
+}
+
+.impt-buscar{
+    background-color: #F3F4F0;
+    width: 250px;
+    border-radius: 5px;
+    padding: 4px;
 }
 
 .btn-viagem{
@@ -142,29 +173,27 @@ dialog::backdrop{
 }
     
 .lb-op{
-    margin-right: 20px;    
+    margin-right: 10px;    
 }
 
 .lb-cod{
-    margin-right: 36px;
+    margin-right: 33px;
 }
 
 .lb-linha{
-    margin-right: 48px;
+    margin-right: 45px;
 }
 
 .lb-desc{
-    margin-right: 16px;       
+    margin-right: 13px;       
 }
 
 .lb-grupo{
-    margin-right: 40px;
-    margin-left: 5px;
+    margin-right: 45px;   
 }
 
 .lb-tarifa{
-    margin-right: 45px;
-    margin-left: 5px;
+    margin-right: 50px;    
 }
 
 .lb-status{
@@ -174,7 +203,7 @@ dialog::backdrop{
 
 .inpt-cod, .inpt-linha{
     background-color: #F3F4F0;
-    width: 372px;
+    width: 370px;
     border-radius: 5px;
     padding: 4px;
 }
@@ -191,13 +220,6 @@ dialog::backdrop{
 .selc{
     background-color: #F3F4F0;
     width: 378px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.selc1{
-    background-color: #F3F4F0;
-    width: 318px;
     border-radius: 5px;
     padding: 4px;
 }
