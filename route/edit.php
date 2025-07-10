@@ -30,40 +30,34 @@
 </script>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar linha</title>
-    <link rel="stylesheet" href="../css/route.css?v=1.0">
-    <style>
-        .p1 {
-            text-align: center;
-        }        
-    </style>
+    <link rel="stylesheet" href="../css/route.css?v=1.2">
+    
 </head>
-
 <body>
     <section id="section-iframe">
         <h1>Editar linha</h1>
         <hr>
         <form action="edit_result.php" method="POST" autocomplete="off">
             <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?=$result_id['route_id']?>">            
-            <p class="p1">
-                <label for="id-cod" class="lb-cod">Código:</label>
-                <input type="text" name="codigo" class="inpt-cod" id="id-cod" value="<?=$result_id['route_short_name']?>" disabled>
+            <p class="p-estilo">
+                <label for="id-cod" class="lb-edt-cod">Código:</label>
+                <input type="text" name="codigo" class="inpt-edt" id="id-cod" value="<?=$result_id['route_short_name']?>" disabled>
             </p>
-            <p class="p1">
-                <label for="id-linha" class="lb-linha">Linha:</label>
-                <input type="text" name="linha" class="inpt-linha" id="id-linha" value="<?=$result_id['route_long_name']?>">
+            <p class="p-estilo">
+                <label for="id-linha" class="lb-edt-linha">Linha:</label>
+                <input type="text" name="linha" class="inpt-edt" id="id-linha" value="<?=$result_id['route_long_name']?>">
             </p>
-            <p class="p1">
-                <label for="id-desc" class="lb-desc">Descrição:</label>
-                <textarea name="descricao" id="id-desc" class="tx_area1"><?=$result_id['route_desc']?></textarea>
+            <p class="p-estilo">
+                <label for="id-desc" class="lb-edt-desc">Descrição:</label>
+                <textarea name="descricao" id="id-desc" class="txt-edt"><?=$result_id['route_desc']?></textarea>
             </p>
-            <p class="p1">
-                <label for="id-grp" class="lb-grupo">Grupo:</label>
-                <select name="tipo" id="id-grp" class="selc">
+            <p class="p-estilo">
+                <label for="id-grp" class="lb-edt-grup">Grupo:</label>
+                <select name="tipo" id="id-grp" class="selc-edt">
                     <?php
                         // fare_id atualmente salvo na tabela routes (em route_group)
                         $grupo_salvo_id = $result_id['route_group']; 
@@ -84,9 +78,9 @@
                     ?>       
                 </select>         
             </p>                   
-            <p class="p1">
-                <label for="id-tarifa" class="lb-tarifa">Tarifa:</label>
-                <select name="tarifa" id="id-tarifa" class="selc" disabled>                   
+            <p class="p-estilo">
+                <label for="id-tarifa" class="lb-edt-tarifa">Tarifa:</label>
+                <select name="tarifa" id="id-tarifa" class="selc-edt" disabled>                   
                         <?php
                             // Converte o valor da tarifa salva para número com 2 casas decimais, usando ponto como separador decimal 
                             $tarifa_salva_valor = number_format((float)$result_id['price'], 2, '.', '');
@@ -108,8 +102,8 @@
                     </select>
             </p>
             <?php $status_salvo = $result_id['route_status']; ?>
-            <p class="p1">
-                <label for="id-status" class="lb-status">Status:</label>
+            <p class="p-estilo">
+                <label for="id-status" class="lb-edt-status">Status:</label>
 
                 <input type="radio" name="status" id="id-status-a" value="A" <?= ($status_salvo === 'A') ? 'checked' : '' ?>>
                 <label for="id-status-a">Ativa</label>
@@ -118,12 +112,18 @@
                 <label for="id-status-i">Inativa</label>
             </p>
             <hr>
-            <p>
-                <Button class="inpt_btn_edt" onclick="return editar()">EDITAR</Button>                       
-            </p>
+            <nav class="nav-edt-btn">
+                <p>
+                    <Button class="btn-edt" onclick="return editar()">EDITAR</Button>
+                </p>
+                <p>
+                    <Button class="btn-edt-canc">
+                        <a href="list.php" class="a-btn-canc">CANCELAR</a>
+                    </Button>
+                </p>
+            </nav>
         </form>
     </section>
-
 </body>
 <?php mysqli_close($conexao); ?>
 </html>

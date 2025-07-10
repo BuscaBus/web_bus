@@ -73,7 +73,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.4">
+    <link rel="stylesheet" href="../css/route.css?v=1.5">
     <link rel="stylesheet" href="../css/table.css">
 </head>
 
@@ -88,10 +88,10 @@
                     <a href="register.php" class="link">+ CADASTRAR</a>
                 </button>
                 <br>                  
-                <nav class="nav-style">
+                <nav class="nav-estilo">
                     <!-- Select no banco de dados para filtrar uma operadora-->
                     <form method="POST" action="list.php">
-                        <select name="pesquisar" class="selc1">
+                        <select name="pesquisar" class="selc-pesq">
                             <option>Pesquise por operadora</option>;
                             <?php
                                 $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
@@ -114,14 +114,14 @@
                 <table>
                     <caption>Relação de linhas</caption>
                     <thead>
-                        <th class="th1">Operadora</th>
-                        <th class="th2">Código</th>
-                        <th class="th3">Linha</th>
-                        <th class="th4">Grupo</th>
-                        <th class="th5">Tarifa</th>
-                        <th class="th6">Status</th>
-                        <th class="th7">Atualização</th>
-                        <th class="th8">Ações</th>
+                        <th class="th-op">Operadora</th>
+                        <th class="th-cod">Código</th>
+                        <th class="th-linha">Linha</th>
+                        <th class="th-grup">Grupo</th>
+                        <th class="th-tarifa">Tarifa</th>
+                        <th class="th-status">Status</th>
+                        <th class="th-atual">Atualização</th>
+                        <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                         // Laço de repetição para trazer dados do banco

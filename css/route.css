@@ -1,6 +1,15 @@
 @charset "UTF-8";
 
-/*Configurações gerais da página*/
+/*-- Variaveis de cores CSS*/
+:root{
+    --color0: #F3F4F0;
+    --color1: #CED8D0;
+    --color2: #96A5A0;
+    --color3: #4F5C55;
+    --color4: #517709;
+}
+
+/*Configurações da página list.php*/
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #CED8D0;
@@ -14,10 +23,6 @@ section{
     padding-left: 30px;
 }
 
-table{
-    margin: auto;
-}
-
 .btn-cadastrar{
     background-color: var(--color4);
     color: var(--color0);
@@ -28,7 +33,7 @@ table{
     margin-bottom: 15px;   
 }
 
-.selc1{
+.selc-pesq{
     background-color: #F3F4F0;
     width: 250px;
     border-radius: 5px;
@@ -58,7 +63,7 @@ table{
     cursor: pointer;
 }
 
-.nav-style{
+.nav-estilo{
     display: flex;
     justify-content: center;
 }
@@ -103,112 +108,178 @@ table{
     cursor: pointer;
 }
 
-/*Configurações do Iframe e do Dialog*/
-iframe{
-    width: 550px;
-    height: 500px;    
+/*Configurações da tabela da página list.php*/
+table{
+    margin: auto;
 }
-
-dialog{
-    background-color: #CED8D0;
-    margin: 2% 65% 50% 32.5%;
-    padding: 10px;
-}
-
-.btn-fechar{
-    background-color: var(--color4);
-    color: var(--color0);
-    font-weight: bold;
-    padding: 5px 12px 5px 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-}    
-
-dialog::backdrop{
-    background-color: var(--color3);
-    opacity: 0.6;
-}
-
-/*Configurações da tabela da página*/
-.th1{
+.th-op{
     padding-right: 100px;
 }
 
-.th2{
+.th-cod{
     padding-right: 10px;
 }
 
-.th3{
+.th-linha{
     padding-right: 300px;
 }
-.th4{
+.th-grup{
     padding-right: 250px;
 }
 
-.th5{
+.th-tarifa{
     padding-right: 20px;
 }
 
-.th6{
+.th-status{
     padding-right: 5px;
 }
 
-.th7{
+.th-atual{
     text-align: center;
 }
 
-.th8{
+.th-acoes{
     padding-right: 136px;
 }
 
-/*Configurações da tela de cadastro e editar*/
-#section-iframe{
+/*Configuração da navegação da página list.php*/
+.nav-pag {
+    color: black;
+    font-weight: bold;           
+} 
+.nav-pag a:hover {
+    color: green; 
+    font-weight: bold;            
+}
+
+/*Configurações da tela register.php*/
+.p-estilo {
     text-align: center;
-    height: 200px;
-    padding: 10px;
+}    
+.lb-reg-op{
+    margin-right: 8px;    
 }
 
-.p1{
-    text-align: left;
-}
-    
-.lb-op{
-    margin-right: 10px;    
-}
-
-.lb-cod{
+.lb-reg-cod{
     margin-right: 33px;
 }
 
-.lb-linha{
+.lb-reg-linha{
     margin-right: 45px;
 }
 
-.lb-desc{
+.lb-reg-desc{
     margin-right: 13px;       
 }
 
-.lb-grupo{
-    margin-right: 45px;   
+.lb-reg-grup{
+    margin-right: 40px;   
 }
 
-.lb-tarifa{
-    margin-right: 50px;    
+.lb-reg-tarifa{
+    margin-right: 45px;    
 }
 
-.lb-status{
+.lb-reg-status{
     margin-right: 15px;
     margin-left: 10px;
 }
 
-.inpt-cod, .inpt-linha{
+.inpt-reg{
     background-color: #F3F4F0;
     width: 370px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.tx_area1{
+.txt-reg{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F3F4F0;    
+    width: 370px;
+    height: 50px;
+    border-radius: 6px;
+    padding: 3px 5px 3px 5px;
+}
+
+.selc-reg{
+    background-color: #F3F4F0;
+    width: 380px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-reg-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-reg-cad{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.btn-reg-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*Configurações da tela edit.php*/
+.p-estilo {
+    text-align: center;
+}    
+.lb-edt-op{
+    margin-right: 10px;    
+}
+
+.lb-edt-cod{
+    margin-right: 33px;
+}
+
+.lb-edt-linha{
+    margin-right: 45px;
+}
+
+.lb-edt-desc{
+    margin-right: 13px;       
+}
+
+.lb-edt-grup{
+    margin-right: 40px;   
+}
+
+.lb-edt-tarifa{
+    margin-right: 45px;    
+}
+
+.lb-edt-status{
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.inpt-edt{
+    background-color: #F3F4F0;
+    width: 370px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.txt-edt{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #F3F4F0;    
     width: 372px;
@@ -217,14 +288,14 @@ dialog::backdrop{
     padding: 3px 5px 3px 5px;
 }
 
-.selc{
+.selc-edt{
     background-color: #F3F4F0;
-    width: 378px;
+    width: 370px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt_btn_reg{
+.btn_edt{
     background-color: #4F5C55;
     color: white;
     font-weight: bold;
@@ -233,22 +304,33 @@ dialog::backdrop{
     cursor: pointer;
 }
 
-.inpt_btn_edt{
-    background-color: #4F5C55;
-    color: white;
+.nav-edt-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-edt{
+    background-color: var(--color4);
+    color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
+    margin-right: 5px;
     padding: 3px 30px 3px 30px;
     cursor: pointer;
 }
 
-/*Configuração da navegação da página*/
-.nav-pag {
-    color: black;
-    font-weight: bold;           
-} 
-.nav-pag a:hover {
-    color: green; 
-    font-weight: bold;            
+.btn-edt-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
 }
 
