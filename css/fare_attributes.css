@@ -9,7 +9,7 @@
     --color4: #517709;
 }
 
-/*Configurações gerais da página*/
+/*Configurações da página list.php*/
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #CED8D0;  
@@ -23,11 +23,7 @@ section{
     padding-left: 30px; 
 }
 
-table{
-    margin: auto;
-}
-
-.link{
+.btn-a-cad{
      font-weight: bold;                      
 }
 
@@ -53,6 +49,14 @@ table{
     cursor: pointer;
 }
 
+.selec-pesq{
+    background-color: #F3F4F0;
+    margin-left: 30px;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
 .btn-editar{
     background-color: var(--color4);
     color: var(--color0);
@@ -75,125 +79,7 @@ table{
     cursor: pointer;
 }
 
-/*Configurações da tabela da página*/
-
-.th1{
-    padding-right: 30px;
-}
-
-.th2{
-    padding-right: 25px;
-}
-
-.th3{
-    padding-right: 375px;
-}
-
-.th4{
-    padding-right: 20px; 
-}
-.th5{
-    padding-right: 75px; 
-}
-
-.selc2{
-    background-color: #F3F4F0;
-    margin-left: 30px;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-/*Configurações da tela de cadastro e editar*/
-#section-iframe{
-    text-align: center;
-    height: 200px;
-    padding: 10px;
-}
-
-.p1{
-    text-align: left;    
-}
-    
-.lb1{
-    margin-right: 100px;
-    margin-left: 15px;
-    text-align: left;
-}
-
-.lb2{
-    margin-right: 110px;
-    margin-left: 15px;
-    text-align: left;
-}
-
-.lb3{
-    margin-right: 120px;
-    margin-left: 15px;
-    text-align: left;
-}
-
-.lb4{
-    margin-right: 5px;
-    margin-left: 20px;
-    text-align: left;
-}
-
-.inpt1{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt2{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt3{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-.inpt4{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.selc1{
-    background-color: #F3F4F0;
-    margin-right: 90px;
-    margin-left: 30px;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt_btn_reg{
-    background-color: #4F5C55;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 3px 30px 3px 30px;
-    cursor: pointer;
-}
-
-.inpt_btn_edt{
-    background-color: #4F5C55;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 3px 30px 3px 30px;
-    cursor: pointer;
-}
-
-/*Configuração da navegação da página*/
+/*Configuração da navegação da página list.php*/
 .nav-pag {
     color: black;
     font-weight: bold;           
@@ -202,3 +88,161 @@ table{
     color: green; 
     font-weight: bold;            
 }
+
+/*Configurações da tabela da página list.php*/
+
+table{
+    margin: auto;
+}
+
+.th-cod{
+    padding-right: 30px;
+}
+
+.th-tarifa{
+    padding-right: 25px;
+}
+
+.th-tipo{
+    padding-right: 375px;
+}
+
+.th-atual{
+    padding-right: 20px; 
+}
+.th-acoes{
+    padding-right: 75px; 
+}
+
+/*Configurações da tela register.php*/
+
+.p-estilo{
+    text-align: center;    
+}
+    
+.lb-reg-cod{
+    margin-right: 100px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-reg-tar{
+    margin-right: 110px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-reg-tipo{
+    margin-right: 120px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-reg-atual{
+    margin-right: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.inpt-reg-cod{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-tar{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-tipo{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+.inpt-reg-data{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.btn-reg-cad{
+    background-color: #4F5C55;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 30px 3px 30px;
+    cursor: pointer;
+}
+
+/*Configurações da tela edit.php*/
+
+.p-estilo{
+    text-align: center;    
+}
+    
+.lb-edt-cod{
+    margin-right: 100px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-edt-tar{
+    margin-right: 110px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-edt-tipo{
+    margin-right: 120px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.lb-edt-atual{
+    margin-right: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.inpt-edt-cod{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-tar{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-tipo{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+.inpt-edt-data{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.btn-edt{
+    background-color: #4F5C55;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 30px 3px 30px;
+    cursor: pointer;
+}
+

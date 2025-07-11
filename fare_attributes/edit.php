@@ -27,38 +27,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de tarifas</title>
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4"> 
-    <style>
-        .p1 {
-            text-align: center;
-        }        
-    </style>
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5"> 
 </head>
 
 <body>
-    <section id="section-iframe">
+    <section>
         <h1>Editar tarifa</h1>
         <form action="edit_result.php" method="POST" autocomplete="off">
             <hr>
-            <p class="p1">
-                <label for="id-codigo" class="lb1">Código:</label>
-                <input type="text" name="codigo" class="inpt1" id="id-codigo" value="<?=$result_id['fare_id']?>">
+            <p class="p-estilo">
+                <label for="id-codigo" class="lb-edt-cod">Código:</label>
+                <input type="text" name="codigo" class="inpt-edt-cod" id="id-codigo" value="<?=$result_id['fare_id']?>">
             </p>
-            <p class="p1">
-                <label for="id-tarifa" class="lb2">Tarifa:</label>
-                <input type="text" name="tarifa" class="inpt2" id="id-tarifa" value="<?=$result_id['price_format']?>">
+            <p class="p-estilo">
+                <label for="id-tarifa" class="lb-edt-tar">Tarifa:</label>
+                <input type="text" name="tarifa" class="inpt-edt-tar" id="id-tarifa" value="<?=$result_id['price_format']?>">
             </p>
-            <p class="p1">
-                <label for="id-tipo" class="lb3">Tipo:</label>
-                <input type="text" name="tipo" class="inpt3" id="id-tipo" value="<?=$result_id['route_group']?>">
+            <p class="p-estilo">
+                <label for="id-tipo" class="lb-edt-tipo">Tipo:</label>
+                <input type="text" name="tipo" class="inpt-edt-tipo" id="id-tipo" value="<?=$result_id['route_group']?>">
             </p>            
-            <p class="p1">
-                <label for="id-data" class="lb4">Data de Atualização:</label>
-                <input type="date" name="data" class="inpt4" id="id-data" value="<?=$result_id['update_date']?>">
+            <p class="p-estilo">
+                <label for="id-data" class="lb-edt-data">Data de Atualização:</label>
+                <input type="date" name="data" class="inpt-edt-data" id="id-data" value="<?=$result_id['update_date']?>">
             </p>
             <hr>
             <p>
-                <Button class="inpt_btn_reg" onclick="return editar()">EDITAR</Button>  
+                <Button class="btn-edt" onclick="return editar()">EDITAR</Button>  
             </p>
 
         </form>

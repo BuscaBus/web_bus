@@ -46,7 +46,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.3">    
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4">    
 </head>
 
 <body>
@@ -57,12 +57,12 @@
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.html" class="link">+ CADASTRAR</a>
+                    <a href="register.html" class="btn-a-cad">+ CADASTRAR</a>
                 </button>
                 <br> 
                 <!-- Select no banco de dados para filtrar uma operadora--> 
                 <form method="POST" action="list.php">
-                    <select name="pesquisar" class="selc2">
+                    <select name="pesquisar" class="selec-pesq">
                         <option>Selecione um tipo de tarifa</option>;
                         <?php
                             $sql_select = "SELECT * FROM fare_attributes";
@@ -80,11 +80,11 @@
                 <table>
                     <caption>Relação de tarifas vigentes</caption>
                     <thead>
-                        <th class="th1">Código</th>
-                        <th class="th2">Tarifa</th>
-                        <th class="th3">Tipo</th>
-                        <th class="th4">Atualização</th>
-                        <th class="th5">Ações</th>
+                        <th class="th-cod">Código</th>
+                        <th class="th-tarifa">Tarifa</th>
+                        <th class="th-tipo">Tipo</th>
+                        <th class="th-atual">Atualização</th>
+                        <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                         // Laço de repetição para trazer dados do banco

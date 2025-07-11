@@ -6,38 +6,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de tarifas</title>
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4"> 
-    <style>
-        .p1 {
-            text-align: center;
-        }        
-    </style>
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5">     
 </head>
 
 <body>
-    <section id="section-iframe">
+    <section>
         <h1>Cadastrar tarifas</h1>
         <form action="register.php" method="POST" autocomplete="off">
             <hr>
-            <p class="p1">
-                <label for="id-codigo" class="lb1">Código:</label>
-                <input type="text" name="codigo" class="inpt1" id="id-codigo" placeholder="insira o código da tarifa..." required>
+            <p class="p-estilo">
+                <label for="id-codigo" class="lb-reg-cod">Código:</label>
+                <input type="text" name="codigo" class="inpt-reg-cod" id="id-codigo" placeholder="insira o código da tarifa..." required>
             </p>
-             <p class="p1">
-                <label for="id-tarifa" class="lb2">Tarifa:</label>
-                <input type="text" name="tarifa" class="inpt2" id="id-tarifa" placeholder="insira o valor da tarifa..." required>
+             <p class="p-estilo">
+                <label for="id-tarifa" class="lb-reg-tar">Tarifa:</label>
+                <input type="text" name="tarifa" class="inpt-reg-tar" id="id-tarifa" placeholder="insira o valor da tarifa..." required>
             </p>
-             <p class="p1">
-                <label for="id-tipo" class="lb3">Tipo:</label>
-                <input type="text" name="tipo" class="inpt3" id="id-tipo" placeholder="insira o tipo da linha..." required>
+             <p class="p-estilo">
+                <label for="id-tipo" class="lb-reg-tipo">Tipo:</label>
+                <input type="text" name="tipo" class="inpt-reg-tipo" id="id-tipo" placeholder="insira o tipo da linha..." required>
             </p>            
-            <p class="p1">
-                <label for="id-data" class="lb4">Data de Atualização:</label>
-                <input type="date" name="data" class="inpt4" id="id-data" placeholder="insira a data de atualização..." required>
+            <p class="p-estilo">
+                <label for="id-data" class="lb-reg-atual">Data de Atualização:</label>
+                <input type="date" name="data" class="inpt-reg-data" id="id-data" placeholder="insira a data de atualização..." required>
             </p>
             <hr>
             <p>
-                <Button class="inpt_btn_reg">CADASTRAR</Button>  
+                <Button class="btn-reg-cad">CADASTRAR</Button>  
             </p>
 
         </form>
