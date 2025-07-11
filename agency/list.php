@@ -45,8 +45,8 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/agency.css?v=1.3">    
+    <link rel="stylesheet" href="../css/table.css?v=1.0">
+    <link rel="stylesheet" href="../css/agency.css?v=1.4">    
 </head>
 
 <body>
@@ -57,12 +57,12 @@
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.html" class="link">+ CADASTRAR</a>
+                    <a href="register.html" class="a-btn-cad">+ CADASTRAR</a>
                 </button>
                 <br> 
                 <!-- Select no banco de dados para filtrar uma operadora--> 
                 <form method="POST" action="list.php">
-                    <select name="pesquisar" class="selc1">
+                    <select name="pesquisar" class="selc-pesq">
                         <option>Selecione uma operadora</option>;
                         <?php
                             $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
@@ -80,10 +80,10 @@
                 <table>
                     <caption>Relação de operadoras</caption>
                     <thead>
-                        <th class="th1">Operadora</th>
-                        <th class="th2">Cidade</th>
-                        <th class="th3">Site</th>
-                        <th class="th4">Ações</th>
+                        <th class="th-op">Operadora</th>
+                        <th class="th-cid">Cidade</th>
+                        <th class="th-site">Site</th>
+                        <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                         // Laço de repetição para trazer dados do banco

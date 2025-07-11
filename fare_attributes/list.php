@@ -45,7 +45,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/table.css?v=1.0">
     <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4">    
 </head>
 

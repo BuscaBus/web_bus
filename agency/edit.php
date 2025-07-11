@@ -28,37 +28,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar operadoras</title>
-    <link rel="stylesheet" href="../css/agency.css"> 
-     <style>
-        .p1 {
-            text-align: center;
-        }        
-    </style>
+    <link rel="stylesheet" href="../css/agency.css?v=1.0">      
 </head>
 
 <body>
-    <section id="section-iframe">
+    <section>
         <h1>Editar operadora</h1>
         <hr>
         <form action="edit_result.php" method="POST" autocomplete="off">
-            <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?=$result_id['agency_id']?>">
-            <p class="p1">
-                <label for="id-nome" class="lb1">Nome:</label>
-                <input type="text" name="nome" class="inpt1" id="id-nome" value="<?=$result_id['agency_name']?>">
+            <input type="hidden" name="id" class="inpt-edt-id" id="id-nome" value="<?=$result_id['agency_id']?>">
+            <p class="p-estilo">
+                <label for="id-nome" class="lb-edt-op">Nome:</label>
+                <input type="text" name="nome" class="inpt-edt-op" id="id-nome" value="<?=$result_id['agency_name']?>">
             </p>
-            <p class="p1">
-                <label for="id-cid" class="lb2">Cidade:</label>
-                <input type="text" name="cidade" class="inpt1" id="id-cid" value="<?=$result_id['agency_city']?>">                     
+            <p class="p-estilo">
+                <label for="id-cid" class="lb-edt-cid">Cidade:</label>
+                <input type="text" name="cidade" class="inpt-edt-cid" id="id-cid" value="<?=$result_id['agency_city']?>">                     
                 </select>                
             </p>    
-            <p class="p1">
-                <label for="id-url" class="lb3">Site:</label>
-                <input type="text" name="url" class="inpt2" id="id-url" value="<?=$result_id['agency_url']?>">
+            <p class="p-estilo">
+                <label for="id-url" class="lb-edt-site">Site:</label>
+                <input type="text" name="url" class="inpt-edt-site" id="id-url" value="<?=$result_id['agency_url']?>">
             </p>
             <hr>
-            <p>
-                <Button class="inpt_btn_edt" onclick="return editar()">EDITAR</Button>                       
-            </p>
+            <nav class="nav-edt-btn">
+                <p>
+                    <Button class="btn-edt" onclick="return editar()">EDITAR</Button>
+                </p>
+                <p>
+                    <Button class="btn-edt-canc">
+                        <a href="list.php" class="a-btn-canc">CANCELAR</a>
+                    </Button>
+                </p>
+            </nav>
         </form>
     </section>
 

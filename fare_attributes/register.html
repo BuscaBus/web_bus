@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de tarifas</title>
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5">     
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.6">     
 </head>
 
 <body>
@@ -27,13 +27,20 @@
                 <input type="text" name="tipo" class="inpt-reg-tipo" id="id-tipo" placeholder="insira o tipo da linha..." required>
             </p>            
             <p class="p-estilo">
-                <label for="id-data" class="lb-reg-atual">Data de Atualização:</label>
+                <label for="id-data" class="lb-reg-data">Data de Atualização:</label>
                 <input type="date" name="data" class="inpt-reg-data" id="id-data" placeholder="insira a data de atualização..." required>
             </p>
             <hr>
-            <p>
-                <Button class="btn-reg-cad">CADASTRAR</Button>  
-            </p>
+            <nav class="nav-reg-btn">
+                <p>
+                    <Button class="btn-reg-cad">CADASTRAR</Button>
+                </p>
+                <p>
+                    <Button class="btn-reg-canc">
+                        <a href="list.php" class="a-btn-canc">CANCELAR</a> 
+                    </Button>
+                </p>
+            </nav>
 
         </form>
     </section>

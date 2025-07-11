@@ -295,15 +295,6 @@ table{
     padding: 4px;
 }
 
-.btn_edt{
-    background-color: #4F5C55;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 3px 30px 3px 30px;
-    cursor: pointer;
-}
-
 .nav-edt-btn{
     display: flex;
     justify-content: center;

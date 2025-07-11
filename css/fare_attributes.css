@@ -138,8 +138,8 @@ table{
     text-align: left;
 }
 
-.lb-reg-atual{
-    margin-right: 5px;
+.lb-reg-data{
+    margin-right: 7px;
     margin-left: 20px;
     text-align: left;
 }
@@ -171,13 +171,34 @@ table{
     padding: 4px;
 }
 
+.nav-reg-btn{
+    display: flex;
+    justify-content: center;
+}
+
 .btn-reg-cad{
-    background-color: #4F5C55;
-    color: white;
+    background-color: var(--color4);
+    color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
-    padding: 3px 30px 3px 30px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
     cursor: pointer;
+}
+
+.btn-reg-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
 }
 
 /*Configurações da tela edit.php*/
@@ -204,8 +225,8 @@ table{
     text-align: left;
 }
 
-.lb-edt-atual{
-    margin-right: 5px;
+.lb-edt-data{
+    margin-right: 7px;
     margin-left: 20px;
     text-align: left;
 }
@@ -237,12 +258,32 @@ table{
     padding: 4px;
 }
 
+.nav-edt-btn{
+    display: flex;
+    justify-content: center;
+}
+
 .btn-edt{
-    background-color: #4F5C55;
-    color: white;
+    background-color: var(--color4);
+    color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
+    margin-right: 5px;
     padding: 3px 30px 3px 30px;
     cursor: pointer;
 }
 
+.btn-edt-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
+}

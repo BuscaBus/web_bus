@@ -74,7 +74,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/route.css?v=1.5">
-    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/table.css?v=1.0">
 </head>
 
 <body>

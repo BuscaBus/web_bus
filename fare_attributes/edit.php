@@ -27,7 +27,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de tarifas</title>
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5"> 
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.6"> 
 </head>
 
 <body>
@@ -52,9 +52,16 @@
                 <input type="date" name="data" class="inpt-edt-data" id="id-data" value="<?=$result_id['update_date']?>">
             </p>
             <hr>
-            <p>
-                <Button class="btn-edt" onclick="return editar()">EDITAR</Button>  
-            </p>
+            <nav class="nav-edt-btn">
+                <p>
+                    <Button class="btn-edt" onclick="return editar()">EDITAR</Button>
+                </p>
+                <p>
+                    <Button class="btn-edt-canc">
+                        <a href="list.php" class="a-btn-canc">CANCELAR</a>
+                    </Button>
+                </p>
+            </nav>
 
         </form>
     </section>
