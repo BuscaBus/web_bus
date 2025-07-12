@@ -5,39 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de calendário</title>
-    <link rel="stylesheet" href="../css/calendar.css">  
+    <link rel="stylesheet" href="../css/calendar.css?v=1.2">  
 </head>
 
 <body>
     <section id="section-iframe">
         <h1>Cadastrar calendário</h1>
-        <form action="#" method="get" autocomplete="off">
+        <form action="register.php" method="POST" autocomplete="off">
             <hr>
-            <p class="p1">
-                <label for="id-dia-tp" class="lb-dia-tp">Dia tipo:</label>
-                <input type="text" name="dia_tipo" class="inpt-dia-tp" id="id-dia-tp" placeholder="insira um dia tipo..." required>
+            <p class="p-estilo">
+                <label for="id-servico" class="lb-reg-serv">Serviço:</label>
+                <input type="text" name="servico" class="inpt-reg-serv" id="id-servico" placeholder="insira um serviço..." required>
             </p>
-            <p class="p1">
-                <label for="id-inicio-vig" class="lb-inicio-vig">Inicio da vigência:</label>
-                <input type="date" name="inicio_vigencia" class="inpt-inicio-vig" id="id-inicio-vig" required>            
+            <p class="p-estilo">
+                <label for="id-inicio-vig" class="lb-reg-inic">Inicio da vigência:</label>
+                <input type="date" name="inic_vig" class="inpt-reg-inic" id="id-inicio-vig" required>            
             </p>
-            <p class="p1">
-                <label for="id-term-vig" class="lb-term-vig">Término da vigência:</label>
-                <input type="date" name="term_vigencia" class="inpt-term-vig" id="id-term-vig" required>            
-            </p>
-            <br>
-            <input type="checkbox" name="chec-seg" id="id-chec-seg"> Segunda
-            <input type="checkbox" name="chec-ter" id="id-chec-ter"> Terça
-            <input type="checkbox" name="chec-qua" id="id-chec-qua"> Quarta
-            <input type="checkbox" name="chec-qui" id="id-chec-qui"> Quinta
-            <input type="checkbox" name="chec-sex" id="id-chec-sex"> Sexta
-            <input type="checkbox" name="chec-sab" id="id-chec-sab"> Sábado
-            <input type="checkbox" name="chec-dom" id="id-chec-dom"> Domingo
+            <p class="p-estilo">
+                <label for="id-term-vig" class="lb-reg-term">Término da vigência:</label>
+                <input type="date" name="term_vig" class="inpt-reg-term" id="id-term-vig" required>            
+            </p>            
             <br>
             <hr>
-            <p>
-                <input type="submit" value="CADASTRAR" class="inpt_btn_reg">
-            </p>
+            <nav class="nav-reg-btn">
+                <p>
+                    <Button class="btn-reg-cad">CADASTRAR</Button>
+                </p>
+                <p>
+                    <Button class="btn-reg-canc">
+                        <a href="list.php" class="a-btn-canc">CANCELAR</a> 
+                    </Button>
+                </p>
+            </nav>
         </form>
     </section>
 </body>

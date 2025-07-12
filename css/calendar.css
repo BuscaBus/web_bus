@@ -1,6 +1,15 @@
 @charset "UTF-8";
 
-/*Configurações gerais da página*/
+/*-- Variaveis de cores CSS*/
+:root{
+    --color0: #F3F4F0;
+    --color1: #CED8D0;
+    --color2: #96A5A0;
+    --color3: #4F5C55;
+    --color4: #517709;
+}
+
+/*Configurações da página list.php*/
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #CED8D0;
@@ -14,10 +23,6 @@ section{
     padding-left: 30px;
 }
 
-table{
-    margin: auto;
-}
-
 .btn-cadastrar{
     background-color: var(--color4);
     color: var(--color0);
@@ -26,6 +31,7 @@ table{
     padding: 5px 10px 5px 10px;
     border-radius: 6px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .btn-editar{
@@ -36,6 +42,7 @@ table{
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
     margin-right: 1px;
+    cursor: pointer;
 }
 
 .btn-excluir{
@@ -46,139 +53,165 @@ table{
     padding: 3px;
     padding: 3px 6px 3px 6px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
-/*Configurações do Iframe e do Dialog*/
-iframe{
-    width: 650px;
-    height: 345px;    
+/*Configurações da tabela da página list.php*/
+
+table{
+    margin: auto;
 }
 
-dialog{
-    background-color: #CED8D0;
-    margin: 2% 60% 50% 30%;
-    padding: 10px;
+.th-serv{
+    padding-right: 200px;          
 }
 
-.btn-fechar{
-    background-color: var(--color4);
-    color: var(--color0);
-    font-weight: bold;
-    padding: 5px 12px 5px 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
+.th-inic{
+    padding-right: 80px;
 }
 
-dialog::backdrop{
-    background-color: var(--color3);
-    opacity: 0.6;
+.th-term{
+    padding-right: 60px;
 }
 
-/*Configurações da tabela da página*/
-.th1{
-    padding-right: 100px;          
-}
-
-.th2{
-    padding-right: 40px;
-}
-
-.th3{
-    padding-right: 20px;
-}
-
-.th4{
-    padding-right: 10px; /*Seg*/
-} 
-
-.th5{
-    padding-right: 14px; /*Ter*/   
-} 
-
-.th6{
-    padding-right: 7px; /*Qua*/   
-} 
-
-.th7{
-    padding-right: 10px; /*Qui*/   
-} 
-
-.th8{
-    padding-right: 10px; /*Sex*/   
-} 
-
-.th9{
-    padding-right: 10px; /*Sab*/
-}
-
-.th10{
-    padding-right: 5px;
-
-}
-.th10{
-    padding-right: 5px;
-}
-
-.th11{
+.th-acoes{
     padding-right: 75px;
 }
 
-/*Configurações da tela de cadastro e editar*/
-#section-iframe{
-    text-align: center;
-    height: 200px;
-    padding: 10px;
-}
+/*Configurações da tela de register.php*/
 
-.p1{
-    text-align: left;
+.p-estilo{
+    text-align: center;    
 }
    
-.lb-dia-tp{
+.lb-reg-serv{
     margin-right: 94px;
 }
 
-.lb-inicio-vig{
+.lb-reg-inic{
     margin-right: 25px;
 }
 
-.lb-term-vig{
+.lb-reg-term{
     margin-right: 5px;
 }
 
-.inpt-dia-tp{
+.inpt-reg-serv{
     background-color: #F3F4F0;
-    width: 412px;
+    width: 300px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-inicio-vig{
+.inpt-reg-inic{
     background-color: #F3F4F0;
-    width: 412px;
+    width: 300px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-term-vig{
+.inpt-reg-term{
     background-color: #F3F4F0;
-    width: 412px;
+    width: 300px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt_btn_reg{
-    background-color: #4F5C55;
-    color: white;
+.nav-reg-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-reg-cad{
+    background-color: var(--color4);
+    color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
-    padding: 3px 30px 3px 30px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
 }
 
-.inpt_btn_edt{
-    background-color: #4F5C55;
-    color: white;
+.btn-reg-canc{
+    background-color: red;
+    color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*Configurações da tela de edit.php*/
+
+.p-estilo{
+    text-align: center;    
+}
+   
+.lb-edt-serv{
+    margin-right: 94px;
+}
+
+.lb-edt-inic{
+    margin-right: 25px;
+}
+
+.lb-edt-term{
+    margin-right: 5px;
+}
+
+.inpt-edt-serv{
+    background-color: #F3F4F0;
+    width: 300px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-inic{
+    background-color: #F3F4F0;
+    width: 300px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-term{
+    background-color: #F3F4F0;
+    width: 300px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-edt-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-edt{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
     padding: 3px 30px 3px 30px;
+    cursor: pointer;
+}
+
+.btn-edt-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
 }

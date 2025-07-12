@@ -5,9 +5,17 @@
     $sql = "SELECT *, DATE_FORMAT(start_date, '%d/%m/%Y') AS data_for_start, DATE_FORMAT(end_date, '%d/%m/%Y') AS data_for_end  FROM calendar";
     $result = mysqli_query($conexao, $sql);
     
-    // $total_itens = mysqli_num_rows($result_itens);   
-    
-    ?>
+?>
+
+<!--Script para confirmar a exclusão-->
+<script>
+    function deletar() {
+        if(confirm("Deseja exluir esse item?"))
+            document.forms[0].submit();
+        else
+            return false
+    }
+</script>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -19,7 +27,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/calendar.css?v=1.0">    
+    <link rel="stylesheet" href="../css/calendar.css?v=1.2">    
 </head>
 
 <body>
@@ -30,66 +38,54 @@
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.html" class="link" target="frame">+ CADASTRAR</a>
+                    <a href="register.html" class="link">+ CADASTRAR</a>
                 </button>
         
                 <table>
                     <caption>Relação de calendários</caption>
                     <thead>
-                        <th class="th1">Serviço</th>
-                        <th class="th4">Seg</th>
-                        <th class="th5">Ter</th>
-                        <th class="th6">Qua</th>
-                        <th class="th7">Qui</th>
-                        <th class="th8">Sex</th>
-                        <th class="th9">Sab</th>
-                        <th class="th10">Dom</th>
-                        <th class="th2">Inicio</th>
-                        <th class="th3">Término</th>
-                        <th class="th11">Ações</th>
+                        <th class="th-serv">Serviço</th>
+                        <th class="th-inic">Inicio</th>
+                        <th class="th-term">Término</th>
+                        <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                         // Laço de repetição para trazer dados do banco
                         while($sql_result = mysqli_fetch_array($result)){
-                            $id = $sql_result['service_id'];
-                            $seg = $sql_result['monday'];
-                            $ter = $sql_result['tuesday'];
-                            $qua = $sql_result['wednesday'];
-                            $qui = $sql_result['thursday']; 
-                            $sex = $sql_result['friday'];                          
-                            $sab = $sql_result['saturday'];  
-                            $dom = $sql_result['sunday'];
+                            $id = $sql_result['service_id'];                            
                             $data_inicio = $sql_result['data_for_start'];  
                             $data_fim = $sql_result['data_for_end'];    
                     ?>
                     <tbody>
                         <tr>
                             <td><?php echo $id ?></td>
-                            <td><?php echo $seg ?></td>
-                            <td><?php echo $ter ?></td>
-                            <td><?php echo $qua ?></td>
-                            <td><?php echo $qui ?></td>
-                            <td><?php echo $sex ?> </td>
-                            <td><?php echo $sab ?></td>
-                            <td><?php echo $dom ?></td>
                             <td><?php echo $data_inicio ?></td>
                             <td><?php echo $data_fim ?></td>
                             <td>
-                                <button class="btn-editar" id="btn-edit">
-                                    <a href="edit.html" class="link" target="frame">EDITAR</a>
-                                </button>
-                                <Button class="btn-excluir">EXCLUIR</Button>
+                                <form action="delete.php" method ="POST">
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <button class="btn-editar" id="btn-edit">
+                                        <a href="edit.php?id=<?=$sql_result['service_id']?>" class="link">EDITAR</a>
+                                    </button>                                
+                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
+                                </form>
                             </td>
                         </tr> 
                         <?php }; ?>                       
                     </tbody>
                 </table>
-                <br>
-                <dialog>
-                    <iframe src="register.html" name="frame"></iframe>
-                    <br>
-                    <button class="btn-fechar">FECHAR</button>
-                </dialog>
+                <br>                
+                 <!--Consulta no banco de dados a quantidade de registros-->
+                <?php
+                    $sql = "SELECT COUNT(*) AS total FROM calendar";
+                    $result = mysqli_query($conexao, $sql);
+
+                     $row = mysqli_fetch_assoc($result);
+                     $total_registros = $row['total'];                    
+                ?>
+                <!-- Mostra a quantidade de registros-->
+                <p>Total de calendários cadastrados: <?php echo $total_registros;?></p>
+                <br>           
             </section>
         </main>
         <footer>
