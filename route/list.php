@@ -147,7 +147,9 @@
                             <td><?php echo $data ?></td>
                             <td>
                                 <form action="delete.php" method ="POST">
-                                    <Button class="btn-viagem">VIAGENS</Button>
+                                    <Button class="btn-viagem" id="btn-viag">
+                                       <a href="../trips/register.php?id=<?=$sql_result['route_id']?>" class="link">VIAGENS</a>
+                                    </Button>
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <button class="btn-editar" id="btn-edit">
                                         <a href="edit.php?id=<?=$sql_result['route_id']?>" class="link">EDITAR</a>
