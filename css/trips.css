@@ -9,18 +9,131 @@
     --color4: #517709;
 }
 
-/*Configurações da página register.php*/
+/*Configurações gerais da página register.php*/
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: #CED8D0;  
 }
 
-main {
+.main-cont {
     display: flex;
+    justify-content: left;
+    width: 1536px;
+    height:600px;    
 }
-.sect1 {
-    background-color: green;   
+.sect-reg-viag {
+    text-align: center;
+    background-color: green; 
+    width: 600px;
 }
-.sect2 {
+.sect-list-viag {    
     background-color: blue;
+    width: 1000px;
+}
+
+/*Configurações da section de cadastro*/
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; 
+}
+
+.p-estilo{
+    text-align: center;    
+}
+    
+.lb-reg-op{
+    margin-right: 10px;
+}
+
+.lb-reg-cid{
+    margin-right: 5px;
+}
+
+.lb-reg-site{
+    margin-right: 25px;
+}
+
+.inpt-reg-op{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-site{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-cid{
+    background-color: #F3F4F0;
+    width: 323px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.btn-reg-cad{
+    background-color: #4F5C55;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 3px 30px 3px 30px;
+    cursor: pointer;
+}
+
+.nav-reg-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-reg-cad{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.btn-reg-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*Configurações da tabela da página list.php*/
+
+table{
+    margin: auto;
+}
+
+.th-op{
+    padding-right: 125px;
+}
+
+.th-cid{
+    padding-right: 150px;
+}
+
+.th-site{
+    padding-right: 250px;
+}
+
+.th-acoes{
+    padding-right: 75px; 
 }
