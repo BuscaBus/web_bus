@@ -22,6 +22,17 @@ body{
     width: 1536px;
     height:600px;    
 }
+
+.h1-cad-vig{
+    color: black;
+    font-size: 20px;
+}
+
+.cap-list-vig{
+    color: black;
+    font-size: 20px;
+}
+
 .sect-reg-viag {
     text-align: center;
     background-color: green; 
@@ -30,6 +41,30 @@ body{
 .sect-list-viag {    
     background-color: blue;
     width: 1000px;
+}
+
+.btn-editar{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-size: 10px;
+    width: 60px;
+    font-weight: bold;
+    padding: 3px 6px 3px 6px;
+    border-radius: 5px;
+    margin-right: 1px;
+    cursor: pointer;
+}
+
+.btn-excluir{
+    background-color: red;
+    color: var(--color0);
+    font-size: 10px;
+    width: 60px;
+    font-weight: bold;
+    padding: 3px;
+    padding: 3px 6px 3px 6px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 /*Configurações da section de cadastro*/
@@ -44,46 +79,81 @@ form {
     text-align: center;    
 }
     
-.lb-reg-op{
+.lb-reg-cod{
+    margin-right: 75px;
+}
+
+.lb-reg-linha{
+    margin-right: 85px;
+}
+
+.lb-reg-serv{
+    margin-right: 73px;
+}
+
+.lb-reg-orig{
+    margin-right: 73px;
+}
+
+.lb-reg-dest{
+    margin-right: 73px;
+}
+
+.lb-reg-sent{
+    margin-right: 73px;
+}
+
+.lb-reg-part{
     margin-right: 10px;
 }
 
-.lb-reg-cid{
-    margin-right: 5px;
-}
-
-.lb-reg-site{
-    margin-right: 25px;
-}
-
-.inpt-reg-op{
+.inpt-reg-cod{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-reg-site{
+.inpt-reg-linha{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.selc-reg-cid{
+.inpt-reg-orig{
     background-color: #F3F4F0;
-    width: 323px;
+    width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.btn-reg-cad{
-    background-color: #4F5C55;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 3px 30px 3px 30px;
-    cursor: pointer;
+.inpt-reg-dest{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-part{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-serv{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-sent{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
 }
 
 .nav-reg-btn{
@@ -116,24 +186,25 @@ form {
     color: inherit;
 }
 
-/*Configurações da tabela da página list.php*/
+/*Configurações da tabela de listagem das viagens*/
 
 table{
     margin: auto;
 }
 
-.th-op{
-    padding-right: 125px;
+.th-viag{
+    padding-right: 350px;
 }
 
-.th-cid{
-    padding-right: 150px;
+.th-sent{
+    padding-right: 10px;
 }
 
-.th-site{
-    padding-right: 250px;
+.th-part{
+    padding-right: 100px;
 }
 
 .th-acoes{
-    padding-right: 75px; 
+    padding-right: 100px;    
 }
+

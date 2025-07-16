@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.1">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.4">
+    <link rel="stylesheet" href="../css/trips.css?v=1.6">
 </head>
 
 <body>
@@ -26,30 +26,41 @@
         </header>
         <main class="main-cont">
             <section class="sect-reg-viag">
-                <h1>Cadastrar viagens</h1>
-                <form action="register.php" method="POST" autocomplete="off">                    
+                <h1 class="h1-cad-vig">Cadastrar viagens</h1>
+                <form action="register.php" method="POST" autocomplete="off">
                     <p class="p-estilo">
-                        <label for="id-nome" class="lb-reg-op">Nome:</label>
-                        <input type="text" name="nome" class="inpt-reg-op" id="id-nome" placeholder="insira o nome da operadora..." required>
+                        <label for="id-cod" class="lb-reg-cod">Código:</label>
+                        <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod">
                     </p>
                     <p class="p-estilo">
-                        <label for="id-cid" class="lb-reg-cid">Cidade:</label>
-                        <select name="cidade" class="selc-reg-cid" id="id-cid">
-                            <option value="select">Selecione uma cidade..</option>
-                            <option value="Águas Mornas">Águas Mornas</option>
-                            <option value="Antônio Carlos">Antônio Carlos</option>
-                            <option value="Biguaçu">Biguaçu</option>
-                            <option value="Florianópolis">Florianópolis</option>
-                            <option value="Governador Celso Ramos">Governador Celso Ramos</option>
-                            <option value="Palhoça">Palhoça</option>
-                            <option value="Santo Amaro da Imperatriz">Santo Amaro da Imperatriz</option>
-                            <option value="São José">São José</option>
-                            <option value="São Pedro de Alcântara">São Pedro de Alcântara</option>
+                        <label for="id-linha" class="lb-reg-linha">Linha:</label>
+                        <input type="text" name="linha" class="inpt-reg-linha" id="id-linha">
+                    </p>
+                    <p class="p-estilo">
+                        <label for="id-serv" class="lb-reg-serv">Serviço:</label>
+                        <select name="servico" class="selc-reg-serv" id="id-serv">
+                            <option value="select">Dia da Semana</option>
                         </select>
                     </p>
                     <p class="p-estilo">
-                        <label for="id-url" class="lb-reg-site">Site:</label>
-                        <input type="text" name="url" class="inpt-reg-site" id="id-url" placeholder="insira o site da operadora..." required>
+                        <label for="id-orig" class="lb-reg-orig">Origem:</label>
+                        <input type="text" name="origem" class="inpt-reg-orig" id="id-org">
+                    </p>
+                    <p class="p-estilo">
+                        <label for="id-dest" class="lb-reg-dest">Destino:</label>
+                        <input type="text" name="destino" class="inpt-reg-dest" id="id-dest">
+                    </p>
+                    <p class="p-estilo">
+                        <label for="id-sent" class="lb-reg-sent">Sentido:</label>
+                        <select name="sentido" class="selc-reg-sent" id="id-sent">
+                            <option value="select">Selecione o sentido</option>
+                            <option value="0">Ida</option>
+                            <option value="1">Volta</option>
+                        </select>
+                    </p>
+                    <p class="p-estilo">
+                        <label for="id-part" class="lb-reg-part">Local de Partida:</label>
+                        <input type="text" name="partida" class="inpt-reg-part" id="id-part">
                     </p>
                     <br>
                     <nav class="nav-reg-btn">
@@ -65,37 +76,39 @@
 
                 </form>
             </section>
-            <section class="sect-list-viag">                           
+            <section class="sect-list-viag">
+                <br>
                 <table>
-                    <caption>Relação de viagens</caption>
+                    <caption class="cap-list-vig">Relação de viagens</caption>
                     <thead>
-                        <th class="th-op">Operadora</th>
-                        <th class="th-cid">Cidade</th>
-                        <th class="th-site">Site</th>
+                        <th class="th-viag">Viagem</th>
+                        <th class="th-sent">Sentido</th>
+                        <th class="th-part">Partida</th>
                         <th class="th-acoes">Ações</th>
-                    </thead>                    
+                    </thead>
                     <tbody>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>
-                                <form action="delete.php" method ="POST">
+                                <form action="delete.php" method="POST">
                                     <input type="hidden" name="id" value="">
                                     <button class="btn-editar" id="btn-edit">
                                         <a href="edit.php?id=" class="link">EDITAR</a>
-                                    </button>                                
+                                    </button>
                                     <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
                                 </form>
                             </td>
-                        </tr>                                            
+                        </tr>
                     </tbody>
                 </table>
             </section>
 
         </main>
         <footer>
-            <p><a href="../route/list.php">< Voltar</a>
+            <p><a href="../route/list.php">
+                    < Voltar</a>
             </p>
         </footer>
     </div>
