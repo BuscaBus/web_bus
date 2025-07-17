@@ -1,8 +1,19 @@
 <?php
-//include("../connection.php");
+include("../connection.php");
 
 // Declaração da variavel para receber o ID
-//$id = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    die("Erro: ID não informado ou inválido.");
+}
+
+$id = (int) $_GET['id'];
+
+// Consulta o ID no banco de dados
+$sql = "SELECT * FROM routes WHERE route_id = $id";
+$result = mysqli_query($conexao, $sql);
+
+// Variavel que recebe o ID do banco de dados    
+$result_id = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -27,19 +38,29 @@
         <main class="main-cont">
             <section class="sect-reg-viag">
                 <h1 class="h1-cad-vig">Cadastrar viagens</h1>
-                <form action="register.php" method="POST" autocomplete="off">
+                <form action="result_register.php" method="POST" autocomplete="off">
+                    <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['route_id'] ?>">
                     <p class="p-estilo">
                         <label for="id-cod" class="lb-reg-cod">Código:</label>
-                        <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod">
+                        <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod" value="<?= $result_id['route_short_name'] ?>">
                     </p>
                     <p class="p-estilo">
                         <label for="id-linha" class="lb-reg-linha">Linha:</label>
-                        <input type="text" name="linha" class="inpt-reg-linha" id="id-linha">
+                        <input type="text" name="linha" class="inpt-reg-linha" id="id-linha" value="<?= $result_id['route_long_name'] ?>">
                     </p>
                     <p class="p-estilo">
                         <label for="id-serv" class="lb-reg-serv">Serviço:</label>
                         <select name="servico" class="selc-reg-serv" id="id-serv">
-                            <option value="select">Dia da Semana</option>
+                            <?php
+                            $sql_select = "SELECT service_id FROM calendar ORDER BY service_id DESC";
+                            $result_selec = mysqli_query($conexao, $sql_select);
+
+                            while ($dados = mysqli_fetch_array($result_selec)) {
+                                $servicos = $dados['service_id'];
+                                $selected = ($servicos == $result_id['service_id']) ? 'selected' : '';
+                                echo "<option value='$servicos' $selected>$servicos</option>";
+                            }
+                            ?>
                         </select>
                     </p>
                     <p class="p-estilo">
@@ -53,9 +74,8 @@
                     <p class="p-estilo">
                         <label for="id-sent" class="lb-reg-sent">Sentido:</label>
                         <select name="sentido" class="selc-reg-sent" id="id-sent">
-                            <option value="select">Selecione o sentido</option>
-                            <option value="0">Ida</option>
-                            <option value="1">Volta</option>
+                            <option value="Ida">Ida</option>
+                            <option value="Volta">Volta</option>
                         </select>
                     </p>
                     <p class="p-estilo">
@@ -65,15 +85,14 @@
                     <br>
                     <nav class="nav-reg-btn">
                         <p>
-                            <Button class="btn-reg-cad">CADASTRAR</Button>
+                            <button class="btn-reg-cad">CADASTRAR</button>
                         </p>
                         <p>
-                            <Button class="btn-reg-canc">
-                                <a href="list.php" class="a-btn-canc">CANCELAR</a>
-                            </Button>
+                            <button class="btn-reg-canc">
+                                <a href="../route/list.php" class="a-btn-canc">CANCELAR</a>
+                            </button>
                         </p>
-                    </nav>
-
+                    </nav>                    
                 </form>
             </section>
             <section class="sect-list-viag">
@@ -93,11 +112,11 @@
                             <td></td>
                             <td>
                                 <form action="delete.php" method="POST">
-                                    <input type="hidden" name="id" value="">
+                                    <!--<input type="hidden" name="id" value="">-->
                                     <button class="btn-editar" id="btn-edit">
-                                        <a href="edit.php?id=" class="link">EDITAR</a>
+                                        <!--<a href="edit.php?id=" class="link">EDITAR</a>-->
                                     </button>
-                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
+                                    <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>
                         </tr>
