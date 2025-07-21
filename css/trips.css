@@ -43,15 +43,14 @@ body{
     width: 1000px;
 }
 
-.btn-editar{
+.a-editar{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 10px;
-    width: 60px;
     font-weight: bold;
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
-    margin-right: 1px;
+    margin-right: 2px;
     cursor: pointer;
 }
 
@@ -59,17 +58,16 @@ body{
     background-color: red;
     color: var(--color0);
     font-size: 10px;
-    width: 60px;
     font-weight: bold;
     padding: 3px;
-    padding: 3px 6px 3px 6px;
+    padding: 2px 4px 2px 4px;
     border-radius: 6px;
     cursor: pointer;
 }
 
 /*Configurações da section de cadastro*/
 
-form {
+.form-cad-vig {
   display: flex;
   flex-direction: column;
   gap: 16px; 
@@ -205,6 +203,6 @@ table{
 }
 
 .th-acoes{
-    padding-right: 100px;    
+    padding-right: 80px;    
 }
 

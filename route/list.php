@@ -73,7 +73,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/route.css?v=1.5">
+    <link rel="stylesheet" href="../css/route.css?v=1.7">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
 </head>
 
@@ -145,16 +145,12 @@
                             <td>R$ <?php echo $id_tarifa ?></td>
                             <td><?php echo $status ?></td>
                             <td><?php echo $data ?></td>
-                            <td>
-                                <form action="delete.php" method ="POST">
-                                    <Button class="btn-viagem" id="btn-viag">
-                                       <a href="../trips/register.php?id=<?=$sql_result['route_id']?>" class="link">VIAGENS</a>
-                                    </Button>
+                            <td>                                
+                                <form action="delete.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                                    <button class="btn-editar" id="btn-edit">
-                                        <a href="edit.php?id=<?=$sql_result['route_id']?>" class="link">EDITAR</a>
-                                    </button>
-                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
+                                    <a href="../trips/register.php?id=<?=$sql_result['route_id']?>" class="a-viagem" id="a-viag">VIAGENS</a>
+                                    <a href="edit.php?id=<?=$sql_result['route_id']?>" class="a-editar" id="a-edit">EDITAR</a>                                    
+                                    <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>
                         </tr> 

@@ -44,16 +44,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=1.0">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.4">    
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5">    
 </head>
 
 <body>
     <div>
-        <hearder>
+        <header>
             <h1>Tarifas</h1>
-        </hearder>
+        </header>
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
@@ -100,13 +100,11 @@
                             <td><?php echo $preco ?></td>
                             <td><?php echo $grupo ?></td>
                             <td><?php echo $data ?></td>
-                            <td>
+                            <td>                                
                                 <form action="delete.php" method ="POST">
                                     <input type="hidden" name="codigo" value="<?php echo $id ?>">
-                                    <button class="btn-editar" id="btn-edit">
-                                        <a href="edit.php?id=<?=$sql_result['fare_id']?>" class="link">EDITAR</a>
-                                    </button>                                
-                                    <Button class="btn-excluir" onclick="return deletar()">EXCLUIR</Button>
+                                    <a href="edit.php?id=<?=$sql_result['fare_id']?>" class="a-editar" id="a-edit">EDITAR</a>
+                                    <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>
                         </tr> 

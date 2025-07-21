@@ -18,7 +18,7 @@ body{
 section{
     text-align: center; 
     background-color: var(--color1);    
-    height: 560.5px;
+    height: 580px;
     padding-top: 20px;
     padding-left: 30px;
 }
@@ -75,7 +75,7 @@ section{
     padding: 4px;
 }
 
-.btn-viagem{
+.a-viagem{
     background-color: blue;
     color: var(--color0);
     font-size: 10px;
@@ -86,7 +86,7 @@ section{
     cursor: pointer;
 }
 
-.btn-editar{
+.a-editar{
     background-color: var(--color4);
     color: var(--color0);
     font-size: 10px;
@@ -103,7 +103,7 @@ section{
     font-size: 10px;
     font-weight: bold;
     padding: 3px;
-    padding: 3px 6px 3px 6px;
+    padding: 2px 4px 2px 4px;
     border-radius: 6px;
     cursor: pointer;
 }
@@ -170,7 +170,7 @@ table{
 }
 
 .lb-reg-desc{
-    margin-right: 13px;       
+    margin-right: 13px;    
 }
 
 .lb-reg-grup{

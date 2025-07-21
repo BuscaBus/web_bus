@@ -27,7 +27,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.1">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.6">
+    <link rel="stylesheet" href="../css/trips.css?v=1.8">
 </head>
 
 <body>
@@ -36,9 +36,11 @@ $result_id = mysqli_fetch_assoc($result);
             <h1>Viagens</h1>
         </header>
         <main class="main-cont">
+
+            <!-- Section para cadastrar novas viagens -->
             <section class="sect-reg-viag">
                 <h1 class="h1-cad-vig">Cadastrar viagens</h1>
-                <form action="result_register.php" method="POST" autocomplete="off">
+                <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig" >
                     <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['route_id'] ?>">
                     <p class="p-estilo">
                         <label for="id-cod" class="lb-reg-cod">Código:</label>
@@ -95,6 +97,8 @@ $result_id = mysqli_fetch_assoc($result);
                     </nav>                    
                 </form>
             </section>
+
+            <!-- Section para listar as viagens -->
             <section class="sect-list-viag">
                 <br>
                 <table>
@@ -110,12 +114,10 @@ $result_id = mysqli_fetch_assoc($result);
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>
+                            <td>                                
                                 <form action="delete.php" method="POST">
-                                    <!--<input type="hidden" name="id" value="">-->
-                                    <button class="btn-editar" id="btn-edit">
-                                        <!--<a href="edit.php?id=" class="link">EDITAR</a>-->
-                                    </button>
+                                    <input type="hidden" name="id" value="">
+                                    <a href="edit.php?id=" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>

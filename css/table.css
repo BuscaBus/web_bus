@@ -41,8 +41,14 @@ td {
     border: 1px solid;
     border-color: black;
     padding: 4px 3px 4px 7px;
-    text-align: left; 
+    text-align: left;    
+}
 
+/* Container dos botões dentro da célula */
+.acoes-container {
+    display: flex;
+    gap: 6px;    
+    justify-content: flex-start;
 }
 
 /*Efeito zebrado na tabela*/
