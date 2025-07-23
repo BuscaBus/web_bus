@@ -35,12 +35,23 @@ body{
 
 .sect-reg-viag {
     text-align: center;
-    background-color: green; 
-    width: 600px;
+    background-color: var(--color2); 
+    width: 500px;
 }
 .sect-list-viag {    
+    background-color: var(--color1);
+    width: 1100px;
+}
+
+.a-horario{
     background-color: blue;
-    width: 1000px;
+    color: var(--color0);
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 6px 3px 6px;
+    border-radius: 5px;
+    margin-right: 2px;
+    cursor: pointer;
 }
 
 .a-editar{
@@ -194,15 +205,110 @@ table{
     padding-right: 350px;
 }
 
+.th-serv{
+    padding-right: 70px;
+}
+
 .th-sent{
     padding-right: 10px;
 }
 
 .th-part{
-    padding-right: 100px;
+    padding-right: 130px;
 }
 
 .th-acoes{
-    padding-right: 80px;    
+    padding-right: 160px;    
+}
+
+/*Configurações da tela edit.php*/
+
+.sect-edt{
+    text-align: center;
+}
+    
+.lb-edt-serv{
+    margin-right: 73px;
+}
+
+.lb-edt-orig{
+    margin-right: 73px;
+}
+
+.lb-edt-dest{
+    margin-right: 73px;
+}
+
+.lb-edt-sent{
+    margin-right: 73px;
+}
+
+.lb-edt-part{
+    margin-right: 10px;
+}
+
+.inpt-edt-serv{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-sent{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-orig{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-dest{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-part{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.nav-edt-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-edt{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 30px 3px 30px;
+    cursor: pointer;
+}
+
+.btn-edt-canc{
+    background-color: red;
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
+.a-btn-canc{
+    text-decoration: none;
+    color: inherit;
 }
 

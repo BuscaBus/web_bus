@@ -17,6 +17,16 @@ $result_id = mysqli_fetch_assoc($result);
 
 ?>
 
+<!--Script para confirmar a exclusão-->
+<script>
+    function deletar() {
+        if (confirm("Deseja exluir esse item?"))
+            document.forms[0].submit();
+        else
+            return false
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.1">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.8">
+    <link rel="stylesheet" href="../css/trips.css?v=2.1">
 </head>
 
 <body>
@@ -40,15 +50,15 @@ $result_id = mysqli_fetch_assoc($result);
             <!-- Section para cadastrar novas viagens -->
             <section class="sect-reg-viag">
                 <h1 class="h1-cad-vig">Cadastrar viagens</h1>
-                <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig" >
+                <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig">
                     <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['route_id'] ?>">
                     <p class="p-estilo">
                         <label for="id-cod" class="lb-reg-cod">Código:</label>
-                        <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod" value="<?= $result_id['route_short_name'] ?>">
+                        <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod" value="<?= $result_id['route_short_name'] ?>" disabled>
                     </p>
                     <p class="p-estilo">
                         <label for="id-linha" class="lb-reg-linha">Linha:</label>
-                        <input type="text" name="linha" class="inpt-reg-linha" id="id-linha" value="<?= $result_id['route_long_name'] ?>">
+                        <input type="text" name="linha" class="inpt-reg-linha" id="id-linha" value="<?= $result_id['route_long_name'] ?>" disabled>
                     </p>
                     <p class="p-estilo">
                         <label for="id-serv" class="lb-reg-serv">Serviço:</label>
@@ -66,19 +76,19 @@ $result_id = mysqli_fetch_assoc($result);
                         </select>
                     </p>
                     <p class="p-estilo">
+                        <label for="id-sent" class="lb-reg-sent">Sentido:</label>
+                        <select name="sentido" class="selc-reg-sent" id="id-sent">
+                            <option value="Ida">Ida</option>
+                            <option value="Volta">Volta</option>
+                        </select>
+                    </p>
+                    <p class="p-estilo">
                         <label for="id-orig" class="lb-reg-orig">Origem:</label>
                         <input type="text" name="origem" class="inpt-reg-orig" id="id-org">
                     </p>
                     <p class="p-estilo">
                         <label for="id-dest" class="lb-reg-dest">Destino:</label>
                         <input type="text" name="destino" class="inpt-reg-dest" id="id-dest">
-                    </p>
-                    <p class="p-estilo">
-                        <label for="id-sent" class="lb-reg-sent">Sentido:</label>
-                        <select name="sentido" class="selc-reg-sent" id="id-sent">
-                            <option value="Ida">Ida</option>
-                            <option value="Volta">Volta</option>
-                        </select>
                     </p>
                     <p class="p-estilo">
                         <label for="id-part" class="lb-reg-part">Local de Partida:</label>
@@ -94,7 +104,7 @@ $result_id = mysqli_fetch_assoc($result);
                                 <a href="../route/list.php" class="a-btn-canc">CANCELAR</a>
                             </button>
                         </p>
-                    </nav>                    
+                    </nav>
                 </form>
             </section>
 
@@ -105,31 +115,49 @@ $result_id = mysqli_fetch_assoc($result);
                     <caption class="cap-list-vig">Relação de viagens</caption>
                     <thead>
                         <th class="th-viag">Viagem</th>
+                        <th class="th-serv">Serviço</th>
                         <th class="th-sent">Sentido</th>
                         <th class="th-part">Partida</th>
                         <th class="th-acoes">Ações</th>
                     </thead>
+                    <?php
+                    // Consulta no banco de dados para exibir na tabela de viagens 
+                    $sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name, direction_id, departure_location FROM trips WHERE route_id = $id ORDER BY service_id DESC, direction_id ASC";
+                    $result = mysqli_query($conexao, $sql);
+                 
+                    while ($sql_result = mysqli_fetch_array($result)) {
+                        $id = $sql_result['trip_id'];
+                        $id_route = $sql_result['route_id'];
+                        $servico = $sql_result['service_id'];
+                        $destino = $sql_result['trip_headsign'];
+                        $origem = $sql_result['trip_short_name'];
+                        $sentido = $sql_result['direction_id'];
+                        $partida = $sql_result['departure_location'];
+                    ?>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>                                
+                            <td><?php echo $origem?> - <?php echo $destino?></td>
+                            <td><?php echo $servico?></td>
+                            <td><?php echo $sentido?></td>
+                            <td><?php echo $partida?></td>
+                            <td>
                                 <form action="delete.php" method="POST">
-                                    <input type="hidden" name="id" value="">
-                                    <a href="edit.php?id=" class="a-editar" id="a-edit">EDITAR</a>
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
+                                    <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
+                                    <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>
                         </tr>
+                        <?php }; ?>
                     </tbody>
                 </table>
             </section>
 
         </main>
         <footer>
-            <p><a href="../route/list.php">
-                    < Voltar</a>
+            <p><a href="../route/list.php">< Voltar</a>
             </p>
         </footer>
     </div>
