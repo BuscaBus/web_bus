@@ -59,7 +59,7 @@ include("../connection.php");
             <p class="p-estilo">
                 <label for="id-term" class="lb-reg-term">Terminal:</label>
                 <select name="terminal" class="selc-reg-term" id="id-term">
-                    <option value="select">Selecione um terminal</option>
+                    <option value="">Selecione um terminal</option>
                     <option value="TICEN - Terminal de Integração do Centro">TICEN - Terminal de Integração do Centro</option>
                     <option value="TITRI - Terminal de Integração da Trindade">TITRI - Terminal de Integração da Trindade</option>
                     <option value="TIRIO - Terminal de Integração do Rio Tavares">TIRIO - Terminal de Integração do Rio Tavares</option>
