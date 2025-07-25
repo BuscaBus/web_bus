@@ -126,32 +126,48 @@ table{
     padding-right: 75px; 
 }
 
-/*Configurações da tela register.html*/
+/*Configurações da tela register.php*/
 
 .p-estilo{
     text-align: center;    
 }
     
-.lb-reg-op{
-    margin-right: 10px;
+.lb-reg-cod{
+    margin-right: 50px;
+}
+
+.lb-reg-pont{
+    margin-right: 60px;
 }
 
 .lb-reg-cid{
-    margin-right: 5px;
+    margin-right: 53px;
 }
 
-.lb-reg-site{
-    margin-right: 25px;
+.lb-reg-bair{
+    margin-right: 60px;
 }
 
-.inpt-reg-op{
+.lb-reg-loc{
+    margin-right: 13px;
+}
+
+.lb-reg-term{
+    margin-right: 43px;
+}
+
+.lb-reg-box{
+    margin-right: 75px;
+}
+
+.inpt-reg-cod{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-reg-site{
+.inpt-reg-pont{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
@@ -160,7 +176,35 @@ table{
 
 .selc-reg-cid{
     background-color: #F3F4F0;
-    width: 323px;
+    width: 320px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-bair{
+    background-color: #F3F4F0;
+    width: 320px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-loc{
+    background-color: #F3F4F0;
+    width: 320px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.selc-reg-term{
+    background-color: #F3F4F0;
+    width: 320px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-box{
+    background-color: #F3F4F0;
+    width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
@@ -210,26 +254,42 @@ table{
     text-align: center;    
 }
     
-.lb-edt-op{
-    margin-right: 10px;
+.lb-edt-cod{
+    margin-right: 50px;
+}
+
+.lb-edt-pont{
+    margin-right: 60px;
 }
 
 .lb-edt-cid{
-    margin-right: 5px;
+    margin-right: 53px;
 }
 
-.lb-edt-site{
-    margin-right: 25px;
+.lb-edt-bair{
+    margin-right: 60px;
 }
 
-.inpt-edt-op{
+.lb-edt-loc{
+    margin-right: 13px;
+}
+
+.lb-edt-term{
+    margin-right: 43px;
+}
+
+.lb-edt-box{
+    margin-right: 75px;
+}
+
+.inpt-edt-cod{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-edt-site{
+.inpt-edt-pont{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
@@ -242,6 +302,36 @@ table{
     border-radius: 5px;
     padding: 4px;
 }
+
+.inpt-edt-bair{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-loc{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-term{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-edt-box{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+
 
 .nav-edt-btn{
     display: flex;

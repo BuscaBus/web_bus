@@ -68,7 +68,7 @@ $total_itens = mysqli_num_rows($result_itens);
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.html" class="a-btn-cad">+ CADASTRAR</a>
+                    <a href="register.php" class="a-btn-cad">+ CADASTRAR</a>
                 </button>
                 <br>
                 <!-- Imput para buscar dados e filtrar -->
