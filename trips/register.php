@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.1">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=2.1">
+    <link rel="stylesheet" href="../css/trips.css?v=2.2">
 </head>
 
 <body>
@@ -144,6 +144,7 @@ $result_id = mysqli_fetch_assoc($result);
                                 <form action="delete.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
+                                    <a href="../stop_times/trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-trajeto" id="a-traj">TRAJETO</a>
                                     <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
                                     <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>

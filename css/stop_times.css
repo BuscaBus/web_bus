@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/*-- Variaveis de cores CSS*/
+:root{
+    --color0: #F3F4F0;
+    --color1: #CED8D0;
+    --color2: #96A5A0;
+    --color3: #4F5C55;
+    --color4: #517709;
+}
+
+/*Configurações da página list.php*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #CED8D0;
+}
+
+section{
+    text-align: center;
+    background-color: var(--color1);    
+    height: 580px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+
+/*Configurações da tabela da página trips.php*/
+
+table{
+    margin: auto;
+}
+
+.th-seq{
+    padding-right: 45px;          
+}
+
+.th-pont{
+    padding-right: 300px;
+}
+
+.th-dest{
+    padding-right: 150px;
+}
+
