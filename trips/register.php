@@ -145,7 +145,7 @@ $result_id = mysqli_fetch_assoc($result);
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
                                     <a href="../stop_times/trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-trajeto" id="a-traj">TRAJETO</a>
-                                    <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
+                                    <a href="../stop_times/register.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
                                     <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
