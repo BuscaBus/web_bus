@@ -35,9 +35,9 @@ $result_id = mysqli_fetch_assoc($result);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/style.css?v=1.1">
+    <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=2.2">
+    <link rel="stylesheet" href="../css/trips.css?v=1.0">
 </head>
 
 <body>
@@ -49,7 +49,9 @@ $result_id = mysqli_fetch_assoc($result);
 
             <!-- Section para cadastrar novas viagens -->
             <section class="sect-reg-viag">
+                <br>
                 <h1 class="h1-cad-vig">Cadastrar viagens</h1>
+                <br>
                 <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig">
                     <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['route_id'] ?>">
                     <p class="p-estilo">
