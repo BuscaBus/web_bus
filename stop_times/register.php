@@ -8,6 +8,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
+
 // Consulta o ID no banco de dados
 $sql = "SELECT trip_id, service_id, trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
 $result = mysqli_query($conexao, $sql);
@@ -37,7 +38,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.0">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.2">
 </head>
 
 <body>
@@ -46,9 +47,10 @@ $result_id = mysqli_fetch_assoc($result);
             <h1>Horários</h1>
         </header>
         <main class="main-cont">
-            <!-- Section para cadastrar novos horários -->
+            <!-- Section para cadastrar horários -->
             <section class="sect-reg-hor">
                 <h1 class="h1-cad-hor">Cadastrar Horários</h1>
+                <br>
                 <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig">
                     <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['trip_id'] ?>">
                     <p class="p-estilo">
@@ -97,7 +99,7 @@ $result_id = mysqli_fetch_assoc($result);
                         </p>
                         <p>
                             <button class="btn-reg-canc">
-                                <a href="../route/list.php" class="a-btn-canc">CANCELAR</a>
+                                <a href="../trips/register.php?id=" class="a-btn-canc">CANCELAR</a>
                             </button>
                         </p>
                     </nav>
@@ -108,41 +110,42 @@ $result_id = mysqli_fetch_assoc($result);
             <section class="sect-list-hor">
                 <br>
                 <table>
-                    <caption class="cap-list-hor">Relação de viagens</caption>
+                    <label> <?= $result_id['trip_short_name'] ?> - <?= $result_id['trip_headsign'] ?> </label>
+                    <br><br>
                     <thead>
-                        <th class="th-viag">Viagem</th>
-                        <th class="th-serv">Serviço</th>
-                        <th class="th-sent">Sentido</th>
-                        <th class="th-part">Partida</th>
+                        <th class="th-hor">Horário</th>
+                        <th class="th-destino">Destino</th>
+                        <th class="th-tipo">Tipo</th>
                         <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                     // Consulta no banco de dados para exibir na tabela de viagens 
-                    $sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name, direction_id, departure_location FROM trips WHERE route_id = $id ORDER BY service_id DESC, direction_id ASC";
+                    $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign, timepoint,
+                            CASE 
+                               WHEN stop_times.timepoint = '0' THEN 'P'
+                               WHEN stop_times.timepoint = '1' THEN '' 
+                               WHEN stop_times.timepoint = '2' THEN 'M' 
+                               WHEN stop_times.timepoint = '3' THEN 'R'                    
+                            END AS format_timepoint 
+                            FROM stop_times WHERE trip_id = $id ORDER BY arrival_time ASC";
                     $result = mysqli_query($conexao, $sql);
 
                     while ($sql_result = mysqli_fetch_array($result)) {
-                        $id = $sql_result['trip_id'];
-                        $id_route = $sql_result['route_id'];
-                        $servico = $sql_result['service_id'];
-                        $destino = $sql_result['trip_headsign'];
-                        $origem = $sql_result['trip_short_name'];
-                        $sentido = $sql_result['direction_id'];
-                        $partida = $sql_result['departure_location'];
+                        $id = $sql_result['time_id'];
+                        $trip_id = $sql_result['trip_id'];
+                        $hr_inicio = $sql_result['arrival_time'];
+                        $destino = $sql_result['stop_headsign'];
+                        $tipo = $sql_result['format_timepoint'];                        
                     ?>
                         <tbody>
                             <tr>
-                                <td><?php echo $origem ?> - <?php echo $destino ?></td>
-                                <td><?php echo $servico ?></td>
-                                <td><?php echo $sentido ?></td>
-                                <td><?php echo $partida ?></td>
+                                <td><?php echo $hr_inicio ?></td>
+                                <td><?php echo $destino ?></td>
+                                <td><?php echo $tipo ?></td>                                
                                 <td>
                                     <form action="delete.php" method="POST">
-                                        <input type="hidden" name="id" value="<?php echo $id ?>">
-                                        <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
-                                        <a href="../stop_times/trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-trajeto" id="a-traj">TRAJETO</a>
-                                        <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
-                                        <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
+                                        <input type="hidden" name="id" value="<?php echo $id ?>">  
+                                        <input type="hidden" name="trip-id" value="<?php echo $trip_id ?>">                                       
                                         <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                     </form>
                                 </td>
