@@ -236,15 +236,11 @@ table{
 }
 
 .th-destino{
-    padding-right: 150px;
-}
-
-.th-tipo{
-    padding-right: 15px;
+    padding-right: 250px;
 }
 
 .th-acoes{
-    padding-right: 30px;    
+    padding-right: 25px;    
 }
 
 /*Configurações da tabela da página trips.php*/
@@ -254,14 +250,18 @@ table{
 }
 
 .th-seq{
-    padding-right: 45px;          
+    padding-right: 10px;          
 }
 
 .th-pont{
     padding-right: 300px;
 }
 
-.th-dest{
+.th-bair{
+    padding-right: 150px;
+}
+
+.th-cid{
     padding-right: 150px;
 }
 

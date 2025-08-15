@@ -8,9 +8,8 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
-
 // Consulta o ID no banco de dados
-$sql = "SELECT trip_id, service_id, trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
+$sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
 $result = mysqli_query($conexao, $sql);
 
 // Variavel que recebe o ID do banco de dados    
@@ -38,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.2">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.3">
 </head>
 
 <body>
@@ -52,6 +51,7 @@ $result_id = mysqli_fetch_assoc($result);
                 <h1 class="h1-cad-hor">Cadastrar Horários</h1>
                 <br>
                 <form action="result_register.php" method="POST" autocomplete="off" class="form-cad-vig">
+                    <input type="hidden" name="route_id" class="inpt1" id="id-nome" value="<?= $result_id['route_id'] ?>">
                     <input type="hidden" name="id" class="inpt1" id="id-nome" value="<?= $result_id['trip_id'] ?>">
                     <p class="p-estilo">
                         <label for="id-serv" class="lb-reg-serv">Serviço:</label>
@@ -63,15 +63,15 @@ $result_id = mysqli_fetch_assoc($result);
                     </p>
                     <p class="p-estilo">
                         <label for="id-pont" class="lb-reg-pont">Ponto:</label>
-                        <input type="text" name="ponto" class="inpt-reg-pont" id="id-pont">
+                        <input type="text" name="ponto" class="inpt-reg-pont" id="id-pont" placeholder="insira o código do ponto...">
                     </p>
                     <p class="p-estilo">
                         <label for="id-sequ" class="lb-reg-sequ">Sequencia:</label>
-                        <input type="text" name="sequencia" class="inpt-reg-sequ" id="id-sequ">
+                        <input type="text" name="sequencia" class="inpt-reg-sequ" id="id-sequ" placeholder="insira a numeração da sequencia...">
                     </p>
                     <p class="p-estilo">
                         <label for="id-dest" class="lb-reg-dest">Destino:</label>
-                        <input type="text" name="destino" class="inpt-reg-dest" id="id-dest">
+                        <input type="text" name="destino" class="inpt-reg-dest" id="id-dest" placeholder="insira o destino da viagem...">
                     </p>
                     <p class="p-estilo">
                         <label for="id-hrInc" class="lb-reg-hrInc">Hora Inicio:</label>
@@ -99,7 +99,7 @@ $result_id = mysqli_fetch_assoc($result);
                         </p>
                         <p>
                             <button class="btn-reg-canc">
-                                <a href="../trips/register.php?id=" class="a-btn-canc">CANCELAR</a>
+                                <a href="../trips/register.php?id=<?= $result_id['route_id'] ?>" class="a-btn-canc">CANCELAR</a>
                             </button>
                         </p>
                     </nav>
@@ -114,19 +114,12 @@ $result_id = mysqli_fetch_assoc($result);
                     <br><br>
                     <thead>
                         <th class="th-hor">Horário</th>
-                        <th class="th-destino">Destino</th>
-                        <th class="th-tipo">Tipo</th>
+                        <th class="th-destino">Destino</th>                        
                         <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
                     // Consulta no banco de dados para exibir na tabela de viagens 
-                    $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign, timepoint,
-                            CASE 
-                               WHEN stop_times.timepoint = '0' THEN 'P'
-                               WHEN stop_times.timepoint = '1' THEN '' 
-                               WHEN stop_times.timepoint = '2' THEN 'M' 
-                               WHEN stop_times.timepoint = '3' THEN 'R'                    
-                            END AS format_timepoint 
+                    $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign
                             FROM stop_times WHERE trip_id = $id ORDER BY arrival_time ASC";
                     $result = mysqli_query($conexao, $sql);
 
@@ -134,14 +127,12 @@ $result_id = mysqli_fetch_assoc($result);
                         $id = $sql_result['time_id'];
                         $trip_id = $sql_result['trip_id'];
                         $hr_inicio = $sql_result['arrival_time'];
-                        $destino = $sql_result['stop_headsign'];
-                        $tipo = $sql_result['format_timepoint'];                        
+                        $destino = $sql_result['stop_headsign'];                                               
                     ?>
                         <tbody>
                             <tr>
                                 <td><?php echo $hr_inicio ?></td>
-                                <td><?php echo $destino ?></td>
-                                <td><?php echo $tipo ?></td>                                
+                                <td><?php echo $destino ?></td>                                                                
                                 <td>
                                     <form action="delete.php" method="POST">
                                         <input type="hidden" name="id" value="<?php echo $id ?>">  
@@ -157,8 +148,7 @@ $result_id = mysqli_fetch_assoc($result);
 
         </main>
         <footer>
-            <p><a href="../route/list.php">
-                    < Voltar</a>
+            <p><a href="../trips/register.php?id=<?= $result_id['route_id'] ?>"> < Voltar</a>
             </p>
         </footer>
     </div>

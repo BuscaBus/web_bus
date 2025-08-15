@@ -5,29 +5,17 @@
     $id = $_GET['id'];
 
     // Consulta no banco de dados para exibir no nome da viagem 
-    $sql_viag = "SELECT trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
+    $sql_viag = "SELECT route_id, trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
     $result_viag = mysqli_query($conexao, $sql_viag);
 
     // Laço de repetição para trazer no nome da viagem do banco
     while($sql_result_viag = mysqli_fetch_array($result_viag)){
+        $route_id = $sql_result_viag['route_id'];
         $destino = $sql_result_viag['trip_headsign'];
         $origem = $sql_result_viag['trip_short_name'];                              
-    }
-    // Consulta no banco de dados para exibir na tabela
-    $sql = "SELECT stop_sequence, stop_id, stop_headsign  FROM stop_times WHERE trip_id = $id ORDER BY stop_sequence ASC";
-    $result = mysqli_query($conexao, $sql);
+    }  
     
 ?>
-
-<!--Script para confirmar a exclusão-->
-<script>
-    function deletar() {
-        if(confirm("Deseja exluir esse item?"))
-            document.forms[0].submit();
-        else
-            return false
-    }
-</script>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,7 +27,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.1">    
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.3">    
 </head>
 
 <body>
@@ -56,20 +44,36 @@
                     <thead>
                         <th class="th-seq">Sequencia</th>
                         <th class="th-pont">Ponto</th>
-                        <th class="th-dest">destino</th>                        
+                        <th class="th-bair">Bairro</th> 
+                        <th class="th-cid">Cidade</th>                       
                     </thead>
                     <?php
+                        // Consulta no banco de dados para exibir na tabela
+                        $sql = "SELECT stop_times.stop_sequence, 
+                                       stop_times.stop_id, 
+                                       stop_times.stop_headsign,
+                                       stops.stop_name,
+                                       stops.stop_district,
+                                       stops.stop_city
+                                FROM stop_times 
+                                JOIN stops ON stops.stop_code = stop_times.stop_id
+                                WHERE trip_id = $id 
+                                ORDER BY stop_sequence ASC";
+                        $result = mysqli_query($conexao, $sql);
+
                         // Laço de repetição para trazer dados do banco
                         while($sql_result = mysqli_fetch_array($result)){
-                            $id = $sql_result['service_id'];                            
-                            $data_inicio = $sql_result['data_for_start'];  
-                            $data_fim = $sql_result['data_for_end'];    
+                            $sequencia = $sql_result['stop_sequence'];                            
+                            $ponto = $sql_result['stop_name'];  
+                            $bairro = $sql_result['stop_district']; 
+                            $cidade = $sql_result['stop_city'];    
                     ?>
                     <tbody>
                         <tr>
-                            <td><?php echo $id ?></td>
-                            <td><?php echo $data_inicio ?></td>
-                            <td><?php echo $data_fim ?></td>                            
+                            <td><?php echo $sequencia ?></td>
+                            <td><?php echo $ponto ?></td>
+                            <td><?php echo $bairro ?></td>  
+                            <td><?php echo $cidade ?></td>                           
                         </tr> 
                         <?php }; ?>                       
                     </tbody>
@@ -77,19 +81,19 @@
                 <br>                
                  <!--Consulta no banco de dados a quantidade de registros-->
                 <?php
-                    $sql = "SELECT COUNT(*) AS total FROM calendar";
+                    $sql = "SELECT COUNT(*) AS total FROM stop_times WHERE trip_id = $id";
                     $result = mysqli_query($conexao, $sql);
 
                      $row = mysqli_fetch_assoc($result);
                      $total_registros = $row['total'];                    
                 ?>
                 <!-- Mostra a quantidade de registros-->
-                <p>Total de calendários cadastrados: <?php echo $total_registros;?></p>
+                <p>Total de pontos para esse trajeto cadastrado: <?php echo $total_registros;?></p>
                 <br>           
             </section>
         </main>
         <footer>
-            <p><a href="../index.html">< Voltar</a></p>
+            <p><a href="../trips/register.php?id=<?= $route_id ?>">< Voltar</a></p>
         </footer>
     </div>
 </body>
