@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.3">    
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">    
 </head>
 
 <body>
@@ -36,7 +36,7 @@
             <h1>Trajeto</h1>
         </header>
         <main>
-            <section>
+            <section class="scroll-area">
                 <label>Viagem: <?php echo $origem; ?> - <?php echo $destino; ?> </label> 
                 <br><br>                        
                 <table>
@@ -49,7 +49,7 @@
                     </thead>
                     <?php
                         // Consulta no banco de dados para exibir na tabela
-                        $sql = "SELECT stop_times.stop_sequence, 
+                        $sql = "SELECT DISTINCT stop_times.stop_sequence, 
                                        stop_times.stop_id, 
                                        stop_times.stop_headsign,
                                        stops.stop_name,
@@ -78,18 +78,7 @@
                         <?php }; ?>                       
                     </tbody>
                 </table>
-                <br>                
-                 <!--Consulta no banco de dados a quantidade de registros-->
-                <?php
-                    $sql = "SELECT COUNT(*) AS total FROM stop_times WHERE trip_id = $id";
-                    $result = mysqli_query($conexao, $sql);
-
-                     $row = mysqli_fetch_assoc($result);
-                     $total_registros = $row['total'];                    
-                ?>
-                <!-- Mostra a quantidade de registros-->
-                <p>Total de pontos para esse trajeto cadastrado: <?php echo $total_registros;?></p>
-                <br>           
+                <br>              
             </section>
         </main>
         <footer>

@@ -49,6 +49,12 @@ section{
 .sect-list-hor {    
     background-color: var(--color1);
     width: 1100px;
+    max-height: 575px; /* ou height: 575px; */
+    overflow-y: auto; /* mostra rolagem só quando precisar */
+    overflow-x: hidden;/* evita rolagem horizontal */
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 .a-trajeto{
@@ -264,4 +270,15 @@ table{
 .th-cid{
     padding-right: 150px;
 }
+
+.scroll-area {
+   height: 580px;
+   max-height: 580px; /* ou height: 400px; */
+   overflow-y: auto; /* mostra rolagem só quando precisar */
+   overflow-x: hidden; /* evita rolagem horizontal */
+   padding: 1rem;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+}
+
 

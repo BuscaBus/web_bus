@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.3">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">
 </head>
 
 <body>
@@ -120,7 +120,7 @@ $result_id = mysqli_fetch_assoc($result);
                     <?php
                     // Consulta no banco de dados para exibir na tabela de viagens 
                     $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign
-                            FROM stop_times WHERE trip_id = $id ORDER BY arrival_time ASC";
+                            FROM stop_times WHERE trip_id = $id AND stop_sequence = 1 ORDER BY arrival_time ASC";
                     $result = mysqli_query($conexao, $sql);
 
                     while ($sql_result = mysqli_fetch_array($result)) {
