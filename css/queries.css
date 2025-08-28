@@ -17,25 +17,21 @@ body{
 
 section{
     text-align: center;   
-    background-color: var(--color1);    
+    background-color: var(--color1); 
+    width: 1550px;   
     height: 580px;
     padding-top: 20px;
     padding-left: 30px; 
 }
 
-.a-btn-cad{
-     font-weight: bold;                      
-}
-
-.btn-cadastrar{
-    background-color: var(--color4);
-    color: var(--color0);
-    font-size: 11px;
-    font-weight: bold;
-    padding: 5px 10px 5px 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    cursor: pointer;
+.scroll-area {
+   height: 580px;
+   max-height: 580px; /* ou height: 400px; */
+   overflow-y: auto; /* mostra rolagem só quando precisar */
+   overflow-x: hidden; /* evita rolagem horizontal */
+   padding: 1rem;
+   border: 1px solid #ddd;
+   border-radius: 8px;
 }
 
 .impt-buscar{
@@ -56,73 +52,42 @@ section{
     cursor: pointer;
 }
 
-.a-editar{
-    background-color: var(--color4);
-    color: var(--color0);
-    font-size: 10px;
-    font-weight: bold;
-    padding: 3px 6px 3px 6px;
-    border-radius: 5px;
-    margin-right: 1px;
-    cursor: pointer;
-}
-
-.btn-excluir{
-    background-color: red;
-    color: var(--color0);
-    font-size: 10px;
-    font-weight: bold;
-    padding: 3px;
-    padding: 2px 4px 2px 4px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/*Configuração da navegação da página list.php*/
-.nav-pag {
-    color: black;
-    font-weight: bold;           
-} 
-.nav-pag a:hover {
-    color: green; 
-    font-weight: bold;            
-}
-
-/*Configurações da tabela da página list.php*/
+/*Configurações da tabela da página queries.php*/
 
 table{
     margin: auto;
 }
 
-.th-cod{
-    padding-right: 12px;
+.th-linh{
+    width: 30px; 
+    text-align: center;      
 }
 
-.th-pont{
+.th-dest{
     padding-right: 300px;
 }
 
-.th-bair{
-    padding-right: 100px;
+.th-hor{
+    width: 100px;
+    text-align: center;
 }
 
-.th-cid{
-    padding-right: 100px;
+.td-linh{
+    text-align: center;
+    font-weight: bold;
+    background-color:#517709;
+    color:#CED8D0;
 }
 
-.th-loc{
-    padding-right: 30px;
+.td-dest{
+    font-weight: bold;
+    color:#517709;
+} 
+
+.td-hor{
+    text-align: center;
+    font-weight: bold;
+    color:#517709;
 }
 
-.th-box{
-    padding-right: 10px;
-}
-
-.th-atual{
-    padding-right: 15px;
-}
-
-.th-acoes{
-    padding-right: 75px; 
-}
 

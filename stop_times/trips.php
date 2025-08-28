@@ -50,13 +50,13 @@
                     <?php
                         // Consulta no banco de dados para exibir na tabela
                         $sql = "SELECT DISTINCT stop_times.stop_sequence, 
-                                       stop_times.stop_id, 
+                                       stop_times.stop_code, 
                                        stop_times.stop_headsign,
                                        stops.stop_name,
                                        stops.stop_district,
                                        stops.stop_city
                                 FROM stop_times 
-                                JOIN stops ON stops.stop_code = stop_times.stop_id
+                                JOIN stops ON stops.stop_code = stop_times.stop_code
                                 WHERE trip_id = $id 
                                 ORDER BY stop_sequence ASC";
                         $result = mysqli_query($conexao, $sql);
