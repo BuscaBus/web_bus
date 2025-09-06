@@ -2,23 +2,26 @@
 include("../connection.php");
 
 if (isset($_GET['operadora'])) {
-    $operadora = mysqli_real_escape_string($conexao, $_GET['operadora']);
+    $operadora = (int) $_GET['operadora']; // força inteiro (agency_id)
 
-    $sql = "SELECT a.agency_id, a.agency_name, r.agency_id, r.route_long_name 
+    $sql = "SELECT r.route_id,
+                   CONCAT(r.route_short_name, ' - ', r.route_long_name) AS route_name
             FROM routes r 
             INNER JOIN agency a ON r.agency_id = a.agency_id
-            WHERE a.agency_name = '$operadora' 
+            WHERE a.agency_id = $operadora 
             ORDER BY r.route_long_name ASC";
+
     $result = mysqli_query($conexao, $sql);
 
-    $linha = [];
-
+    $linhas = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $linha[] = [
-            'nome' => $row['route_long_name']
+        $linhas[] = [
+            'id'   => $row['route_id'],   // manda o id
+            'nome' => $row['route_name']  // manda o nome formatado
         ];
     }
 
-    echo json_encode($linha);
+    header('Content-Type: application/json');
+    echo json_encode($linhas);
 }
 ?>
