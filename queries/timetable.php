@@ -4,19 +4,17 @@ include("../connection.php");
 $filtro_sql = "";
 $operadora = "";
 $linha = "";
-$servico = "";
+$servico = null;
 $result = null;
 $nome_saida_ida = "";
 $nome_saida_volta = "";
 $result_ida = null;
 $result_volta = null;
+$codigo_linha = "";
+$nome_linha = "Aguardando seleção da linha...";
 
-// Só executa se tiver filtro aplicado
-if (
-    (!empty($_GET['operadora'])) ||
-    (!empty($_GET['linha'])) ||
-    (!empty($_GET['servico']) && $_GET['servico'] !== "selecionar")
-) {
+// Só executa se clicou no botão SELECIONAR
+if (isset($_GET['filtrar'])) {
     if (!empty($_GET['operadora'])) {
         $operadora = mysqli_real_escape_string($conexao, $_GET['operadora']);
         $filtro_sql .= " AND a.agency_id = '$operadora'";
@@ -95,6 +93,27 @@ if (
         $row_s2 = mysqli_fetch_assoc($res_saida_volta);
         $nome_saida_volta = $row_s2['departure_location'];
     }
+
+    // --- consulta para pegar código e nome da linha selecionada ---
+    $sql_nome_linha = "SELECT DISTINCT 
+                      r.route_id, 
+                      r.route_short_name, 
+                      r.route_long_name
+                   FROM routes r
+                   INNER JOIN agency a ON r.agency_id = a.agency_id
+                   INNER JOIN trips t ON r.route_id = t.route_id
+                   WHERE 1=1 $filtro_sql
+                   LIMIT 1";
+
+    $res_nome_linha = mysqli_query($conexao, $sql_nome_linha);
+    $codigo_linha = "";
+    $nome_linha   = "";
+
+    if ($res_nome_linha && mysqli_num_rows($res_nome_linha) > 0) {
+        $row_nome   = mysqli_fetch_assoc($res_nome_linha);
+        $codigo_linha = $row_nome['route_short_name']; 
+        $nome_linha   = $row_nome['route_long_name'];
+    }
 }
 ?>
 
@@ -120,13 +139,14 @@ if (
             <section class="scroll-area">
                 <form method="GET" action="">
                     <label for="id-serv">Dia da Semana</label>
-                    <select name="servico" class="selc-serv" id="id-serv" onchange="this.form.submit()">
+                    <select name="servico" class="selc-serv" id="id-serv">
+                        <option value="">Selecione o serviço</option>
                         <option value="Segunda a Sexta" <?php if ($servico == "Segunda a Sexta") echo "selected"; ?>>Segunda a Sexta</option>
                         <option value="Sábado" <?php if ($servico == "Sábado") echo "selected"; ?>>Sábado</option>
                         <option value="Domingo e Feriado" <?php if ($servico == "Domingo e Feriado") echo "selected"; ?>>Domingo e Feriado</option>
                     </select>
                     <br><br>
-                    <Label>Operadora: </Label>
+                    <label>Operadora: </label>
                     <select name="operadora" id="selc-op" class="selc-op">
                         <option value="">Selecione a operadora</option>
                         <?php
@@ -140,12 +160,15 @@ if (
                         }
                         ?>
                     </select>
-                    <Label>Linha: </Label>
+                    <label>Linha: </label>
                     <select name="linha" id="selc-linh" class="selc-linh">
                         <option value="">Selecione a linha</option>
                     </select>
-                    <button type="submit" class="btn-selec">SELECIONAR</button>
+                    <button type="submit" name="filtrar" value="1" class="btn-selec">SELECIONAR</button>
                 </form>
+                <hr><br>
+                <h2><?php echo htmlspecialchars($codigo_linha . " - " . $nome_linha); ?></h2>
+                <br>                  
                 <table>
                     <caption>Saída: <?php echo htmlspecialchars($nome_saida_ida); ?></caption>
                     <thead>

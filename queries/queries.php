@@ -131,6 +131,8 @@ if (
                     </select>
                 </form>
                 <br>
+                <hr>
+                <br>
                 <?php if ($result && mysqli_num_rows($result) > 0): ?>
                     <table>
                         <caption><?php echo $nome_pt; ?></caption>
