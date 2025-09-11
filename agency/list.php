@@ -77,6 +77,9 @@ $total_itens = mysqli_num_rows($result_itens);
                     </select>
                     <button type="submit" class="btn-pesq">PESQUISAR</button>
                 </form>
+                
+                <hr>
+                <br>
                 <table>
                     <caption>Relação de operadoras</caption>
                     <thead>

@@ -40,7 +40,8 @@
                 <button class="btn-cadastrar" id="btn-cad">
                     <a href="register.html" class="link">+ CADASTRAR</a>
                 </button>
-        
+                <hr>
+                <br>
                 <table>
                     <caption>Relação de calendários</caption>
                     <thead>

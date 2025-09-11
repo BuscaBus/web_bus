@@ -76,6 +76,8 @@ $total_itens = mysqli_num_rows($result_itens);
                     <input name="buscar" class="impt-buscar" value="<?php if (isset($_GET['buscar'])) echo $_GET['buscar']; ?>" placeholder="Pesquise por código" type="text">
                     <button type="submit" class="btn-buscar">PESQUISAR</button>
                 </form>
+                <hr>
+                <br>
                 <table>
                     <caption>Relação de pontos</caption>
                     <thead>

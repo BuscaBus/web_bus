@@ -76,7 +76,9 @@
                         ?>                          
                     </select> 
                     <button type="submit" class="btn-pesq">PESQUISAR</button> 
-                </form>                 
+                </form> 
+                <hr>
+                <br>                
                 <table>
                     <caption>Relação de tarifas vigentes</caption>
                     <thead>

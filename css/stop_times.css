@@ -251,6 +251,14 @@ table{
 
 /*Configurações da tabela da página trips.php*/
 
+h3{
+    color: #517709;
+}
+
+caption{
+    font-size: 18px;
+}
+
 table{
     margin: auto;
 }

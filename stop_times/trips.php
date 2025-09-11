@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">    
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.5">    
 </head>
 
 <body>
@@ -37,8 +37,10 @@
         </header>
         <main>
             <section class="scroll-area">
-                <label>Viagem: <?php echo $origem; ?> - <?php echo $destino; ?> </label> 
-                <br><br>                        
+                <h3><?php echo $origem; ?> - <?php echo $destino; ?> </h3> 
+                <br>  
+                <hr>
+                <br>                     
                 <table>
                     <caption>Relação de pontos do trajeto</caption>
                     <thead>

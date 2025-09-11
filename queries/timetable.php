@@ -11,7 +11,7 @@ $nome_saida_volta = "";
 $result_ida = null;
 $result_volta = null;
 $codigo_linha = "";
-$nome_linha = "Aguardando seleção da linha...";
+$nome_linha = "Selecionar uma linha -";
 
 // Só executa se clicou no botão SELECIONAR
 if (isset($_GET['filtrar'])) {
@@ -127,7 +127,7 @@ if (isset($_GET['filtrar'])) {
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/queries.css?v=1.3">
+    <link rel="stylesheet" href="../css/queries.css?v=1.5">
 </head>
 
 <body>
@@ -168,7 +168,9 @@ if (isset($_GET['filtrar'])) {
                 </form>
                 <hr><br>
                 <h2><?php echo htmlspecialchars($codigo_linha . " - " . $nome_linha); ?></h2>
-                <br>                  
+                <br> 
+                <hr>
+                <br>                 
                 <table>
                     <caption>Saída: <?php echo htmlspecialchars($nome_saida_ida); ?></caption>
                     <thead>
@@ -186,7 +188,7 @@ if (isset($_GET['filtrar'])) {
                         <?php endif; ?>
                     </tbody>
                 </table>
-                <br>
+                <br>                
                 <table>
                     <caption>Saída: <?php echo htmlspecialchars($nome_saida_volta); ?></caption>
                     <thead>
@@ -203,7 +205,7 @@ if (isset($_GET['filtrar'])) {
                             <?php endwhile; ?>
                         <?php endif; ?>
                     </tbody>
-                </table>
+                </table>                
             </section>
         </main>
         <footer>

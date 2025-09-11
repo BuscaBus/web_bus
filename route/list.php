@@ -110,7 +110,9 @@
                        <input name="buscar"  class="impt-buscar"  value="<?php if(isset($_GET['buscar'])) echo $_GET['buscar'];?>" placeholder="Pesquise por linha" type="text">
                        <button type="submit" class="btn-buscar">PESQUISAR</button>
                     </form>
-                </nav>      
+                </nav> 
+                <hr> 
+                <br>    
                 <table>
                     <caption>Relação de linhas</caption>
                     <thead>

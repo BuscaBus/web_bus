@@ -117,8 +117,8 @@ $result_id = mysqli_fetch_assoc($result);
                 <table>
                     <caption class="cap-list-vig">Relação de viagens</caption>
                     <thead>
-                        <th class="th-viag">Viagem</th>
                         <th class="th-serv">Serviço</th>
+                        <th class="th-viag">Viagem</th>                        
                         <th class="th-sent">Sentido</th>
                         <th class="th-part">Partida</th>
                         <th class="th-acoes">Ações</th>
@@ -139,8 +139,8 @@ $result_id = mysqli_fetch_assoc($result);
                     ?>
                     <tbody>
                         <tr>
-                            <td><?php echo $origem?> - <?php echo $destino?></td>
                             <td><?php echo $servico?></td>
+                            <td><?php echo $origem?> - <?php echo $destino?></td>                            
                             <td><?php echo $sentido?></td>
                             <td><?php echo $partida?></td>
                             <td>
