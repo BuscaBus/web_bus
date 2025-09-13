@@ -14,16 +14,7 @@
         $filtro_sql .= " AND routes.route_long_name LIKE '%$pesquisa%'";
     }
 
-    // Paginação
-    $pagina = (isset($_GET['pagina']))? (int) $_GET['pagina'] : 1; //Verificar se está passando na URL a página
-
-    $sql_itens = "SELECT * FROM routes";                
-    $result_itens = mysqli_query($conexao, $sql_itens);
-    $total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
-    $quant_paginas = 10; // Setar quantidade de itens por página
-    $num_pagina = ceil($total_itens/$quant_paginas); // Calcula o numero de páginas necessárias
-    $inicio = ($quant_paginas*$pagina)-$quant_paginas; // Calcula o inicio da visualização
-
+   
     // Consulta no banco de dados para exibir na tabela
     $sql = "SELECT 
                 agency.agency_name,
@@ -47,10 +38,8 @@
                 agency ON agency.agency_id = routes.agency_id
             JOIN
                 fare_attributes ON fare_attributes.fare_id = routes.route_group   
-            $filtro_sql ORDER BY routes.route_id ASC LIMIT $inicio, $quant_paginas";
-            $result = mysqli_query($conexao, $sql);  
-
-    $total_itens = mysqli_num_rows($result_itens);   
+            $filtro_sql ORDER BY routes.route_id ASC";
+            $result = mysqli_query($conexao, $sql);        
     
 ?>
 
@@ -73,7 +62,7 @@
     <title>Sistema WebBus</title>
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
-    <link rel="stylesheet" href="../css/route.css?v=1.7">
+    <link rel="stylesheet" href="../css/route.css?v=1.9">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
 </head>
 
@@ -83,7 +72,7 @@
             <h1>Linhas</h1>
         </header>
         <main>
-            <section>
+            <section class="scroll-area">
                 <button class="btn-cadastrar" id="btn-cad">
                     <a href="register.php" class="link">+ CADASTRAR</a>
                 </button>
@@ -92,7 +81,7 @@
                     <!-- Select no banco de dados para filtrar uma operadora-->
                     <form method="POST" action="list.php">
                         <select name="pesquisar" class="selc-pesq">
-                            <option>Pesquise por operadora</option>;
+                            <option>Operadora</option>;
                             <?php
                                 $sql_select = "SELECT * FROM agency ORDER BY agency_name ASC";
                                 $result_selec = mysqli_query($conexao, $sql_select);
@@ -107,7 +96,7 @@
                     </form>
                     <!-- Imput para buscar dados e filtrar por linha -->
                     <form method="GET">
-                       <input name="buscar"  class="impt-buscar"  value="<?php if(isset($_GET['buscar'])) echo $_GET['buscar'];?>" placeholder="Pesquise por linha" type="text">
+                       <input name="buscar"  class="impt-buscar"  value="<?php if(isset($_GET['buscar'])) echo $_GET['buscar'];?>" placeholder="Nome da linha" type="text">
                        <button type="submit" class="btn-buscar">PESQUISAR</button>
                     </form>
                 </nav> 
@@ -159,33 +148,7 @@
                     <?php }; ?>                           
                     </tbody>
                 </table>
-                <br>
-                <?php
-                    // Verificar pagina anterior e posterior
-                    $pagina_ant = $pagina - 1;
-                    $pagina_post = $pagina + 1;
-                ?>
-                 <!-- Navegação da páginação-->
-                <nav class="nav-pag" aria-label="Page navigation example">
-                    <ul class="paginacao">                       
-                        <?php
-                            if($pagina_ant != 0){ ?>
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> Páginas: << </a>
-                        <?php } else{?>
-                            <span> Páginas: << </span>
-                        <?php } ?>  
-                        <?php
-                            for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        <?php } ?>  
-                        <?php
-                            if($pagina_post <= $num_pagina){ ?>
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>"> >> </a>
-                        <?php } else{?>
-                            <span> >> </span>
-                        <?php } ?>                                        
-                    </ul>
-                </nav>        
+                <br>                
                 <br>
                 <!--Consulta no banco de dados a quantidade de registros-->
                 <?php
@@ -205,5 +168,4 @@
         </footer>
     </div>
 </body>
-<script src="../js/modal-route.js"></script>
 </html>

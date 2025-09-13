@@ -99,11 +99,11 @@ table{
 }
 
 .th-pont{
-    padding-right: 300px;
+    padding-right: 400px;
 }
 
 .th-bair{
-    padding-right: 100px;
+    padding-right: 150px;
 }
 
 .th-cid{
@@ -124,6 +124,10 @@ table{
 
 .th-acoes{
     padding-right: 75px; 
+}
+
+.paginacao .active {    
+    text-decoration: underline;
 }
 
 /*Configurações da tela register.php*/
@@ -360,5 +364,6 @@ table{
     text-decoration: none;
     color: inherit;
 }
+
 
 

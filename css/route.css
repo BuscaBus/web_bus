@@ -113,7 +113,7 @@ table{
     margin: auto;
 }
 .th-op{
-    padding-right: 100px;
+    padding-right: 60px;
 }
 
 .th-cod{
@@ -121,14 +121,14 @@ table{
 }
 
 .th-linha{
-    padding-right: 300px;
+    padding-right: 350px;
 }
 .th-grup{
-    padding-right: 250px;
+    padding-right: 230px;
 }
 
 .th-tarifa{
-    padding-right: 20px;
+    padding-right: 25px;
 }
 
 .th-status{
@@ -141,6 +141,17 @@ table{
 
 .th-acoes{
     padding-right: 136px;
+}
+
+.scroll-area {
+   width: 2000px; 
+   height: 580px;
+   max-height: 580px; /* ou height: 400px; */
+   overflow-y: auto; /* mostra rolagem só quando precisar */
+   overflow-x: hidden; /* evita rolagem horizontal */
+   padding: 1rem;
+   border: 1px solid #ddd;
+   border-radius: 8px;
 }
 
 /*Configuração da navegação da página list.php*/

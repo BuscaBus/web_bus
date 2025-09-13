@@ -4,36 +4,38 @@ include("../connection.php");
 $filtro_sql = "";
 
 // Código para buscar pelo input 
+$buscar = "";
 if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
-    $pesquisa = mysqli_real_escape_string($conexao, $_GET['buscar']);
-    $filtro_sql .= " WHERE stops.stop_code LIKE '%$pesquisa%'";
+    $buscar = mysqli_real_escape_string($conexao, $_GET['buscar']);
+    $filtro_sql .= " WHERE stops.stop_code LIKE '%$buscar%'";
 }
 
-
 // Paginação
-$pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
+$pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+if ($pagina < 1) $pagina = 1;
 
-$sql_itens = "SELECT * FROM stops";
+$sql_itens = "SELECT * FROM stops $filtro_sql";
 $result_itens = mysqli_query($conexao, $sql_itens);
-$total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
-$quant_paginas = 10; // Setar quantidade de itens por página
-$num_pagina = ceil($total_itens / $quant_paginas); // Calcula o numero de páginas necessárias
-$inicio = ($quant_paginas * $pagina) - $quant_paginas; // Calcula o inicio da visualização
+$total_itens = mysqli_num_rows($result_itens);
+
+$quant_paginas = 10;
+$num_pagina = ceil($total_itens / $quant_paginas);
+$inicio = ($quant_paginas * $pagina) - $quant_paginas;
 
 // Consulta no banco de dados para exibir na tabela
-$sql = "SELECT *,
-        CASE 
-            WHEN stops.location_type = '0' THEN 'Ponto'
-            WHEN stops.location_type = '1' THEN 'Terminal'                    
-            END AS status_format,
-            stops.update_date,
-            DATE_FORMAT(stops.update_date, '%d/%m/%Y') AS data_format 
+$sql = "SELECT stop_id,
+               stop_code, 
+               stop_name, 
+               stop_district, 
+               stop_city,
+               location_type, 
+               platform_code,                  
+               stops.update_date,
+               DATE_FORMAT(stops.update_date, '%d/%m/%Y') AS data_format 
         FROM stops $filtro_sql
-        ORDER BY stop_code 
-        ASC LIMIT $inicio, $quant_paginas";
+        ORDER BY stop_code ASC 
+        LIMIT $inicio, $quant_paginas";
 $result = mysqli_query($conexao, $sql);
-
-$total_itens = mysqli_num_rows($result_itens);
 
 ?>
 
@@ -57,7 +59,7 @@ $total_itens = mysqli_num_rows($result_itens);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stops.css?v=1.0">
+    <link rel="stylesheet" href="../css/stops.css?v=1.3">
 </head>
 
 <body>
@@ -71,9 +73,9 @@ $total_itens = mysqli_num_rows($result_itens);
                     <a href="register.php" class="a-btn-cad">+ CADASTRAR</a>
                 </button>
                 <br>
-                <!-- Imput para buscar dados e filtrar -->
+                <!-- Input para buscar dados e filtrar -->
                 <form method="GET">
-                    <input name="buscar" class="impt-buscar" value="<?php if (isset($_GET['buscar'])) echo $_GET['buscar']; ?>" placeholder="Pesquise por código" type="text">
+                    <input name="buscar" class="impt-buscar" value="<?php echo $buscar; ?>" placeholder="Pesquise por código" type="text">
                     <button type="submit" class="btn-buscar">PESQUISAR</button>
                 </form>
                 <hr>
@@ -90,19 +92,18 @@ $total_itens = mysqli_num_rows($result_itens);
                         <th class="th-atual">Atualização</th>
                         <th class="th-acoes">Ações</th>
                     </thead>
-                    <?php
-                    // Laço de repetição para trazer dados do banco
-                    while ($sql_result = mysqli_fetch_array($result)) {
-                        $id = $sql_result['stop_id'];
-                        $codigo = $sql_result['stop_code'];
-                        $ponto = $sql_result['stop_name'];
-                        $bairro = $sql_result['stop_district'];
-                        $cidade = $sql_result['stop_city'];
-                        $local = $sql_result['status_format'];
-                        $box = $sql_result['platform_code'];
-                        $atual = $sql_result['data_format'];
-                    ?>
-                        <tbody>
+                    <tbody>
+                        <?php
+                        while ($sql_result = mysqli_fetch_array($result)) {
+                            $id = $sql_result['stop_id'];
+                            $codigo = $sql_result['stop_code'];
+                            $ponto = $sql_result['stop_name'];
+                            $bairro = $sql_result['stop_district'];
+                            $cidade = $sql_result['stop_city'];
+                            $local = $sql_result['location_type'];
+                            $box = $sql_result['platform_code'];
+                            $atual = $sql_result['data_format'];
+                        ?>
                             <tr>
                                 <td><?php echo $codigo ?></td>
                                 <td><?php echo $ponto ?></td>
@@ -119,31 +120,53 @@ $total_itens = mysqli_num_rows($result_itens);
                                     </form>
                                 </td>
                             </tr>
-                        <?php }; ?>
-                        </tbody>
+                        <?php } ?>
+                    </tbody>
                 </table>
                 <br>
                 <?php
                 // Verificar pagina anterior e posterior
                 $pagina_ant = $pagina - 1;
                 $pagina_post = $pagina + 1;
+
+                // Manter filtro na paginação
+                $query_str = "";
+                if (!empty($buscar)) {
+                    $query_str = "&buscar=" . urlencode($buscar);
+                }
                 ?>
-                <!-- Navegação da páginação-->
+                <!-- Navegação da paginação-->
                 <nav class="nav-pag" aria-label="Page navigation example">
                     <ul class="paginacao">
                         <?php
-                        if ($pagina_ant != 0) { ?>
-                            <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> Páginas: << </a>
+                        if ($pagina_ant >= 1) { ?>
+                            <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant . $query_str; ?>">
+                                << </a>
                                 <?php } else { ?>
-                                    <span> Páginas: << </span>
-                                        <?php } ?>
-                                        <?php
-                                        for ($i = 1; $i < $num_pagina + 1; $i++) { ?>
-                                            <a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                        <?php } ?>
-                                        <?php
-                                        if ($pagina_post <= $num_pagina) { ?>
-                                            <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>"> >> </a>
+                                    <span>
+                                        << </span>
+                                        <?php }
+
+                                    // Definir range de páginas (máximo 5)
+                                    $max_links = 5;
+                                    $inicio = max(1, $pagina - floor($max_links / 2));
+                                    $fim = min($num_pagina, $inicio + $max_links - 1);
+
+                                    if ($fim - $inicio + 1 < $max_links) {
+                                        $inicio = max(1, $fim - $max_links + 1);
+                                    }
+
+                                    // Loop limitado
+                                    for ($i = $inicio; $i <= $fim; $i++) {
+                                        if ($i == $pagina) {
+                                            echo "<a class='nav-pag active' href='list.php?pagina=$i$query_str'> $i </a>";
+                                        } else {
+                                            echo "<a class='nav-pag' href='list.php?pagina=$i$query_str'> $i </a>";
+                                        }
+                                    }
+
+                                    if ($pagina_post <= $num_pagina) { ?>
+                                            <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post . $query_str; ?>"> >> </a>
                                         <?php } else { ?>
                                             <span> >> </span>
                                         <?php } ?>
@@ -154,7 +177,6 @@ $total_itens = mysqli_num_rows($result_itens);
                 <?php
                 $sql = "SELECT COUNT(*) AS total FROM stops";
                 $result = mysqli_query($conexao, $sql);
-
                 $row = mysqli_fetch_assoc($result);
                 $total_registros = $row['total'];
                 ?>
@@ -170,7 +192,5 @@ $total_itens = mysqli_num_rows($result_itens);
         </footer>
     </div>
 </body>
-<script src="../js/modal-agency.js"></script>
-<script src="../js/agency.js"></script>
 
 </html>
