@@ -167,7 +167,7 @@ if (isset($_GET['filtrar'])) {
                     <button type="submit" name="filtrar" value="1" class="btn-selec">SELECIONAR</button>
                 </form>
                 <hr><br>
-                <h2><?php echo htmlspecialchars($codigo_linha . " - " . $nome_linha); ?></h2>
+                <h2>Linha:  <?php echo htmlspecialchars($codigo_linha . " - " . $nome_linha); ?></h2>
                 <br> 
                 <hr>
                 <br>                 

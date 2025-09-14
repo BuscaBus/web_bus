@@ -37,7 +37,7 @@
         </header>
         <main>
             <section class="scroll-area">
-                <h3><?php echo $origem; ?> - <?php echo $destino; ?> </h3> 
+                <h3>Viagem:  <?php echo $origem; ?> - <?php echo $destino; ?> </h3> 
                 <br>  
                 <hr>
                 <br>                     

@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.0">
+    <link rel="stylesheet" href="../css/trips.css?v=1.2">
 </head>
 
 <body>
@@ -168,3 +168,4 @@ $result_id = mysqli_fetch_assoc($result);
 </body>
 
 </html>
+

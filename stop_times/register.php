@@ -110,7 +110,7 @@ $result_id = mysqli_fetch_assoc($result);
             <section class="sect-list-hor">
                 <br>
                 <table>
-                    <h3> <?= $result_id['trip_short_name'] ?> - <?= $result_id['trip_headsign'] ?> </h3>
+                    <h3>Viagem:  <?= $result_id['trip_short_name'] ?> - <?= $result_id['trip_headsign'] ?> </h3>
                     <br>
                     <hr>
                     <br>
