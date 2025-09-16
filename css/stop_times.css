@@ -280,6 +280,7 @@ table{
 }
 
 .scroll-area {
+   width: 1600px; 
    height: 580px;
    max-height: 580px; /* ou height: 400px; */
    overflow-y: auto; /* mostra rolagem só quando precisar */
@@ -289,5 +290,10 @@ table{
    border-radius: 8px;
 }
 
-
+#div-map{
+    height: 400px;
+    width: 835px;
+    margin: 20px auto; 
+    border: solid 1px black;
+}
 
