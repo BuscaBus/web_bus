@@ -1,6 +1,9 @@
 <?php
 include("../connection.php");
 
+$lat = $_GET['latitude'];
+$lng = $_GET['longitude'];
+
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +76,17 @@ include("../connection.php");
                 <label for="id-box" class="lb-reg-box">Box:</label>
                 <input type="text" name="box" class="inpt-reg-box" id="id-box" placeholder="insira o Box...">
             </p>
+            <p class="p-estilo">
+                <label for="id-lat" class="lb-reg-lat">Latitude:</label>
+                <input type="text" name="latitude" class="inpt-reg-lat" id="id-lat"
+                    value="<?php echo isset($_GET['latitude']) ? htmlspecialchars($_GET['latitude']) : ''; ?>">
+            </p>
+            <p class="p-estilo">
+                <label for="id-lng" class="lb-reg-lng">Longitude:</label>
+                <input type="text" name="longitude" class="inpt-reg-lng" id="id-lng"
+                    value="<?php echo isset($_GET['longitude']) ? htmlspecialchars($_GET['longitude']) : ''; ?>">
+            </p>
+
             <hr>
             <nav class="nav-reg-btn">
                 <p>

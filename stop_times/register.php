@@ -63,7 +63,7 @@ $result_id = mysqli_fetch_assoc($result);
                     </p>
                     <p class="p-estilo">
                         <label for="id-pont" class="lb-reg-pont">Ponto:</label>
-                        <input type="text" name="ponto" class="inpt-reg-pont" id="id-pont" placeholder="insira o código do ponto...">
+                        <input type="text" name="ponto" class="inpt-reg-pont" id="id-pont" pattern="\d{5}" minlength="5" maxlength="5" placeholder="insira o código do ponto...">
                     </p>
                     <p class="p-estilo">
                         <label for="id-sequ" class="lb-reg-sequ">Sequencia:</label>
@@ -71,7 +71,7 @@ $result_id = mysqli_fetch_assoc($result);
                     </p>
                     <p class="p-estilo">
                         <label for="id-dest" class="lb-reg-dest">Destino:</label>
-                        <input type="text" name="destino" class="inpt-reg-dest" id="id-dest" placeholder="insira o destino da viagem...">
+                        <input type="text" name="destino" class="inpt-reg-dest" id="id-dest" value="<?= $result_id['trip_headsign'] ?>">
                     </p>
                     <p class="p-estilo">
                         <label for="id-hrInc" class="lb-reg-hrInc">Hora Inicio:</label>

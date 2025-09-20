@@ -59,7 +59,7 @@ $result = mysqli_query($conexao, $sql);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stops.css?v=1.3">
+    <link rel="stylesheet" href="../css/stops.css?v=1.4">
 </head>
 
 <body>
@@ -70,8 +70,8 @@ $result = mysqli_query($conexao, $sql);
         <main>
             <section>
                 <button class="btn-cadastrar" id="btn-cad">
-                    <a href="register.php" class="a-btn-cad">+ CADASTRAR</a>
-                </button>
+                    <a href="stop_maps.php" class="a-btn-cad">+ CADASTRAR</a>
+                </button>                
                 <br>
                 <!-- Input para buscar dados e filtrar -->
                 <form method="GET">

@@ -27,7 +27,7 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.6">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -39,62 +39,21 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
     <!-- JS do Leaflet.draw -->
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
+
 </head>
 
 <body>
     <div>
         <header>
-            <h1>Trajeto</h1>
+            <h1>Mapa</h1>
         </header>
         <main>
-            <section class="scroll-area">
+            <section>
                 <h3>Viagem: <?php echo $origem; ?> - <?php echo $destino; ?> </h3>
                 <br>
                 <hr>
-                <br>
-                <table>
-                    <caption>Relação de pontos do trajeto</caption>
-                    <thead>
-                        <th class="th-seq">Sequencia</th>
-                        <th class="th-pont">Ponto</th>
-                        <th class="th-bair">Bairro</th>
-                        <th class="th-cid">Cidade</th>
-                    </thead>
-                    <?php
-                    // Consulta no banco de dados para exibir na tabela
-                    $sql = "SELECT DISTINCT stop_times.stop_sequence, 
-                                       stop_times.stop_code, 
-                                       stop_times.stop_headsign,
-                                       stops.stop_name,
-                                       stops.stop_district,
-                                       stops.stop_city
-                                FROM stop_times 
-                                JOIN stops ON stops.stop_code = stop_times.stop_code
-                                WHERE trip_id = $id 
-                                ORDER BY stop_sequence ASC";
-                    $result = mysqli_query($conexao, $sql);
-
-                    // Laço de repetição para trazer dados do banco
-                    while ($sql_result = mysqli_fetch_array($result)) {
-                        $sequencia = $sql_result['stop_sequence'];
-                        $ponto = $sql_result['stop_name'];
-                        $bairro = $sql_result['stop_district'];
-                        $cidade = $sql_result['stop_city'];
-                    ?>
-                        <tbody>
-                            <tr>
-                                <td><?php echo $sequencia ?></td>
-                                <td><?php echo $ponto ?></td>
-                                <td><?php echo $bairro ?></td>
-                                <td><?php echo $cidade ?></td>
-                            </tr>
-                        <?php }; ?>
-                        </tbody>
-                </table>
-                <br>
-
-                <!-- MAPA -->
-                <div id="div-map">i</div>
+                <!-- Mapa -->
+                <div id="div-map"></div>
                 <script>
                     // Cria o mapa
                     var map = L.map('div-map').setView([-27.595740, -48.568228], 13);
@@ -116,7 +75,7 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                                     weight: 5, // espessura (px)
                                     opacity: 0.8
                                 }
-                            },
+                            },                            
                         }
                     });
                     map.addControl(drawControl);
@@ -129,12 +88,13 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
 
                     });
 
+
                     map.addControl(drawControl);
                 </script>
             </section>
         </main>
         <footer>
-            <p><a href="../trips/register.php?id=<?= $route_id ?>">
+            <p><a href="../maps_trips/register.php?id=<?= $route_id ?>">
                     < Voltar</a>
             </p>
         </footer>

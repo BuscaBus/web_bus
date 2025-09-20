@@ -164,6 +164,14 @@ table{
     margin-right: 75px;
 }
 
+.lb-reg-lat{
+    margin-right: 45px;
+}
+
+.lb-reg-lng{
+    margin-right: 32px;
+}
+
 .inpt-reg-cod{
     background-color: #F3F4F0;
     width: 310px;
@@ -207,6 +215,20 @@ table{
 }
 
 .inpt-reg-box{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-lat{
+    background-color: #F3F4F0;
+    width: 310px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.inpt-reg-lng{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
@@ -365,5 +387,12 @@ table{
     color: inherit;
 }
 
+/*Configurações da tela stop_maps.php*/
+#div-map{
+    height: 500px;
+    width: 900px;
+    margin: 20px auto; 
+    border: solid 1px black;
+}
 
 
