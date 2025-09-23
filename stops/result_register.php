@@ -9,6 +9,8 @@
     $local = $_POST['local'];
     $terminal = $_POST['terminal'];
     $box = $_POST['box'];
+    $latitude = $_POST['latitude'];
+    $longitude = $_POST['longitude'];
     
     // Altera no banco de dados
     $sql = "INSERT INTO stops (
@@ -16,6 +18,8 @@
                 stop_name, 
                 stop_city,
                 stop_district,
+                stop_lat,
+                stop_lon,
                 location_type,
                 parent_station,
                 platform_code                
@@ -25,6 +29,8 @@
                 '$ponto', 
                 '$cidade',
                 '$bairro',
+                '$latitude',
+                '$longitude',
                 '$local',
                 '$terminal',
                 '$box'                

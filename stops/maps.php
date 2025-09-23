@@ -2,7 +2,9 @@
 include("../connection.php");
 
 // Pega todos os pontos cadastrados que tenham coordenadas
-$sql = "SELECT stop_lat AS latitude, stop_lon AS longitude, stop_code FROM stops WHERE stop_lat <> '' AND stop_lon <> ''";
+$sql = "SELECT stop_lat AS latitude, stop_lon AS longitude, stop_code 
+        FROM stops 
+        WHERE stop_lat <> '' AND stop_lon <> ''";
 $result = mysqli_query($conexao, $sql);
 
 $marcadores = [];
@@ -32,37 +34,19 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
     <style>
-        .form-coords {
-            margin-top: 15px;
-        }
-
-        .form-coords label {
-            display: inline-block;
-            width: 80px;
-            font-weight: bold;
+        #div-map {
+            height: 600px;
+            width: 1460px;
+            margin: 1px;
+            border: solid 1px black;
         }
     </style>
 </head>
 
 <body>
     <section>
-        <h2>Cadastrar ponto no mapa</h2>
-
         <!-- MAPA -->
         <div id="div-map"></div>
-
-        <!-- Inputs para coordenadas -->
-        <div class="form-coords">
-            <form action="register.php" method="GET">
-                <label>Latitude:</label>
-                <input type="text" id="lat" name="latitude" readonly>
-
-                <label>Longitude:</label>
-                <input type="text" id="lng" name="longitude" readonly>
-
-                <button type="submit" class="btn-reg-cad">SALVAR</button>
-            </form>
-        </div>
 
         <script>
             // =================== BASEMAPS ===================
@@ -156,6 +140,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 }
             });
         </script>
+
         <p>
             <button class="btn-reg-cad">
                 <a href="list.php" class="a-btn-canc">VOLTAR</a>

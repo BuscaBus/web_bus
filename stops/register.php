@@ -23,7 +23,7 @@ $lng = $_GET['longitude'];
             <hr>
             <p class="p-estilo">
                 <label for="id-cod" class="lb-reg-cod">Código:</label>
-                <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod" placeholder="insira o código..." required>
+                <input type="text" name="codigo" class="inpt-reg-cod" id="id-cod" pattern="\d{5}" minlength="5" maxlength="5" placeholder="insira o código..." required>
             </p>
             <p class="p-estilo">
                 <label for="id-pont" class="lb-reg-pont">Ponto:</label>
