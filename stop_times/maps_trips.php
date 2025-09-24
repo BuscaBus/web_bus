@@ -39,7 +39,6 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
     <!-- JS do Leaflet.draw -->
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
-
 </head>
 
 <body>
@@ -75,26 +74,61 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                                     weight: 5, // espessura (px)
                                     opacity: 0.8
                                 }
-                            },                            
+                            },
                         }
                     });
                     map.addControl(drawControl);
 
-                    // Evento ao criar um desenho
                     map.on(L.Draw.Event.CREATED, function(event) {
                         var layer = event.layer;
                         drawnItems.addLayer(layer);
-                        console.log(layer.toGeoJSON());
 
+                        var geojson = layer.toGeoJSON();
+
+                        if (geojson.geometry.type === "LineString") {
+                            var coords = geojson.geometry.coordinates; // [lon, lat]
+
+                            fetch("salvar_shape.php", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({
+                                        trip_id: <?= $id ?>, // ID da viagem atual em PHP
+                                        coords: coords
+                                    })
+                                })
+                                .then(res => res.text())
+                                .then(data => {
+                                    alert(data);
+                                });
+                        }
                     });
 
+                    // ID da trip vindo do PHP
+                    var tripId = <?= $id ?>;
 
-                    map.addControl(drawControl);
+                    // Buscar shape salvo no banco
+                    fetch("get_shape.php?trip_id=" + tripId)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.length > 0) {
+                                // data = [[lat, lon], [lat, lon], ...]
+                                var polyline = L.polyline(data, {
+                                    color: "#0000ff",
+                                    weight: 3,
+                                    opacity: 0.8
+                                }).addTo(map);
+
+                                // Centralizar mapa no shape
+                                map.fitBounds(polyline.getBounds());
+                            }
+                        });
                 </script>
             </section>
         </main>
         <footer>
-            <p><a href="../maps_trips/register.php?id=<?= $route_id ?>">
+            <p><a href="../trips/register.php?id=<?= $route_id ?>">
                     < Voltar</a>
             </p>
         </footer>

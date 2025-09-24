@@ -134,8 +134,7 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
             </section>
         </main>
         <footer>
-            <p><a href="../trips/register.php?id=<?= $route_id ?>">
-                    < Voltar</a>
+            <p><a href="../trips/register.php?id=<?= $route_id ?>"> < Voltar</a>
             </p>
         </footer>
     </div>
