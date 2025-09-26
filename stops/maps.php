@@ -13,42 +13,102 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de pontos</title>
-    <link rel="stylesheet" href="../css/stops.css?v=1.1">
+    <link rel="stylesheet" href="../css/stops.css?v=1.5">
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- CSS do Leaflet.draw -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
     <!-- JS do Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- JS do Leaflet.draw -->
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
-    <style>
-        #div-map {
-            height: 600px;
-            width: 1460px;
-            margin: 1px;
-            border: solid 1px black;
-        }
-    </style>
 </head>
 
 <body>
     <section>
+        <!-- FILTROS -->
+        <form id="form-filtro">
+            <label>Operadora: </label>
+            <select name="operadora" id="selc-op" class="selc-op">
+                <option value="">Selecione a operadora</option>
+                <?php
+                $sql_select = "SELECT agency_id, agency_name FROM agency ORDER BY agency_name ASC";
+                $result_selec = mysqli_query($conexao, $sql_select);
+                while ($dados = mysqli_fetch_array($result_selec)) {
+                    $id = $dados['agency_id'];
+                    $nome = $dados['agency_name'];
+                    echo "<option value=\"$id\">$nome</option>";
+                }
+                ?>
+            </select>
+
+            <label>Linha: </label>
+            <select name="linha" id="selc-linh" class="selc-linh">
+                <option value="">Selecione a linha</option>
+            </select>
+
+            <label>Viagem: </label>
+            <select name="viagem" id="selc-viag" class="selc-viag">
+                <option value="">Selecione a viagem</option>
+            </select>
+
+            <button type="button" class="btn-selec">SELECIONAR</button>
+        </form>
+
         <!-- MAPA -->
         <div id="div-map"></div>
 
         <script>
+            // =================== SELECTS DINÂMICOS ===================
+            document.getElementById('selc-op').addEventListener('change', function() {
+                let agency_id = this.value;
+                let linhaSelect = document.getElementById('selc-linh');
+                let viagemSelect = document.getElementById('selc-viag');
+
+                linhaSelect.innerHTML = "<option value=''>Carregando...</option>";
+                viagemSelect.innerHTML = "<option value=''>Selecione a viagem</option>";
+
+                if (agency_id) {
+                    fetch('get_linhas.php?agency_id=' + agency_id)
+                        .then(response => response.json())
+                        .then(data => {
+                            linhaSelect.innerHTML = "<option value=''>Selecione a linha</option>";
+                            data.forEach(linha => {
+                                linhaSelect.innerHTML += `<option value="${linha.route_id}">${linha.route_long_name}</option>`;
+                            });
+                        });
+                } else {
+                    linhaSelect.innerHTML = "<option value=''>Selecione a linha</option>";
+                }
+            });
+
+            document.getElementById('selc-linh').addEventListener('change', function() {
+                let route_id = this.value;
+                let viagemSelect = document.getElementById('selc-viag');
+
+                viagemSelect.innerHTML = "<option value=''>Carregando...</option>";
+
+                if (route_id) {
+                    fetch('get_viagens.php?route_id=' + route_id)
+                        .then(response => response.json())
+                        .then(data => {
+                            viagemSelect.innerHTML = "<option value=''>Selecione a viagem</option>";
+                            data.forEach(viagem => {
+                                viagemSelect.innerHTML += `<option value="${viagem.trip_id}">${viagem.viagem_nome}</option>`;
+                            });
+                        });
+                } else {
+                    viagemSelect.innerHTML = "<option value=''>Selecione a viagem</option>";
+                }
+            });
+
             // =================== BASEMAPS ===================
             var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap'
@@ -58,40 +118,19 @@ while ($row = mysqli_fetch_assoc($result)) {
                 attribution: 'Tiles © Esri'
             });
 
-            // Cria o mapa já com o OSM
             var map = L.map('div-map', {
                 center: [-27.595740, -48.568228],
                 zoom: 13,
-                layers: [osm] // camada inicial
+                layers: [osm]
             });
 
-            // Controle para trocar camadas
             var baseMaps = {
                 "OpenStreetMap": osm,
-                "Satélite": satelite,                             
+                "Satélite": satelite,
             };
-
             L.control.layers(baseMaps).addTo(map);
 
-            // =================== DESENHO ===================
-            var drawnItems = new L.FeatureGroup();
-            map.addLayer(drawnItems);
-
-            var drawControl = new L.Control.Draw({
-                edit: {
-                    featureGroup: drawnItems
-                },
-                draw: {
-                    marker: true,
-                    polyline: false,
-                    polygon: false,
-                    rectangle: false,
-                    circle: false
-                }
-            });
-            map.addControl(drawControl);
-
-            // =================== ÍCONE ===================
+            // =================== MARCADORES EXISTENTES ===================
             var meuIcone = L.icon({
                 iconUrl: '../img/icon-bus2.png',
                 iconSize: [15, 15],
@@ -99,54 +138,50 @@ while ($row = mysqli_fetch_assoc($result)) {
                 popupAnchor: [0, -32]
             });
 
-            // =================== MARCADORES EXISTENTES ===================
             var marcadoresBanco = L.layerGroup().addTo(map);
-
             var marcadoresExistentes = <?php echo json_encode($marcadores); ?>;
 
             marcadoresExistentes.forEach(function(ponto) {
                 if (ponto.latitude && ponto.longitude) {
-                    L.marker([ponto.latitude, ponto.longitude], {
-                            icon: meuIcone
-                        })
+                    L.marker([ponto.latitude, ponto.longitude], { icon: meuIcone })
                         .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
                         .addTo(marcadoresBanco);
                 }
             });
 
-            // =================== NOVO MARCADOR ===================
-            map.on(L.Draw.Event.CREATED, function(event) {
-                var layer = event.layer;
+            // =================== SHAPES ===================
+            let shapeLayer;
 
-                if (event.layerType === 'marker') {
-                    var coords = layer.getLatLng();
+            document.querySelector(".btn-selec").addEventListener("click", function(e) {
+                e.preventDefault();
 
-                    // Preenche inputs (se existirem)
-                    if (document.getElementById('lat')) {
-                        document.getElementById('lat').value = coords.lat;
-                    }
-                    if (document.getElementById('lng')) {
-                        document.getElementById('lng').value = coords.lng;
-                    }
-
-                    var marcador = L.marker([coords.lat, coords.lng], {
-                            icon: meuIcone
-                        })
-                        .bindPopup("Lat: " + coords.lat + "<br>Lng: " + coords.lng)
-                        .openPopup();
-
-                    drawnItems.clearLayers();
-                    drawnItems.addLayer(marcador);
+                let trip_id = document.getElementById("selc-viag").value;
+                if (!trip_id) {
+                    alert("Selecione uma viagem!");
+                    return;
                 }
+
+                fetch("get_shape.php?trip_id=" + trip_id)
+                    .then(response => response.json())
+                    .then(pontos => {
+                        if (shapeLayer) {
+                            map.removeLayer(shapeLayer);
+                        }
+                        if (pontos.length > 0) {
+                            shapeLayer = L.polyline(pontos, { color: "blue", weight: 4 }).addTo(map);
+                            map.fitBounds(shapeLayer.getBounds());
+                        } else {
+                            alert("Nenhuma rota traçada para esta viagem.");
+                        }
+                    });
             });
         </script>
 
         <p>
             <button class="btn-reg-cad">
-                <a href="list.php" class="a-btn-canc">VOLTAR</a>
+                <a href="../index.html" class="a-btn-canc">VOLTAR</a>
             </button>
         </p>
     </section>
 </body>
-
 </html>

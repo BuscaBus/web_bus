@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de pontos</title>
-    <link rel="stylesheet" href="../css/stops.css?v=1.1">
+    <link rel="stylesheet" href="../css/stops.css?v=1.2">
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -40,14 +40,12 @@ while ($row = mysqli_fetch_assoc($result)) {
             display: inline-block;
             width: 80px;
             font-weight: bold;
-        }
+        }        
     </style>
 </head>
 
 <body>
     <section>
-        <h2>Cadastrar ponto no mapa</h2>
-
         <!-- MAPA -->
         <div id="div-map"></div>
 
@@ -61,6 +59,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <input type="text" id="lng" name="longitude" readonly>
 
                 <button type="submit" class="btn-reg-cad">SALVAR</button>
+
+                <button class="btn-reg-canc">
+                    <a href="list.php" class="a-btn-canc">CANCELAR</a>
+                </button>
             </form>
         </div>
 
@@ -155,12 +157,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     drawnItems.addLayer(marcador);
                 }
             });
-        </script>
-        <p>
-            <button class="btn-reg-cad">
-                <a href="list.php" class="a-btn-canc">VOLTAR</a>
-            </button>
-        </p>
+        </script>        
     </section>
 </body>
 

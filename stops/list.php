@@ -76,10 +76,7 @@ $result = mysqli_query($conexao, $sql);
                 <!-- Input para buscar dados e filtrar -->
                 <form method="GET">
                     <input name="buscar" class="impt-buscar" value="<?php echo $buscar; ?>" placeholder="Pesquise por código" type="text">
-                    <button type="submit" class="btn-buscar">PESQUISAR</button>
-                    <button class="btn-cadastrar" id="btn-cad">
-                        <a href="maps.php" class="a-btn-cad">MAPA DOS PONTOS</a>
-                    </button>
+                    <button type="submit" class="btn-buscar">PESQUISAR</button>                    
                 </form>
                 <hr>
                 <br>
