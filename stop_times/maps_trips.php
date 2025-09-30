@@ -27,7 +27,7 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.5">
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -62,29 +62,32 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                     var drawnItems = new L.FeatureGroup();
                     map.addLayer(drawnItems);
 
-                    // Controle de desenho
+                    // Controle de desenho com editar/excluir habilitado
                     var drawControl = new L.Control.Draw({
                         edit: {
-                            featureGroup: drawnItems
+                            featureGroup: drawnItems,
+                            remove: true // habilita botão de excluir
                         },
                         draw: {
                             polyline: {
                                 shapeOptions: {
-                                    color: '#000000', // cor da linha
-                                    weight: 5, // espessura (px)
+                                    color: '#0000ff',
+                                    weight: 5,
                                     opacity: 0.8
                                 }
                             },
+                            polygon: false,
+                            marker: false,
+                            rectangle: false,
+                            circle: false,
+                            circlemarker: false
                         }
                     });
                     map.addControl(drawControl);
 
-                    map.on(L.Draw.Event.CREATED, function(event) {
-                        var layer = event.layer;
-                        drawnItems.addLayer(layer);
-
+                    // Função para salvar linha no servidor
+                    function salvarShape(layer) {
                         var geojson = layer.toGeoJSON();
-
                         if (geojson.geometry.type === "LineString") {
                             var coords = geojson.geometry.coordinates; // [lon, lat]
 
@@ -94,7 +97,7 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                                         "Content-Type": "application/json"
                                     },
                                     body: JSON.stringify({
-                                        trip_id: <?= $id ?>, // ID da viagem atual em PHP
+                                        trip_id: <?= $id ?>,
                                         coords: coords
                                     })
                                 })
@@ -103,28 +106,57 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                                     alert(data);
                                 });
                         }
+                    }
+
+                    // Quando criar novo traçado
+                    map.on(L.Draw.Event.CREATED, function(event) {
+                        drawnItems.clearLayers(); // só permite um traçado por trip
+                        var layer = event.layer;
+                        drawnItems.addLayer(layer);
+                        salvarShape(layer);
                     });
 
-                    // ID da trip vindo do PHP
-                    var tripId = <?= $id ?>;
+                    // Quando editar traçado
+                    map.on(L.Draw.Event.EDITED, function(event) {
+                        event.layers.eachLayer(function(layer) {
+                            salvarShape(layer);
+                        });
+                    });
 
-                    // Buscar shape salvo no banco
+                    // Quando excluir traçado
+                    map.on(L.Draw.Event.DELETED, function(event) {
+                        fetch("salvar_shape.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    trip_id: <?= $id ?>,
+                                    coords: [] // vazio = remover shape
+                                })
+                            })
+                            .then(res => res.text())
+                            .then(data => {
+                                alert(data);
+                            });
+                    });
+
+                    // Carregar traçado salvo
+                    var tripId = <?= $id ?>;
                     fetch("get_shape.php?trip_id=" + tripId)
                         .then(res => res.json())
                         .then(data => {
                             if (data.length > 0) {
-                                // data = [[lat, lon], [lat, lon], ...]
                                 var polyline = L.polyline(data, {
                                     color: "#0000ff",
-                                    weight: 3,
+                                    weight: 5,
                                     opacity: 0.8
-                                }).addTo(map);
-
-                                // Centralizar mapa no shape
+                                }).addTo(drawnItems);
                                 map.fitBounds(polyline.getBounds());
                             }
                         });
                 </script>
+
             </section>
         </main>
         <footer>

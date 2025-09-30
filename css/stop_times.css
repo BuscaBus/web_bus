@@ -290,12 +290,14 @@ table{
    border-radius: 8px;
 }
 
+
+/*Configurações da tela maps_trips.php*/
 #div-map{
     height: 490px;
-    width: 835px;
+    width: 1000px;
     margin: 20px auto; 
     border: solid 1px black;
 }
 
-     
+
 
