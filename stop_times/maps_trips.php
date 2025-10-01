@@ -1,19 +1,14 @@
 <?php
 include("../connection.php");
 
-// Declaração da variavel para receber o ID
-$id = $_GET['id'];
+$trip_inicial_id = (int)($_GET['id'] ?? 0);
 
-// Consulta no banco de dados para exibir no nome da viagem 
-$sql_viag = "SELECT route_id, trip_headsign, trip_short_name FROM trips WHERE trip_id = $id";
-$result_viag = mysqli_query($conexao, $sql_viag);
+// Dados da trip inicial
+$viagem = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT route_id, trip_headsign, trip_short_name, shape_id FROM trips WHERE trip_id = $trip_inicial_id"));
+$route_id = $viagem['route_id'] ?? 0;
 
-// Laço de repetição para trazer no nome da viagem do banco
-while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
-    $route_id = $sql_result_viag['route_id'];
-    $destino = $sql_result_viag['trip_headsign'];
-    $origem = $sql_result_viag['trip_short_name'];
-}
+// Todas trips da mesma rota para o select
+$res_trips = mysqli_query($conexao, "SELECT trip_id, trip_short_name, trip_headsign FROM trips WHERE route_id = $route_id ORDER BY trip_id ASC");
 
 ?>
 
@@ -23,22 +18,14 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema WebBus</title>
-    <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
+    <title>Mapa das Trips</title>
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.5">
-
-    <!-- CSS do Leaflet -->
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.6">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- CSS do Leaflet.draw -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
-
-    <!-- JS do Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- JS do Leaflet.draw -->
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
-
 </head>
 
 <body>
@@ -48,25 +35,34 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
         </header>
         <main>
             <section>
-                <h3>Viagem: <?php echo $origem; ?> - <?php echo $destino; ?> </h3>
+                 <h3>Viagem: <?= htmlspecialchars($viagem['trip_short_name']) ?> - <?= htmlspecialchars($viagem['trip_headsign']) ?></h3>
+                <br>                
+                <label for="tripSelect">Reaproveitar shape de outra viagem:</label>
+                <select id="tripSelect">
+                    <option value="" selected disabled>-- Selecione uma viagem --</option>
+                    <?php while ($t = mysqli_fetch_assoc($res_trips)) { ?>
+                        <option value="<?= $t['trip_id'] ?>">
+                            <?= $t['trip_short_name'] ?> - <?= $t['trip_headsign'] ?>
+                        </option>
+                    <?php } ?>
+                </select>
+                <button type="button" id="btnSalvar">Salvar shape na trip inicial</button>
                 <br>
                 <hr>
-                <!-- Mapa -->
-                <div id="div-map"></div>
-                <script>
-                    // Cria o mapa
-                    var map = L.map('div-map').setView([-27.595740, -48.568228], 13);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
 
-                    // Grupo de layers desenhados
+                <div id="div-map" style="height:500px;"></div>
+
+                <script>
+                    var map = L.map('div-map').setView([-27.595740, -48.568228], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
                     var drawnItems = new L.FeatureGroup();
                     map.addLayer(drawnItems);
 
-                    // Controle de desenho com editar/excluir habilitado
                     var drawControl = new L.Control.Draw({
                         edit: {
                             featureGroup: drawnItems,
-                            remove: true // habilita botão de excluir
+                            remove: true
                         },
                         draw: {
                             polyline: {
@@ -85,84 +81,126 @@ while ($sql_result_viag = mysqli_fetch_array($result_viag)) {
                     });
                     map.addControl(drawControl);
 
-                    // Função para salvar linha no servidor
-                    function salvarShape(layer) {
+                    var tripInicialId = <?= $trip_inicial_id ?>;
+                    var currentShapeId = <?= $viagem['shape_id'] ?? 'null' ?>;
+
+                    // Função para carregar shape de qualquer trip
+                    function carregarShape(tripId) {
+                        drawnItems.clearLayers();
+                        if (!tripId) return;
+
+                        fetch("get_shape.php?trip_id=" + tripId)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (!data || !data.coords) return;
+                                currentShapeId = data.shape_id;
+                                if (data.coords.length > 0) {
+                                    var polyline = L.polyline(data.coords, {
+                                            color: "#0000ff",
+                                            weight: 5,
+                                            opacity: 0.8
+                                        })
+                                        .addTo(drawnItems);
+                                    map.fitBounds(polyline.getBounds());
+                                }
+                            });
+                    }
+
+                    // Carrega shape da trip inicial automaticamente
+                    carregarShape(tripInicialId);
+
+                    // Desenho/edição do mapa
+                    function salvarShapeNaTripInicial(layer) {
                         var geojson = layer.toGeoJSON();
                         if (geojson.geometry.type === "LineString") {
-                            var coords = geojson.geometry.coordinates; // [lon, lat]
-
+                            var coords = geojson.geometry.coordinates;
                             fetch("salvar_shape.php", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json"
                                     },
                                     body: JSON.stringify({
-                                        trip_id: <?= $id ?>,
+                                        trip_id: tripInicialId,
                                         coords: coords
                                     })
                                 })
-                                .then(res => res.text())
+                                .then(res => res.json())
                                 .then(data => {
-                                    alert(data);
+                                    alert(data.message);
+                                    currentShapeId = data.shape_id;
                                 });
                         }
                     }
 
-                    // Quando criar novo traçado
-                    map.on(L.Draw.Event.CREATED, function(event) {
-                        drawnItems.clearLayers(); // só permite um traçado por trip
-                        var layer = event.layer;
+                    map.on(L.Draw.Event.CREATED, function(e) {
+                        drawnItems.clearLayers();
+                        var layer = e.layer;
                         drawnItems.addLayer(layer);
-                        salvarShape(layer);
+                        salvarShapeNaTripInicial(layer);
                     });
-
-                    // Quando editar traçado
-                    map.on(L.Draw.Event.EDITED, function(event) {
-                        event.layers.eachLayer(function(layer) {
-                            salvarShape(layer);
+                    map.on(L.Draw.Event.EDITED, function(e) {
+                        e.layers.eachLayer(function(layer) {
+                            salvarShapeNaTripInicial(layer);
                         });
                     });
-
-                    // Quando excluir traçado
-                    map.on(L.Draw.Event.DELETED, function(event) {
+                    map.on(L.Draw.Event.DELETED, function(e) {
                         fetch("salvar_shape.php", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json"
                                 },
                                 body: JSON.stringify({
-                                    trip_id: <?= $id ?>,
-                                    coords: [] // vazio = remover shape
+                                    trip_id: tripInicialId,
+                                    coords: []
                                 })
                             })
-                            .then(res => res.text())
+                            .then(res => res.json())
                             .then(data => {
-                                alert(data);
+                                alert(data.message);
+                                currentShapeId = null;
                             });
                     });
 
-                    // Carregar traçado salvo
-                    var tripId = <?= $id ?>;
-                    fetch("get_shape.php?trip_id=" + tripId)
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.length > 0) {
-                                var polyline = L.polyline(data, {
-                                    color: "#0000ff",
-                                    weight: 5,
-                                    opacity: 0.8
-                                }).addTo(drawnItems);
-                                map.fitBounds(polyline.getBounds());
-                            }
-                        });
+                    // Select de trips: exibir shape selecionado imediatamente
+                    document.getElementById("tripSelect").addEventListener("change", function() {
+                        var tripSelecionada = this.value;
+                        if (!tripSelecionada) return;
+                        // Mostrar shape da trip selecionada (apenas visual)
+                        carregarShape(tripSelecionada);
+                    });
+
+                    // Botão "Reaproveitar shape" → copia shape para a trip inicial
+                    document.getElementById("btnSalvar").addEventListener("click", function() {
+                        var select = document.getElementById("tripSelect");
+                        var selectedTrip = select.value;
+                        if (!selectedTrip) {
+                            alert("Selecione uma viagem para reaproveitar o shape.");
+                            return;
+                        }
+
+                        fetch("vincular_shape_trip.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    trip_origem_id: selectedTrip,
+                                    trip_destino_id: tripInicialId
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                alert(data.message);
+                                // Atualiza o mapa com o shape recém vinculado à trip inicial
+                                carregarShape(tripInicialId);
+                            });
+                    });
                 </script>
 
             </section>
         </main>
         <footer>
-            <p><a href="../trips/register.php?id=<?= $route_id ?>">
-                    < Voltar</a>
-            </p>
+            <p><a href="../trips/register.php?id=<?= $route_id ?>">&lt; Voltar</a></p>
         </footer>
     </div>
 </body>

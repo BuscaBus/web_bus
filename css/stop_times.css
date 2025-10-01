@@ -293,7 +293,7 @@ table{
 
 /*Configurações da tela maps_trips.php*/
 #div-map{
-    height: 490px;
+    height: 450px;
     width: 1000px;
     margin: 20px auto; 
     border: solid 1px black;
