@@ -7,8 +7,14 @@ $trip_inicial_id = (int)($_GET['id'] ?? 0);
 $viagem = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT route_id, trip_headsign, trip_short_name, shape_id FROM trips WHERE trip_id = $trip_inicial_id"));
 $route_id = $viagem['route_id'] ?? 0;
 
-// Todas trips da mesma rota para o select
-$res_trips = mysqli_query($conexao, "SELECT trip_id, trip_short_name, trip_headsign FROM trips WHERE route_id = $route_id ORDER BY trip_id ASC");
+// Todas trips da mesma rota para o select (excluindo os duplicados)
+$res_trips = mysqli_query($conexao, "
+    SELECT MIN(trip_id) AS trip_id, trip_short_name, trip_headsign
+    FROM trips
+    WHERE route_id = $route_id
+    GROUP BY trip_short_name, trip_headsign
+    ORDER BY trip_short_name, trip_headsign
+");
 
 ?>
 
@@ -21,7 +27,8 @@ $res_trips = mysqli_query($conexao, "SELECT trip_id, trip_short_name, trip_heads
     <title>Mapa das Trips</title>
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.6">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.7">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -37,20 +44,19 @@ $res_trips = mysqli_query($conexao, "SELECT trip_id, trip_short_name, trip_heads
             <section>
                  <h3>Viagem: <?= htmlspecialchars($viagem['trip_short_name']) ?> - <?= htmlspecialchars($viagem['trip_headsign']) ?></h3>
                 <br>                
-                <label for="tripSelect">Reaproveitar shape de outra viagem:</label>
-                <select id="tripSelect">
-                    <option value="" selected disabled>-- Selecione uma viagem --</option>
+                <label for="tripSelect">Viagem:</label>
+                <select id="tripSelect" class="selc-viag">
+                    <option value="" selected disabled>Selecione uma viagem</option>
                     <?php while ($t = mysqli_fetch_assoc($res_trips)) { ?>
                         <option value="<?= $t['trip_id'] ?>">
                             <?= $t['trip_short_name'] ?> - <?= $t['trip_headsign'] ?>
                         </option>
                     <?php } ?>
                 </select>
-                <button type="button" id="btnSalvar">Salvar shape na trip inicial</button>
+                <button type="button" id="btnSalvar" class="btn-salv">SALVAR</button>
                 <br>
-                <hr>
-
-                <div id="div-map" style="height:500px;"></div>
+                
+                <div id="div-map"></div>
 
                 <script>
                     var map = L.map('div-map').setView([-27.595740, -48.568228], 13);

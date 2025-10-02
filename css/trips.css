@@ -45,8 +45,19 @@ body{
     height: 580px;
 }
 
-.a-trajeto{
-    background-color: lightsalmon;
+.a-mapa{
+    background-color: orchid;
+    color: var(--color0);
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 6px 3px 6px;
+    border-radius: 5px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.a-pontos{
+    background-color: yellowgreen;
     color: var(--color0);
     font-size: 10px;
     font-weight: bold;
@@ -215,7 +226,7 @@ table{
 }
 
 .th-viag{
-    padding-right: 385px;
+    padding-right: 380px;
 }
 
 .th-serv{
@@ -223,15 +234,15 @@ table{
 }
 
 .th-sent{
-    padding-right: 10px;
+    padding-right: 5px;
 }
 
 .th-part{
-    padding-right: 70px;
+    padding-right: 65px;
 }
 
 .th-acoes{
-    padding-right: 220px;    
+    padding-right: 245px;    
 }
 
 /*Configurações da tela edit.php*/

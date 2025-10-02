@@ -15,11 +15,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de pontos</title>
-    <link rel="stylesheet" href="../css/stops.css?v=1.5">
+    <link rel="stylesheet" href="../css/shape.css?v=1.0">
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -81,8 +82,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                         .then(data => {
                             linhaSelect.innerHTML = "<option value=''>Selecione a linha</option>";
                             data.forEach(linha => {
-                                linhaSelect.innerHTML += `<option value="${linha.route_id}">${linha.route_long_name}</option>`;
+                                linhaSelect.innerHTML += `<option value="${linha.route_id}">${linha.linha_nome}</option>`;
                             });
+
                         });
                 } else {
                     linhaSelect.innerHTML = "<option value=''>Selecione a linha</option>";
@@ -143,7 +145,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             marcadoresExistentes.forEach(function(ponto) {
                 if (ponto.latitude && ponto.longitude) {
-                    L.marker([ponto.latitude, ponto.longitude], { icon: meuIcone })
+                    L.marker([ponto.latitude, ponto.longitude], {
+                            icon: meuIcone
+                        })
                         .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
                         .addTo(marcadoresBanco);
                 }
@@ -168,7 +172,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                             map.removeLayer(shapeLayer);
                         }
                         if (pontos.length > 0) {
-                            shapeLayer = L.polyline(pontos, { color: "blue", weight: 4 }).addTo(map);
+                            shapeLayer = L.polyline(pontos, {
+                                color: "blue",
+                                weight: 4
+                            }).addTo(map);
                             map.fitBounds(shapeLayer.getBounds());
                         } else {
                             alert("Nenhuma rota traçada para esta viagem.");
@@ -184,4 +191,5 @@ while ($row = mysqli_fetch_assoc($result)) {
         </p>
     </section>
 </body>
+
 </html>

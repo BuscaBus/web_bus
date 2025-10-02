@@ -293,10 +293,27 @@ table{
 
 /*Configurações da tela maps_trips.php*/
 #div-map{
-    height: 450px;
+    height: 470px;
     width: 1000px;
     margin: 20px auto; 
     border: solid 1px black;
+}
+
+.selc-viag{
+    background-color: #F3F4F0;
+    width: 350px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.btn-salv{
+    background-color: var(--color4);
+    color: var(--color0);
+    font-weight: bold;
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
 }
 
 

@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.2">
+    <link rel="stylesheet" href="../css/trips.css?v=1.3">
 </head>
 
 <body>
@@ -147,8 +147,9 @@ $result_id = mysqli_fetch_assoc($result);
                                 <form action="delete.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $id ?>">
                                     <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
-                                    <a href="../stop_times/register.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">HORARIOS</a>
-                                    <a href="../stop_times/maps_trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-trajeto" id="a-traj">MAPA</a>                                    
+                                    <a href="../stop_times/register.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">PARTIDAS</a>
+                                    <a href="../stop_times/maps_trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-pontos" id="a-traj">PONTOS</a> 
+                                    <a href="../stop_times/maps_trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-mapa" id="a-traj">MAPA</a>                                    
                                     <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
