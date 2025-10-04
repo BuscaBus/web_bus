@@ -84,7 +84,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                             data.forEach(linha => {
                                 linhaSelect.innerHTML += `<option value="${linha.route_id}">${linha.linha_nome}</option>`;
                             });
-
                         });
                 } else {
                     linhaSelect.innerHTML = "<option value=''>Selecione a linha</option>";
@@ -142,16 +141,31 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             var marcadoresBanco = L.layerGroup().addTo(map);
             var marcadoresExistentes = <?php echo json_encode($marcadores); ?>;
+            var zoomMinimo = 17; // Nível mínimo de zoom para mostrar ícones
 
-            marcadoresExistentes.forEach(function(ponto) {
-                if (ponto.latitude && ponto.longitude) {
-                    L.marker([ponto.latitude, ponto.longitude], {
-                            icon: meuIcone
-                        })
-                        .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
-                        .addTo(marcadoresBanco);
+            function atualizarMarcadores() {
+                marcadoresBanco.clearLayers();
+                if (map.getZoom() >= zoomMinimo) {
+                    var bounds = map.getBounds(); // limites visíveis do mapa
+                    marcadoresExistentes.forEach(function(ponto) {
+                        if (ponto.latitude && ponto.longitude) {
+                            var latlng = L.latLng(ponto.latitude, ponto.longitude);
+                            if (bounds.contains(latlng)) { // só adiciona se estiver dentro da região visível
+                                L.marker([ponto.latitude, ponto.longitude], {
+                                    icon: meuIcone
+                                })
+                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
+                                .addTo(marcadoresBanco);
+                            }
+                        }
+                    });
                 }
-            });
+            }
+
+            // Atualiza ao iniciar, ao mudar o zoom ou ao arrastar o mapa
+            map.on('zoomend', atualizarMarcadores);
+            map.on('moveend', atualizarMarcadores);
+            atualizarMarcadores();
 
             // =================== SHAPES ===================
             let shapeLayer;

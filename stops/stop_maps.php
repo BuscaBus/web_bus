@@ -11,7 +11,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -23,12 +22,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     <!-- CSS do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- CSS do Leaflet.draw -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
     <!-- JS do Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- JS do Leaflet.draw -->
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
     <style>
@@ -40,7 +37,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             display: inline-block;
             width: 80px;
             font-weight: bold;
-        }        
+        }
     </style>
 </head>
 
@@ -76,19 +73,16 @@ while ($row = mysqli_fetch_assoc($result)) {
                 attribution: 'Tiles © Esri'
             });
 
-            // Cria o mapa já com o OSM
             var map = L.map('div-map', {
                 center: [-27.595740, -48.568228],
                 zoom: 13,
-                layers: [osm] // camada inicial
+                layers: [osm]
             });
 
-            // Controle para trocar camadas
             var baseMaps = {
                 "OpenStreetMap": osm,
-                "Satélite": satelite,                             
+                "Satélite": satelite
             };
-
             L.control.layers(baseMaps).addTo(map);
 
             // =================== DESENHO ===================
@@ -109,28 +103,56 @@ while ($row = mysqli_fetch_assoc($result)) {
             });
             map.addControl(drawControl);
 
-            // =================== ÍCONE ===================
-            var meuIcone = L.icon({
-                iconUrl: '../img/icon-bus2.png',
-                iconSize: [15, 15],
-                iconAnchor: [16, 5],
-                popupAnchor: [0, -32]
-            });
+            // =================== ÍCONE DINÂMICO ===================
+            function getIconSize(zoom) {
+                const minSize = 10;
+                const maxSize = 15;
+                let size = zoom * 3; // ajuste conforme necessário
+                if (size < minSize) size = minSize;
+                if (size > maxSize) size = maxSize;
+                return [size, size];
+            }
+
+            function criarIcone(zoom) {
+                const size = getIconSize(zoom);
+                return L.icon({
+                    iconUrl: '../img/icon-bus2.png',
+                    iconSize: size,
+                    iconAnchor: [size[0]/2, size[1]],
+                    popupAnchor: [0, -size[1]]
+                });
+            }
 
             // =================== MARCADORES EXISTENTES ===================
             var marcadoresBanco = L.layerGroup().addTo(map);
-
             var marcadoresExistentes = <?php echo json_encode($marcadores); ?>;
+            var zoomMinimo = 17; // Nível mínimo de zoom para mostrar ícones
 
-            marcadoresExistentes.forEach(function(ponto) {
-                if (ponto.latitude && ponto.longitude) {
-                    L.marker([ponto.latitude, ponto.longitude], {
-                            icon: meuIcone
-                        })
-                        .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
-                        .addTo(marcadoresBanco);
+            function atualizarMarcadores() {
+                marcadoresBanco.clearLayers();
+
+                if (map.getZoom() >= zoomMinimo) {
+                    var bounds = map.getBounds(); // região visível do mapa
+
+                    marcadoresExistentes.forEach(function(ponto) {
+                        if (ponto.latitude && ponto.longitude) {
+                            var latlng = L.latLng(ponto.latitude, ponto.longitude);
+                            if (bounds.contains(latlng)) { // só adiciona se estiver dentro da região visível
+                                L.marker([ponto.latitude, ponto.longitude], {
+                                    icon: criarIcone(map.getZoom())
+                                })
+                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
+                                .addTo(marcadoresBanco);
+                            }
+                        }
+                    });
                 }
-            });
+            }
+
+            // Atualiza ao iniciar, ao mudar zoom e ao mover o mapa
+            map.on('zoomend', atualizarMarcadores);
+            map.on('moveend', atualizarMarcadores);
+            atualizarMarcadores();
 
             // =================== NOVO MARCADOR ===================
             map.on(L.Draw.Event.CREATED, function(event) {
@@ -139,25 +161,20 @@ while ($row = mysqli_fetch_assoc($result)) {
                 if (event.layerType === 'marker') {
                     var coords = layer.getLatLng();
 
-                    // Preenche inputs (se existirem)
-                    if (document.getElementById('lat')) {
-                        document.getElementById('lat').value = coords.lat;
-                    }
-                    if (document.getElementById('lng')) {
-                        document.getElementById('lng').value = coords.lng;
-                    }
+                    if (document.getElementById('lat')) document.getElementById('lat').value = coords.lat;
+                    if (document.getElementById('lng')) document.getElementById('lng').value = coords.lng;
 
                     var marcador = L.marker([coords.lat, coords.lng], {
-                            icon: meuIcone
-                        })
-                        .bindPopup("Lat: " + coords.lat + "<br>Lng: " + coords.lng)
-                        .openPopup();
+                        icon: criarIcone(map.getZoom())
+                    })
+                    .bindPopup("Lat: " + coords.lat + "<br>Lng: " + coords.lng)
+                    .openPopup();
 
                     drawnItems.clearLayers();
                     drawnItems.addLayer(marcador);
                 }
             });
-        </script>        
+        </script>
     </section>
 </body>
 
