@@ -16,6 +16,14 @@ body{
     background-color: #CED8D0;  
 }
 
+section{
+    text-align: center;
+    background-color: var(--color1);    
+    height: 580px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
 .main-cont {
     display: flex;
     justify-content: left;
@@ -23,47 +31,40 @@ body{
     height:600px;    
 }
 
-.h1-cad-vig{
+.h1-cad-pont{
     color: black;
     font-size: 20px;
 }
 
-.cap-list-vig{
+.cap-list-hor{
     color: black;
     font-size: 20px;
 }
 
-.sect-reg-viag {
+.sect-reg-pont {
     text-align: center;
     background-color: var(--color2); 
-    width: 500px;
-    height: 580px;
+    width: 600px;
 }
-.sect-list-viag {    
+.sect-list-hor {    
     background-color: var(--color1);
     width: 1100px;
-    height: 580px;
+    max-height: 575px; /* ou height: 575px; */
+    overflow-y: auto; /* mostra rolagem só quando precisar */
+    overflow-x: hidden;/* evita rolagem horizontal */
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
-.a-mapa{
-    background-color: orchid;
+.a-trajeto{
+    background-color: lightsalmon;
     color: var(--color0);
     font-size: 10px;
     font-weight: bold;
     padding: 3px 6px 3px 6px;
     border-radius: 5px;
     margin-right: 2px;
-    cursor: pointer;
-}
-
-.a-trajeto{
-    background-color: var(--color4);
-    color: var(--color0);
-    font-size: 12px;
-    font-weight: bold;
-    padding: 5px 7px 5px 7px;
-    border-radius: 5px;
-    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -100,7 +101,7 @@ body{
     cursor: pointer;
 }
 
-/*Configurações da section de cadastro*/
+/*Configurações da section para cadastrar os horários*/
 
 .form-cad-vig {
   display: flex;
@@ -110,79 +111,35 @@ body{
 
 .p-estilo{
     text-align: center;    
-}
-    
-.lb-reg-cod{
-    margin-right: 75px;
+}   
+
+.lb-reg-viag{
+    margin-right: 70px;
 }
 
-.lb-reg-linha{
-    margin-right: 85px;
+.lb-reg-pont{
+    margin-right: 80px;
 }
 
-.lb-reg-serv{
-    margin-right: 73px;
+.lb-reg-sequ{
+    margin-right: 45px;
 }
 
-.lb-reg-orig{
-    margin-right: 73px;
-}
-
-.lb-reg-dest{
-    margin-right: 73px;
-}
-
-.lb-reg-sent{
-    margin-right: 73px;
-}
-
-.lb-reg-part{
-    margin-right: 10px;
-}
-
-.inpt-reg-cod{
+.selc-reg-viag{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-reg-linha{
+.inpt-reg-pont{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-reg-orig{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt-reg-dest{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt-reg-part{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.selc-reg-serv{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.selc-reg-sent{
+.inpt-reg-sequ{
     background-color: #F3F4F0;
     width: 310px;
     border-radius: 5px;
@@ -219,110 +176,82 @@ body{
     color: inherit;
 }
 
-/*Configurações da tabela de listagem das viagens*/
+/*Configurações da tabela de listagem de horários*/
 
 table{
     margin: auto;
 }
 
-.th-viag{
-    padding-right: 400px;
+.th-sequ{
+    padding-right: 10px;
 }
 
-.th-serv{
-    padding-right: 70px;
-}
-
-.th-sent{
-    padding-right: 5px;
-}
-
-.th-part{
-    padding-right: 65px;
+.th-ponto{
+    padding-right: 350px;
 }
 
 .th-acoes{
-    padding-right: 200px;    
+    padding-right: 25px;    
 }
 
-/*Configurações da tela edit.php*/
+/*Configurações da tabela da página trips.php*/
 
-.sect-edt{
-    text-align: center;
-}
-    
-.lb-edt-serv{
-    margin-right: 73px;
+h3{
+    color: #517709;
 }
 
-.lb-edt-orig{
-    margin-right: 73px;
+caption{
+    font-size: 18px;
 }
 
-.lb-edt-dest{
-    margin-right: 73px;
+table{
+    margin: auto;
 }
 
-.lb-edt-sent{
-    margin-right: 73px;
+.th-seq{
+    padding-right: 10px;          
 }
 
-.lb-edt-part{
-    margin-right: 10px;
+.th-pont{
+    padding-right: 300px;
 }
 
-.inpt-edt-serv{
+.th-bair{
+    padding-right: 150px;
+}
+
+.th-cid{
+    padding-right: 150px;
+}
+
+.scroll-area {
+   width: 1600px; 
+   height: 580px;
+   max-height: 580px; /* ou height: 400px; */
+   overflow-y: auto; /* mostra rolagem só quando precisar */
+   overflow-x: hidden; /* evita rolagem horizontal */
+   padding: 1rem;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+}
+
+/*Configurações da tela maps_trips.php*/
+#div-map{
+    height: 470px;
+    width: 1000px;
+    margin: 20px auto; 
+    border: solid 1px black;
+}
+
+.selc-viag{
     background-color: #F3F4F0;
-    width: 310px;
+    width: 350px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.inpt-edt-sent{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt-edt-orig{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt-edt-dest{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.inpt-edt-part{
-    background-color: #F3F4F0;
-    width: 310px;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.nav-edt-btn{
-    display: flex;
-    justify-content: center;
-}
-
-.btn-edt{
+.btn-salv{
     background-color: var(--color4);
-    color: var(--color0);
-    font-weight: bold;
-    border-radius: 6px;
-    margin-right: 5px;
-    padding: 3px 30px 3px 30px;
-    cursor: pointer;
-}
-
-.btn-edt-canc{
-    background-color: red;
     color: var(--color0);
     font-weight: bold;
     border-radius: 6px;
@@ -331,8 +260,5 @@ table{
     cursor: pointer;
 }
 
-.a-btn-canc{
-    text-decoration: none;
-    color: inherit;
-}
+
 

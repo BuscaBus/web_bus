@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.3">
+    <link rel="stylesheet" href="../css/trips.css?v=1.4">
 </head>
 
 <body>
@@ -76,7 +76,6 @@ $result_id = mysqli_fetch_assoc($result);
                             }
                             ?>
                         </select>
-
                     </p>
                     <p class="p-estilo">
                         <label for="id-sent" class="lb-reg-sent">Sentido:</label>
@@ -125,48 +124,59 @@ $result_id = mysqli_fetch_assoc($result);
                     </thead>
                     <?php
                     // Consulta no banco de dados para exibir na tabela de viagens 
-                    $sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name, direction_id, departure_location FROM trips WHERE route_id = $id ORDER BY service_id DESC, direction_id ASC";
+                    $sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name, direction_id, departure_location 
+                            FROM trips 
+                            WHERE route_id = $id 
+                            ORDER BY service_id DESC, direction_id ASC";
                     $result = mysqli_query($conexao, $sql);
                  
+                    $first_trip_id = null; // salvar a primeira viagem
+
                     while ($sql_result = mysqli_fetch_array($result)) {
-                        $id = $sql_result['trip_id'];
-                        $id_route = $sql_result['route_id'];
-                        $servico = $sql_result['service_id'];
-                        $destino = $sql_result['trip_headsign'];
-                        $origem = $sql_result['trip_short_name'];
-                        $sentido = $sql_result['direction_id'];
-                        $partida = $sql_result['departure_location'];
+                        if ($first_trip_id === null) {
+                            $first_trip_id = $sql_result['trip_id']; // guarda a primeira
+                        }
+
+                        $id_trip   = $sql_result['trip_id'];
+                        $id_route  = $sql_result['route_id'];
+                        $servico   = $sql_result['service_id'];
+                        $destino   = $sql_result['trip_headsign'];
+                        $origem    = $sql_result['trip_short_name'];
+                        $sentido   = $sql_result['direction_id'];
+                        $partida   = $sql_result['departure_location'];
                     ?>
                     <tbody>
                         <tr>
-                            <td><?php echo $servico?></td>
-                            <td><?php echo $origem?> - <?php echo $destino?></td>                            
-                            <td><?php echo $sentido?></td>
-                            <td><?php echo $partida?></td>
+                            <td><?= $servico ?></td>
+                            <td><?= $origem ?> - <?= $destino ?></td>                            
+                            <td><?= $sentido ?></td>
+                            <td><?= $partida ?></td>
                             <td>
                                 <form action="delete.php" method="POST">
-                                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                                    <input type="hidden" name="id-route" value="<?php echo $id_route ?>">
-                                    <a href="../stop_times/register.php?id=<?= $sql_result['trip_id'] ?>" class="a-horario" id="a-hor">PARTIDAS</a>
-                                    <a href="../stop_times/maps_trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-pontos" id="a-traj">PONTOS</a> 
-                                    <a href="../stop_times/maps_trips.php?id=<?= $sql_result['trip_id'] ?>" class="a-mapa" id="a-traj">MAPA</a>                                    
-                                    <a href="edit.php?id=<?= $sql_result['trip_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
+                                    <input type="hidden" name="id" value="<?= $id_trip ?>">
+                                    <input type="hidden" name="id-route" value="<?= $id_route ?>">
+                                    <a href="../stop_times/register.php?id=<?= $id_trip ?>" class="a-horario" id="a-hor">PARTIDAS</a>                                    
+                                    <a href="../stop_times/maps_trips.php?id=<?= $id_trip ?>" class="a-mapa" id="a-traj">MAPA</a>                                    
+                                    <a href="edit.php?id=<?= $id_trip ?>" class="a-editar" id="a-edit">EDITAR</a>
                                     <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                 </form>
                             </td>
                         </tr>
-                        <?php }; ?>
                     </tbody>
+                    <?php } ?>
                 </table>
+                <br>        
+                <?php if ($first_trip_id): ?>
+                <form method="POST">
+                    <a href="../stop_routes/register.php?id=<?= $first_trip_id ?>" class="a-trajeto" id="a-traj">CADASTRAR TRAJETO</a>
+                </form>
+                <?php endif; ?>
             </section>
 
         </main>
         <footer>
-            <p><a href="../route/list.php">< Voltar</a>
-            </p>
+            <p><a href="../route/list.php">< Voltar</a></p>
         </footer>
     </div>
 </body>
-
 </html>
-
