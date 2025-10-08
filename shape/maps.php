@@ -1,14 +1,27 @@
 <?php
 include("../connection.php");
 
-// Pega todos os pontos cadastrados que tenham coordenadas
-$sql = "SELECT stop_lat AS latitude, stop_lon AS longitude, stop_code 
-        FROM stops 
-        WHERE stop_lat <> '' AND stop_lon <> ''";
+// Pega todos os pontos cadastrados com coordenadas e dados de rota/viagem
+$sql = "SELECT 
+            s.stop_code,
+            s.stop_name,
+            s.stop_lat AS latitude,
+            s.stop_lon AS longitude,
+            GROUP_CONCAT(CONCAT(r.route_short_name, ' - ', t.trip_short_name, '-', t.trip_headsign) SEPARATOR '<br>') AS rotas_viagens
+        FROM stop_routes sr
+        INNER JOIN stops s ON sr.stop_code = s.stop_code
+        INNER JOIN trips t ON sr.trip_id = t.trip_id
+        INNER JOIN routes r ON t.route_id = r.route_id
+        WHERE s.stop_lat <> '' AND s.stop_lon <> ''
+        GROUP BY s.stop_code, s.stop_name, s.stop_lat, s.stop_lon
+        ORDER BY s.stop_name ASC";
+
 $result = mysqli_query($conexao, $sql);
 
 $marcadores = [];
 while ($row = mysqli_fetch_assoc($result)) {
+    $row['latitude'] = floatval($row['latitude']);
+    $row['longitude'] = floatval($row['longitude']);
     $marcadores[] = $row;
 }
 ?>
@@ -29,7 +42,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     <!-- JS do Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
-
 </head>
 
 <body>
@@ -141,20 +153,23 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             var marcadoresBanco = L.layerGroup().addTo(map);
             var marcadoresExistentes = <?php echo json_encode($marcadores); ?>;
-            var zoomMinimo = 17; // Nível mínimo de zoom para mostrar ícones
+            var zoomMinimo = 17;
 
             function atualizarMarcadores() {
                 marcadoresBanco.clearLayers();
                 if (map.getZoom() >= zoomMinimo) {
-                    var bounds = map.getBounds(); // limites visíveis do mapa
+                    var bounds = map.getBounds();
                     marcadoresExistentes.forEach(function(ponto) {
                         if (ponto.latitude && ponto.longitude) {
                             var latlng = L.latLng(ponto.latitude, ponto.longitude);
-                            if (bounds.contains(latlng)) { // só adiciona se estiver dentro da região visível
+                            if (bounds.contains(latlng)) {
                                 L.marker([ponto.latitude, ponto.longitude], {
                                     icon: meuIcone
                                 })
-                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code)
+                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " - " + ponto.stop_name +
+                                (ponto.rotas_viagens ? "<br><br>" + ponto.rotas_viagens : "")
+                                )
+
                                 .addTo(marcadoresBanco);
                             }
                         }
@@ -162,7 +177,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                 }
             }
 
-            // Atualiza ao iniciar, ao mudar o zoom ou ao arrastar o mapa
             map.on('zoomend', atualizarMarcadores);
             map.on('moveend', atualizarMarcadores);
             atualizarMarcadores();

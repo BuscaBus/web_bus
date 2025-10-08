@@ -46,7 +46,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_routes.css?v=1.1">
+    <link rel="stylesheet" href="../css/stop_routes.css?v=1.3">
 </head>
 
 <body>
@@ -64,7 +64,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
 
                     <p class="p-estilo">
                         <label for="id-viag" class="lb-reg-viag">Viagem:</label>
-                        <select name="id" id="id-viag" class="selc-reg-viag">
+                        <select name="viagem" id="id-viag" class="selc-reg-viag">
                             <?php while ($viag = mysqli_fetch_assoc($res_viagens)) { ?>
                                 <option value="<?= $viag['trip_id'] ?>"
                                     <?= ($viag['trip_id'] == $result_id['trip_id']) ? 'selected' : '' ?>>
@@ -105,26 +105,41 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                     <hr>
                     <br>
                     <thead>
-                        <th class="th-sequ">Sequencia</th>
+                        <th class="th-sequ">Sequ</th>
                         <th class="th-ponto">Ponto</th>
+                        <th class="th-bairr">Bairro</th>
+                        <th class="th-cida">Cidade</th>
                         <th class="th-acoes">Ação</th>
                     </thead>
                     <?php
                     // Consulta no banco de dados para exibir na tabela do trajeto 
-                    $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign
-                            FROM stop_times WHERE trip_id = $id AND stop_sequence = 1 ORDER BY arrival_time ASC";
+                    $sql = "SELECT sr.stop_route_id,
+                                   sr.trip_id,
+                                   sr.stop_sequence,
+                                   s.stop_name,
+                                   s.stop_district,
+                                   s.stop_city
+                            FROM stop_routes sr
+                            INNER JOIN stops s ON sr.stop_code = s.stop_code
+                            WHERE sr.trip_id = $id
+                            ORDER BY sr.stop_sequence ASC";
+
                     $result = mysqli_query($conexao, $sql);
 
                     while ($sql_result = mysqli_fetch_array($result)) {
-                        $id = $sql_result['time_id'];
+                        $id = $sql_result['stop_route_id'];
                         $trip_id = $sql_result['trip_id'];
-                        $hr_inicio = $sql_result['arrival_time'];
-                        $destino = $sql_result['stop_headsign'];
+                        $sequencia = $sql_result['stop_sequence'];
+                        $ponto = $sql_result['stop_name'];
+                        $bairro = $sql_result['stop_district'];
+                        $cidade = $sql_result['stop_city'];                       
                     ?>
                         <tbody>
                             <tr>
-                                <td><?php echo $hr_inicio ?></td>
-                                <td><?php echo $destino ?></td>
+                                <td><?php echo $sequencia ?></td>
+                                <td><?php echo $ponto ?></td>
+                                <td><?php echo $bairro ?></td>
+                                <td><?php echo $cidade ?></td>
                                 <td>
                                     <form action="delete.php" method="POST">
                                         <input type="hidden" name="id" value="<?php echo $id ?>">
