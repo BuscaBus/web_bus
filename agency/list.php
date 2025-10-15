@@ -77,7 +77,7 @@ $total_itens = mysqli_num_rows($result_itens);
                     </select>
                     <button type="submit" class="btn-pesq">PESQUISAR</button>
                 </form>
-                
+
                 <hr>
                 <br>
                 <table>
@@ -101,10 +101,10 @@ $total_itens = mysqli_num_rows($result_itens);
                                 <td><?php echo $nome ?></td>
                                 <td><?php echo $cidade ?></td>
                                 <td><?php echo $url ?></td>
-                                <td>                                                                        
-                                    <form action="delete.php" method="POST"> 
+                                <td>
+                                    <form action="delete.php" method="POST">
                                         <input type="hidden" name="id" value="<?php echo $id ?>">
-                                        <a href="edit.php?id=<?= $sql_result['agency_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>                                       
+                                        <a href="edit.php?id=<?= $sql_result['agency_id'] ?>" class="a-editar" id="a-edit">EDITAR</a>
                                         <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
                                     </form>
                                 </td>
@@ -154,8 +154,7 @@ $total_itens = mysqli_num_rows($result_itens);
             </section>
         </main>
         <footer>
-            <p><a href="../index.html">
-                    < Voltar</a>
+            <p><a href="../index.html">< Voltar</a>
             </p>
         </footer>
     </div>

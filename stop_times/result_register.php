@@ -3,33 +3,21 @@
 
     // Recebe as variaveis
     $trip_id = $_POST['id'];
-    $hr_inicio = $_POST['hora_inicio'];
-    $hr_fim = $_POST['hora_fim'];
-    $ponto = $_POST['ponto'];
-    $sequencia = $_POST['sequencia'];
-    $destino = $_POST['destino'];
-    $tipo_hora = $_POST['tipo_hora'];
-    
-    
+    $hr_inicio = $_POST['hora_inicio'];    
+    $destino = $_POST['destino'];  
+        
     // Altera no banco de dados
     $sql = "INSERT INTO stop_times (
                 trip_id, 
                 arrival_time, 
-                departure_time,
-                stop_code,
-                stop_sequence,
-                stop_headsign,
-                timepoint                
+                stop_headsign                                
             ) 
             VALUES (
                 '$trip_id', 
                 '$hr_inicio', 
-                '$hr_fim',
-                '$ponto',
-                '$sequencia',
-                '$destino',
-                '$tipo_hora'                
+                '$destino'                                
             )";
+            
     $query = mysqli_query($conexao, $sql);
 
     //if(mysqli_query($conexao, $sql)){

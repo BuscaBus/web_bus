@@ -60,15 +60,7 @@ $result_id = mysqli_fetch_assoc($result);
                     <p class="p-estilo">
                         <label for="id-viag" class="lb-reg-viag">Viagem:</label>
                         <input type="text" name="viagem" class="inpt-reg-viag" id="id-viag" value="<?= $result_id['trip_short_name'] ?> - <?= $result_id['trip_headsign'] ?>" disabled>
-                    </p>
-                    <p class="p-estilo">
-                        <label for="id-pont" class="lb-reg-pont">Ponto:</label>
-                        <input type="text" name="ponto" class="inpt-reg-pont" id="id-pont" pattern="\d{5}" minlength="5" maxlength="5" placeholder="insira o código do ponto...">
-                    </p>
-                    <p class="p-estilo">
-                        <label for="id-sequ" class="lb-reg-sequ">Sequencia:</label>
-                        <input type="text" name="sequencia" class="inpt-reg-sequ" id="id-sequ" placeholder="insira a numeração da sequencia...">
-                    </p>
+                    </p>                    
                     <p class="p-estilo">
                         <label for="id-dest" class="lb-reg-dest">Destino:</label>
                         <input type="text" name="destino" class="inpt-reg-dest" id="id-dest" value="<?= $result_id['trip_headsign'] ?>">
@@ -76,21 +68,7 @@ $result_id = mysqli_fetch_assoc($result);
                     <p class="p-estilo">
                         <label for="id-hrInc" class="lb-reg-hrInc">Hora Inicio:</label>
                         <input type="time" name="hora_inicio" class="inpt-reg-hrInc" id="id-hrInc">
-                    </p>
-                    <p class="p-estilo">
-                        <label for="id-hrFim" class="lb-reg-hrFim">Hora Fim:</label>
-                        <input type="time" name="hora_fim" class="inpt-reg-hrFim" id="id-hrFim">
-                    </p>
-                    <p class="p-estilo">
-                        <label for="id-tpHr" class="lb-reg-tpHr">Tipo de Horário:</label>
-                        <select name="tipo_hora" class="selc-reg-tpHr" id="id-tpHr">
-                            <option value="">Selecione um tipo</option>
-                            <option value="2">Meia Viagem</option>
-                            <option value="0">Previsto</option>
-                            <option value="1">Fixo</option>
-                            <option value="3">Recolhe</option>
-                        </select>
-                    </p>
+                    </p>                   
 
                     <br>
                     <nav class="nav-reg-btn">
@@ -122,7 +100,7 @@ $result_id = mysqli_fetch_assoc($result);
                     <?php
                     // Consulta no banco de dados para exibir na tabela de viagens 
                     $sql = "SELECT time_id, trip_id, TIME_FORMAT(arrival_time, '%H:%i') AS arrival_time, stop_headsign
-                            FROM stop_times WHERE trip_id = $id AND stop_sequence = 1 ORDER BY arrival_time ASC";
+                            FROM stop_times WHERE trip_id = $id ORDER BY arrival_time ASC";
                     $result = mysqli_query($conexao, $sql);
 
                     while ($sql_result = mysqli_fetch_array($result)) {
