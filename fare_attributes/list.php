@@ -8,21 +8,11 @@
         $filtro_sql = "WHERE route_group ='$filtro'";
     }    
 
-    // Paginação
-    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
-
-    $sql_itens = "SELECT * FROM fare_attributes";
-    $result_itens = mysqli_query($conexao, $sql_itens);
-    $total_itens = mysqli_num_rows($result_itens); // Contar total de operadoras
-    $quant_paginas = 10; // Setar quantidade de itens por página
-    $num_pagina = ceil($total_itens/$quant_paginas); // Calcula o numero de páginas necessárias
-    $inicio = ($quant_paginas*$pagina)-$quant_paginas; // Calcula o inicio da visualização
+   
 
     // Consulta no banco de dados para exibir na tabela
-    $sql = "SELECT *, FORMAT(price, 2) AS price_format, DATE_FORMAT(update_date, '%d/%m/%Y') AS data_format FROM fare_attributes $filtro_sql LIMIT $inicio, $quant_paginas";
-    $result = mysqli_query($conexao, $sql);
-    
-    $total_itens = mysqli_num_rows($result_itens);   
+    $sql = "SELECT *, FORMAT(price, 2) AS price_format, DATE_FORMAT(update_date, '%d/%m/%Y') AS data_format FROM fare_attributes $filtro_sql";
+    $result = mysqli_query($conexao, $sql);    
     
     ?>
 
@@ -46,7 +36,7 @@
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.5">    
+    <link rel="stylesheet" href="../css/fare_attributes.css?v=1.6">    
 </head>
 
 <body>
@@ -55,7 +45,7 @@
             <h1>Tarifas</h1>
         </header>
         <main>
-            <section>
+            <section class="scroll-area">
                 <button class="btn-cadastrar" id="btn-cad">
                     <a href="register.html" class="btn-a-cad">+ CADASTRAR</a>
                 </button>
@@ -113,34 +103,7 @@
                     <?php }; ?>                           
                     </tbody>
                 </table>
-                <br>                
-                <?php
-                    // Verificar pagina anterior e posterior
-                    $pagina_ant = $pagina - 1;
-                    $pagina_post = $pagina + 1;
-                ?>
-                 <!-- Navegação da páginação-->
-                <nav class="nav-pag" aria-label="Page navigation example">
-                    <ul class="paginacao">                       
-                        <?php
-                            if($pagina_ant != 0){ ?>
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_ant; ?>"> Páginas: << </a>
-                        <?php } else{?>
-                            <span> Páginas: << </span>
-                        <?php } ?>  
-                        <?php
-                            for($i = 1; $i < $num_pagina + 1; $i++){ ?>                               
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        <?php } ?>  
-                        <?php
-                            if($pagina_post <= $num_pagina){ ?>
-                                <a class="nav-pag" href="list.php?pagina=<?php echo $pagina_post; ?>"> >> </a>
-                        <?php } else{?>
-                            <span> >> </span>
-                        <?php } ?>                                        
-                    </ul>
-                </nav>                 
-                <br>
+                <br>               
                 <!--Consulta no banco de dados a quantidade de registros-->
                 <?php
                     $sql = "SELECT COUNT(*) AS total FROM fare_attributes";

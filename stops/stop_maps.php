@@ -75,7 +75,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             var map = L.map('div-map', {
                 center: [-27.595740, -48.568228],
-                zoom: 13,
+                zoom: 13, 
+                maxZoom: 18,                              
                 layers: [osm]
             });
 

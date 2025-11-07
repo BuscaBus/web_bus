@@ -90,7 +90,6 @@ section{
 }
 
 /*Configurações da tabela da página list.php*/
-
 table{
     margin: auto;
 }
@@ -112,6 +111,17 @@ table{
 }
 .th-acoes{
     padding-right: 75px; 
+}
+
+.scroll-area {
+   width: 2000px; 
+   height: 580px;
+   max-height: 580px; /* ou height: 400px; */
+   overflow-y: auto; /* mostra rolagem só quando precisar */
+   overflow-x: hidden; /* evita rolagem horizontal */
+   padding: 1rem;
+   border: 1px solid #ddd;
+   border-radius: 8px;
 }
 
 /*Configurações da tela register.php*/
