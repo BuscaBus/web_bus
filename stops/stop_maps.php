@@ -103,6 +103,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 }
             });
             map.addControl(drawControl);
+            
 
             // =================== ÍCONE DINÂMICO ===================
             function getIconSize(zoom) {

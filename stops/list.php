@@ -29,6 +29,11 @@ $sql = "SELECT stop_id,
                stop_district, 
                stop_city,
                location_type, 
+               CASE 
+                    WHEN location_type = 0 THEN 'Ponto'
+                    WHEN location_type = 1 THEN 'Terminal'
+                    ELSE 'Desconhecido'
+               END AS tipo_local,
                platform_code,                  
                stops.update_date,
                DATE_FORMAT(stops.update_date, '%d/%m/%Y') AS data_format 
@@ -100,7 +105,7 @@ $result = mysqli_query($conexao, $sql);
                             $ponto = $sql_result['stop_name'];
                             $bairro = $sql_result['stop_district'];
                             $cidade = $sql_result['stop_city'];
-                            $local = $sql_result['location_type'];
+                            $local = $sql_result['tipo_local'];
                             $box = $sql_result['platform_code'];
                             $atual = $sql_result['data_format'];
                         ?>

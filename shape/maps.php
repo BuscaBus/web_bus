@@ -7,13 +7,16 @@ $sql = "SELECT
             s.stop_name,
             s.stop_lat AS latitude,
             s.stop_lon AS longitude,
-            GROUP_CONCAT(CONCAT(r.route_short_name, ' - ', t.trip_short_name, '-', t.trip_headsign) SEPARATOR '<br>') AS rotas_viagens
-        FROM stop_routes sr
-        INNER JOIN stops s ON sr.stop_code = s.stop_code
-        INNER JOIN trips t ON sr.trip_id = t.trip_id
-        INNER JOIN routes r ON t.route_id = r.route_id
-        WHERE s.stop_lat <> '' AND s.stop_lon <> ''
-        GROUP BY s.stop_code, s.stop_name, s.stop_lat, s.stop_lon
+            GROUP_CONCAT(
+                CONCAT(r.route_short_name, ' - ', t.trip_short_name, ' - ', t.trip_headsign)
+                SEPARATOR '<br>'
+            ) AS rotas_viagens
+        FROM stops s
+        LEFT JOIN stop_routes sr ON sr.stop_code = s.stop_code
+        LEFT JOIN trips t ON sr.trip_id = t.trip_id
+        LEFT JOIN routes r ON t.route_id = r.route_id
+        WHERE s.stop_lat IS NOT NULL AND s.stop_lon IS NOT NULL
+        GROUP BY s.stop_code
         ORDER BY s.stop_name ASC";
 
 $result = mysqli_query($conexao, $sql);
@@ -166,7 +169,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 L.marker([ponto.latitude, ponto.longitude], {
                                     icon: meuIcone
                                 })
-                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " - " + ponto.stop_name +
+                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " <br> " + ponto.stop_name +
                                 (ponto.rotas_viagens ? "<br><br>" + ponto.rotas_viagens : "")
                                 )
 
