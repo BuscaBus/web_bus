@@ -46,7 +46,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_routes.css?v=1.3">
+    <link rel="stylesheet" href="../css/stop_routes.css?v=1.4">
 </head>
 
 <body>
@@ -106,6 +106,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                     <br>
                     <thead>
                         <th class="th-sequ">Sequ</th>
+                        <th class="th-cod">Código</th>
                         <th class="th-ponto">Ponto</th>
                         <th class="th-bairr">Bairro</th>
                         <th class="th-cida">Cidade</th>
@@ -116,6 +117,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                     $sql = "SELECT sr.stop_route_id,
                                    sr.trip_id,
                                    sr.stop_sequence,
+                                   sr.stop_code,
                                    s.stop_name,
                                    s.stop_district,
                                    s.stop_city
@@ -130,6 +132,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                         $id = $sql_result['stop_route_id'];
                         $trip_id = $sql_result['trip_id'];
                         $sequencia = $sql_result['stop_sequence'];
+                        $codigo = $sql_result['stop_code'];
                         $ponto = $sql_result['stop_name'];
                         $bairro = $sql_result['stop_district'];
                         $cidade = $sql_result['stop_city'];                       
@@ -137,6 +140,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                         <tbody>
                             <tr>
                                 <td><?php echo $sequencia ?></td>
+                                <td><?php echo $codigo ?></td>
                                 <td><?php echo $ponto ?></td>
                                 <td><?php echo $bairro ?></td>
                                 <td><?php echo $cidade ?></td>

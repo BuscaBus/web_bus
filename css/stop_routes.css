@@ -186,6 +186,10 @@ table{
     padding-right: 5px;
 }
 
+.th-cod{
+    padding-right: 5px;
+}
+
 .th-ponto{
     padding-right: 300px;
 }
@@ -199,7 +203,7 @@ table{
 }
 
 .th-acoes{
-    padding-right: 25px;    
+    padding-right: 30px;    
 }
 
 /*Configurações da tabela da página trips.php*/
