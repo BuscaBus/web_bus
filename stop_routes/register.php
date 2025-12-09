@@ -135,7 +135,7 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
                         $codigo = $sql_result['stop_code'];
                         $ponto = $sql_result['stop_name'];
                         $bairro = $sql_result['stop_district'];
-                        $cidade = $sql_result['stop_city'];                       
+                        $cidade = $sql_result['stop_city'];
                     ?>
                         <tbody>
                             <tr>
@@ -168,14 +168,14 @@ $res_viagens = mysqli_query($conexao, $sql_viagens);
     <!-- JS para atulizar a viagem na lista de trajeto -->
     <script>
         const selectViagem = document.getElementById('id-viag');
-        const h3Viagem = document.getElementById('h3-viagem');
 
-        // Atualiza o h3 quando muda a seleção
+        // Recarrega a página ao selecionar uma nova viagem
         selectViagem.addEventListener('change', function() {
-            const textoSelecionado = selectViagem.options[selectViagem.selectedIndex].text;
-            h3Viagem.textContent = 'Viagem: ' + textoSelecionado;
+            const novoTripId = selectViagem.value;
+            window.location.href = "?id=" + novoTripId;
         });
     </script>
+
 
 </body>
 

@@ -4,16 +4,19 @@
     // Recebe as variaveis
     $trip_id = $_POST['id'];
     $hr_inicio = $_POST['hora_inicio'];    
+    $ponto = $_POST['ponto']; 
     $destino = $_POST['destino'];  
         
     // Altera no banco de dados
     $sql = "INSERT INTO stop_times (
                 trip_id, 
+                stop_code,
                 arrival_time, 
                 stop_headsign                                
             ) 
             VALUES (
                 '$trip_id', 
+                '$ponto',
                 '$hr_inicio', 
                 '$destino'                                
             )";

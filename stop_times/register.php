@@ -37,7 +37,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/stop_times.css?v=1.4">
+    <link rel="stylesheet" href="../css/stop_times.css?v=1.5">
 </head>
 
 <body>
@@ -64,6 +64,10 @@ $result_id = mysqli_fetch_assoc($result);
                     <p class="p-estilo">
                         <label for="id-dest" class="lb-reg-dest">Destino:</label>
                         <input type="text" name="destino" class="inpt-reg-dest" id="id-dest" value="<?= $result_id['trip_headsign'] ?>">
+                    </p>
+                    <p class="p-estilo">
+                        <label for="id-ponto" class="lb-reg-ponto">Ponto:</label>
+                        <input type="text" name="ponto" class="inpt-reg-ponto" id="id-ponto" pattern="\d{5}" minlength="5" maxlength="5" placeholder="insira o código do ponto..." required>
                     </p>
                     <p class="p-estilo">
                         <label for="id-hrInc" class="lb-reg-hrInc">Hora Inicio:</label>

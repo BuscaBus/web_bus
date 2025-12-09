@@ -8,7 +8,7 @@ $sql = "SELECT
             s.stop_lat AS latitude,
             s.stop_lon AS longitude,
             GROUP_CONCAT(
-                DISTINCT CONCAT(r.route_short_name, ' - ', t.trip_short_name, ' - ', t.trip_headsign)
+                DISTINCT CONCAT(r.route_short_name, ' - ', t.trip_short_name, '-', t.trip_headsign)
                 SEPARATOR '<br>'
             ) AS rotas_viagens
         FROM stops s
@@ -151,7 +151,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             var meuIcone = L.icon({
                 iconUrl: '../img/icon-bus2.png',
                 iconSize: [15, 15],
-                iconAnchor: [16, 5],
+                iconAnchor: [8, 8],
                 popupAnchor: [0, -32]
             });
 
@@ -171,7 +171,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     icon: meuIcone
                                 })
                                 .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " <br>" + ponto.stop_name +
-                                (ponto.rotas_viagens ? "<br><br> Linhas/Viagens: <br>" + ponto.rotas_viagens : "")
+                                (ponto.rotas_viagens ? "<br><br><b>Linhas/Viagens:</b><br>" + ponto.rotas_viagens : "")
                                 )
 
                                 .addTo(marcadoresBanco);
