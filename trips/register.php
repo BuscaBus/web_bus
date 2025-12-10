@@ -168,7 +168,7 @@ $result_id = mysqli_fetch_assoc($result);
                 <br>        
                 <?php if ($first_trip_id): ?>
                 <form method="POST">
-                    <a href="../stop_routes/register.php?id=<?= $first_trip_id ?>" class="a-trajeto" id="a-traj">CADASTRAR TRAJETO</a>
+                    <a href="../stop_routes/register.php?id=<?= $first_trip_id ?>" class="a-trajeto" id="a-traj">PONTOS DO TRAJETO</a>
                 </form>
                 <?php endif; ?>
             </section>

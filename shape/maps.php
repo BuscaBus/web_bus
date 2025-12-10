@@ -170,7 +170,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 L.marker([ponto.latitude, ponto.longitude], {
                                     icon: meuIcone
                                 })
-                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " <br>" + ponto.stop_name +
+                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " - " + ponto.stop_name +
                                 (ponto.rotas_viagens ? "<br><br><b>Linhas/Viagens:</b><br>" + ponto.rotas_viagens : "")
                                 )
 

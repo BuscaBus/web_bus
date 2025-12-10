@@ -49,7 +49,7 @@ $sql = "SELECT
         JOIN agency ON agency.agency_id = routes.agency_id
         JOIN fare_attributes ON fare_attributes.fare_id = routes.route_group   
         $filtro_sql
-        ORDER BY routes.route_id ASC";
+        ORDER BY agency.agency_name ASC, routes.route_short_name ASC";
 
 $result = mysqli_query($conexao, $sql);
 ?>
