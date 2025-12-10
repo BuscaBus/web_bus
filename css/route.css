@@ -75,6 +75,15 @@ section{
     padding: 4px;
 }
 
+.selc-sit-linha{
+    background-color: #F3F4F0;
+    width: 150px;
+    height: 27px;
+    border-radius: 5px;
+    padding: 2px;   
+    margin-left: 15px;
+}
+
 .a-viagem{
     background-color: blue;
     color: var(--color0);
