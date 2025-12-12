@@ -7,15 +7,20 @@ $sql = "SELECT
             s.stop_name,
             s.stop_lat AS latitude,
             s.stop_lon AS longitude,
+
             GROUP_CONCAT(
-                DISTINCT CONCAT(r.route_short_name, ' - ', t.trip_short_name, '-', t.trip_headsign)
+                DISTINCT CONCAT(r.route_short_name, ' - ', r.route_long_name)
                 SEPARATOR '<br>'
-            ) AS rotas_viagens
+            ) AS rotas
+
         FROM stops s
         LEFT JOIN stop_routes sr ON sr.stop_code = s.stop_code
         LEFT JOIN trips t ON sr.trip_id = t.trip_id
         LEFT JOIN routes r ON t.route_id = r.route_id
-        WHERE s.stop_lat IS NOT NULL AND s.stop_lon IS NOT NULL
+
+        WHERE s.stop_lat IS NOT NULL 
+          AND s.stop_lon IS NOT NULL
+
         GROUP BY s.stop_code
         ORDER BY s.stop_name ASC";
 
@@ -137,7 +142,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             var map = L.map('div-map', {
                 center: [-27.595740, -48.568228],
                 zoom: 13,
-                maxZoom: 18, 
+                maxZoom: 18,
                 layers: [osm]
             });
 
@@ -168,13 +173,14 @@ while ($row = mysqli_fetch_assoc($result)) {
                             var latlng = L.latLng(ponto.latitude, ponto.longitude);
                             if (bounds.contains(latlng)) {
                                 L.marker([ponto.latitude, ponto.longitude], {
-                                    icon: meuIcone
-                                })
-                                .bindPopup("<b>Ponto:</b> " + ponto.stop_code + " - " + ponto.stop_name +
-                                (ponto.rotas_viagens ? "<br><br><b>Linhas/Viagens:</b><br>" + ponto.rotas_viagens : "")
-                                )
+                                        icon: meuIcone
+                                    })
+                                    .bindPopup(
+                                        "<b>Ponto:</b> " + ponto.stop_code + " - " + ponto.stop_name +
+                                        (ponto.rotas ? "<br><br><b>Linhas:</b><br>" + ponto.rotas : "")
+                                    )
 
-                                .addTo(marcadoresBanco);
+                                    .addTo(marcadoresBanco);
                             }
                         }
                     });
