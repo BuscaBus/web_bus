@@ -8,6 +8,7 @@ if (isset($_GET['agency_id'])) {
                    CONCAT(route_short_name, ' - ', route_long_name) AS linha_nome
             FROM routes 
             WHERE agency_id = $agency_id 
+            AND route_status = 'A'
             ORDER BY route_short_name ASC";
     $result = mysqli_query($conexao, $sql);
 
