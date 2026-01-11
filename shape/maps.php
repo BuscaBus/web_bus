@@ -1,7 +1,7 @@
 <?php
 include("../connection.php");
 
-// Pega todos os pontos cadastrados com coordenadas e dados de rota/viagem
+// =================== MARCADORES DO BANCO ===================
 $sql = "SELECT 
             s.stop_code,
             s.stop_name,
@@ -24,7 +24,7 @@ $result = mysqli_query($conexao, $sql);
 
 $marcadores = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $row['latitude'] = floatval($row['latitude']);
+    $row['latitude']  = floatval($row['latitude']);
     $row['longitude'] = floatval($row['longitude']);
     $marcadores[] = $row;
 }
@@ -32,7 +32,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,146 +46,194 @@ while ($row = mysqli_fetch_assoc($result)) {
 </head>
 
 <body>
-    <section>
+<section>
 
-        <form id="form-filtro">
-            <label>Operadora: </label>
-            <select name="operadora" id="selc-op" class="selc-op">
-                <option value="">Selecione a operadora</option>
-                <?php
-                $sql_select = "SELECT agency_id, agency_name FROM agency ORDER BY agency_name ASC";
-                $result_selec = mysqli_query($conexao, $sql_select);
-                while ($dados = mysqli_fetch_array($result_selec)) {
-                    echo "<option value='{$dados['agency_id']}'>{$dados['agency_name']}</option>";
+<form id="form-filtro">
+    <label>Operadora: </label>
+    <select name="operadora" id="selc-op" class="selc-op">
+        <option value="">Selecione a operadora</option>
+        <?php
+        $sql_select = "SELECT agency_id, agency_name FROM agency ORDER BY agency_name ASC";
+        $result_selec = mysqli_query($conexao, $sql_select);
+        while ($dados = mysqli_fetch_array($result_selec)) {
+            echo "<option value='{$dados['agency_id']}'>{$dados['agency_name']}</option>";
+        }
+        ?>
+    </select>
+
+    <label>Linha: </label>
+    <select name="linha" id="selc-linh" class="selc-linh">
+        <option value="">Selecione a linha</option>
+    </select>
+
+    <label>Viagem: </label>
+    <select name="viagem" id="selc-viag" class="selc-viag">
+        <option value="">Selecione a viagem</option>
+    </select>
+
+    <button type="button" class="btn-selec">SELECIONAR</button>
+</form>
+
+<div id="div-map"></div>
+
+<script>
+const marcadoresExistentes = <?php echo json_encode($marcadores, JSON_UNESCAPED_UNICODE); ?>;
+
+// =================== MAPA ===================
+var map = L.map('div-map').setView([-27.595740, -48.568228], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// =================== ÍCONE DINÂMICO ===================
+function getIconSize(zoom) {
+    const minSize = 10;
+    const maxSize = 15;
+    let size = zoom * 3;
+    if (size < minSize) size = minSize;
+    if (size > maxSize) size = maxSize;
+    return [size, size];
+}
+
+function criarIcone(zoom) {
+    const size = getIconSize(zoom);
+    return L.icon({
+        iconUrl: '../img/icon-bus2.png',
+        iconSize: size,
+        iconAnchor: [size[0]/2, size[1]],
+        popupAnchor: [0, -size[1]]
+    });
+}
+
+// =================== MARCADORES EXISTENTES ===================
+var marcadoresBanco = L.layerGroup().addTo(map);
+var zoomMinimo = 17;
+
+function atualizarMarcadores() {
+    marcadoresBanco.clearLayers();
+
+    if (map.getZoom() >= zoomMinimo) {
+        var bounds = map.getBounds();
+
+        marcadoresExistentes.forEach(function(ponto) {
+            if (ponto.latitude && ponto.longitude) {
+                var latlng = L.latLng(ponto.latitude, ponto.longitude);
+                if (bounds.contains(latlng)) {
+                    L.marker([ponto.latitude, ponto.longitude], {
+                        icon: criarIcone(map.getZoom())
+                    })
+                    .bindPopup(
+                        "<b>Ponto:</b> " + ponto.stop_code + "<br>" +
+                        ponto.stop_name +
+                        (ponto.rotas ? "<br><br><b>Linhas:</b><br>" + ponto.rotas : "")
+                    )
+                    .addTo(marcadoresBanco);
                 }
-                ?>
-            </select>
-
-            <label>Linha: </label>
-            <select name="linha" id="selc-linh" class="selc-linh">
-                <option value="">Selecione a linha</option>
-            </select>
-
-            <label>Viagem: </label>
-            <select name="viagem" id="selc-viag" class="selc-viag">
-                <option value="">Selecione a viagem</option>
-            </select>
-
-            <button type="button" class="btn-selec">SELECIONAR</button>
-        </form>
-
-        <div id="div-map"></div>
-
-        <script>
-            // =================== SELECTS ===================
-            document.getElementById('selc-op').addEventListener('change', function() {
-                let selc_linh = document.getElementById('selc-linh');
-                let selc_viag = document.getElementById('selc-viag');
-
-                selc_linh.innerHTML = "<option value=''>Carregando...</option>";
-                selc_viag.innerHTML = "<option value=''>Selecione a viagem</option>";
-
-                if (!this.value) {
-                    selc_linh.innerHTML = "<option value=''>Selecione a linha</option>";
-                    return;
-                }
-
-                fetch('get_linhas.php?agency_id=' + this.value)
-                    .then(r => r.json())
-                    .then(d => {
-                        selc_linh.innerHTML = "<option value=''>Selecione a linha</option>";
-                        d.forEach(l => {
-                            selc_linh.innerHTML += `<option value="${l.route_id}">${l.linha_nome}</option>`;
-                        });
-                    });
-            });
-
-            document.getElementById('selc-linh').addEventListener('change', function() {
-                let selc_viag = document.getElementById('selc-viag');
-                let route_id = this.value;
-
-                selc_viag.innerHTML = "<option value=''>Carregando...</option>";
-
-                fetch('get_viagens.php?route_id=' + route_id)
-                    .then(r => r.json())
-                    .then(d => {
-                        selc_viag.innerHTML = "<option value=''>Selecione a viagem</option>";
-                        d.forEach(v => {
-                            selc_viag.innerHTML += `<option value="${v.trip_id}">${v.viagem_nome}</option>`;
-                        });
-                    });
-
-                if (route_id) {
-                    carregarShapesDaLinha(route_id);
-                }
-            });
-
-            // =================== MAPA ===================
-            var map = L.map('div-map').setView([-27.595740, -48.568228], 13);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-
-            // =================== SHAPES ===================
-            let shapeLayer = L.layerGroup().addTo(map);
-
-            function carregarShapesDaLinha(route_id) {
-                shapeLayer.clearLayers();
-
-                fetch("get_shapes_linha.php?route_id=" + route_id)
-                    .then(r => r.json())
-                    .then(data => {
-                        data.forEach(trip => {
-                            if (trip.pontos.length > 0) {
-                                let cor = (trip.direction_id === 'Ida') ? 'blue' : 'red';
-
-                                let poly = L.polyline(trip.pontos, {
-                                    color: cor,
-                                    weight: 4
-                                }).addTo(shapeLayer);
-
-                                map.fitBounds(poly.getBounds());
-                            }
-                        });
-                    });
             }
+        });
+    }
+}
 
-            // =================== BOTÃO SELECIONAR ===================
-            document.querySelector(".btn-selec").addEventListener("click", function() {
-                let selc_viag = document.getElementById('selc-viag');
-                let trip_id = selc_viag.value;
+map.on('zoomend', atualizarMarcadores);
+map.on('moveend', atualizarMarcadores);
+atualizarMarcadores();
 
-                if (!trip_id) {
-                    alert("Selecione uma viagem!");
-                    return;
+// =================== SHAPES ===================
+let shapeLayer = L.layerGroup().addTo(map);
+
+function carregarShapesDaLinha(route_id) {
+    shapeLayer.clearLayers();
+
+    fetch("get_shapes_linha.php?route_id=" + route_id)
+        .then(r => r.json())
+        .then(data => {
+            data.forEach(trip => {
+                if (trip.pontos.length > 0) {
+                    let cor = (trip.direction_id === 'Ida') ? 'blue' : 'red';
+
+                    let poly = L.polyline(trip.pontos, {
+                        color: cor,
+                        weight: 4
+                    }).addTo(shapeLayer);
+
+                    map.fitBounds(poly.getBounds());
                 }
-
-                shapeLayer.clearLayers();
-
-                fetch("get_shape.php?trip_id=" + trip_id)
-                    .then(r => r.json())
-                    .then(data => {
-                        let cor = (data.direction_id === 'Ida') ? 'blue' : 'red';
-
-                        let poly = L.polyline(data.pontos, {
-                            color: cor,
-                            weight: 4
-                        }).addTo(shapeLayer);
-
-                        map.fitBounds(poly.getBounds());
-                    });
-
             });
-        </script>
+        });
+}
 
-        <p>
-            <button class="btn-reg-cad">
-                <a href="../index.html" class="a-btn-canc">VOLTAR</a>
-            </button>
-        </p>
+// =================== SELECT OPERADORA ===================
+document.getElementById('selc-op').addEventListener('change', function () {
+    let selc_linh = document.getElementById('selc-linh');
+    let selc_viag = document.getElementById('selc-viag');
 
-    </section>
+    selc_linh.innerHTML = "<option value=''>Selecione a linha</option>";
+    selc_viag.innerHTML = "<option value=''>Selecione a viagem</option>";
+
+    if (!this.value) return;
+
+    fetch("get_linhas.php?agency_id=" + this.value)
+        .then(r => r.json())
+        .then(data => {
+            data.forEach(linha => {
+                selc_linh.innerHTML += `<option value="${linha.route_id}">${linha.linha_nome}</option>`;
+            });
+        });
+});
+
+// =================== SELECT LINHA ===================
+document.getElementById('selc-linh').addEventListener('change', function () {
+    let route_id = this.value;
+    let selc_viag = document.getElementById('selc-viag');
+
+    selc_viag.innerHTML = "<option value=''>Selecione a viagem</option>";
+
+    if (!route_id) return;
+
+    fetch("get_viagens.php?route_id=" + route_id)
+        .then(r => r.json())
+        .then(data => {
+            data.forEach(v => {
+                selc_viag.innerHTML += `<option value="${v.trip_id}">${v.viagem_nome}</option>`;
+            });
+        });
+
+    carregarShapesDaLinha(route_id);
+});
+
+// =================== BOTÃO SELECIONAR ===================
+document.querySelector(".btn-selec").addEventListener("click", function () {
+    let trip_id = document.getElementById('selc-viag').value;
+
+    if (!trip_id) {
+        alert("Selecione uma viagem!");
+        return;
+    }
+
+    shapeLayer.clearLayers();
+
+    fetch("get_shape.php?trip_id=" + trip_id)
+        .then(r => r.json())
+        .then(data => {
+            let cor = (data.direction_id === 'Ida') ? 'blue' : 'red';
+
+            let poly = L.polyline(data.pontos, {
+                color: cor,
+                weight: 4
+            }).addTo(shapeLayer);
+
+            map.fitBounds(poly.getBounds());
+        });
+});
+</script>
+
+<p>
+    <button class="btn-reg-cad">
+        <a href="../index.html" class="a-btn-canc">VOLTAR</a>
+    </button>
+</p>
+
+</section>
 </body>
-
 </html>
