@@ -11,7 +11,7 @@
    
 
     // Consulta no banco de dados para exibir na tabela
-    $sql = "SELECT *, FORMAT(price, 2) AS price_format, DATE_FORMAT(update_date, '%d/%m/%Y') AS data_format FROM fare_attributes $filtro_sql";
+    $sql = "SELECT *, FORMAT(price, 2) AS price_format, DATE_FORMAT(update_date, '%d/%m/%Y') AS data_format FROM fare_attributes $filtro_sql ORDER BY route_group ASC";
     $result = mysqli_query($conexao, $sql);    
     
     ?>
@@ -55,7 +55,7 @@
                     <select name="pesquisar" class="selec-pesq">
                         <option>Selecione um tipo de tarifa</option>;
                         <?php
-                            $sql_select = "SELECT * FROM fare_attributes";
+                            $sql_select = "SELECT * FROM fare_attributes ORDER BY route_group ASC";
                             $result_selec = mysqli_query($conexao, $sql_select);
 
                             while($dados = mysqli_fetch_array($result_selec)){

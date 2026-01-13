@@ -3,9 +3,15 @@ include("../connection.php");
 
 $filtro_sql = "";
 
-// Filtro por Operadora (POST)
-if ($_POST != NULL && isset($_POST["pesquisar"])) {
-    $filtro = $_POST["pesquisar"];
+// Filtro por Operadora (POST ou GET)
+if (
+    (isset($_POST["pesquisar"]) && $_POST["pesquisar"] != "") ||
+    (isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "")
+) {
+    $filtro = isset($_POST["pesquisar"])
+        ? $_POST["pesquisar"]
+        : $_GET["pesquisar"];
+
     $filtro_sql = "WHERE agency_name = '$filtro'";
 }
 
@@ -15,18 +21,13 @@ if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
     $filtro_sql .= (empty($filtro_sql) ? " WHERE " : " AND ") . "routes.route_long_name LIKE '%$pesquisa%'";
 }
 
-// Filtro por Status com padrão = ATIVA
-if (isset($_GET['sit_linha']) && $_GET['sit_linha'] != "") {
-    // Se usuário escolheu no filtro
+// Filtro por Status (Todas como padrão)
+if (isset($_GET['sit_linha']) && $_GET['sit_linha'] != "" && $_GET['sit_linha'] != "Todas") {
     $status = ($_GET['sit_linha'] == "Ativa") ? "A" : "I";
+    $filtro_sql .= (empty($filtro_sql) ? " WHERE " : " AND ") . "routes.route_status = '$status'";
 } else {
-    // Se não escolheu nada → padrão = Ativa
-    $status = "A";
-    $_GET['sit_linha'] = "Ativa"; // Mantém selecionado no HTML
+    $_GET['sit_linha'] = "Todas"; // mantém selecionado no HTML
 }
-
-$filtro_sql .= (empty($filtro_sql) ? " WHERE " : " AND ") . "routes.route_status = '$status'";
-
 
 // Consulta principal
 $sql = "SELECT 
@@ -113,12 +114,19 @@ $result = mysqli_query($conexao, $sql);
                     </form>
                     <!-- Select com a opção de linha ATIVA/INATIVA -->
                     <form method="GET">
-                        <select name="sit_linha" class="selc-sit-linha" id="id-sit-linha">                            
+                        <?php if (isset($filtro)) { ?>
+                            <input type="hidden" name="pesquisar" value="<?= $filtro ?>">
+                        <?php } ?>
+
+                        <select name="sit_linha" class="selc-sit-linha" id="id-sit-linha">
+                            <option value="Todas" <?= (!isset($_GET['sit_linha']) || $_GET['sit_linha'] == "Todas") ? "selected" : "" ?>>Todas</option>
                             <option value="Ativa" <?= (isset($_GET['sit_linha']) && $_GET['sit_linha'] == "Ativa") ? "selected" : "" ?>>Ativas</option>
                             <option value="Inativa" <?= (isset($_GET['sit_linha']) && $_GET['sit_linha'] == "Inativa") ? "selected" : "" ?>>Inativas</option>
                         </select>
+
                         <button type="submit" class="btn-pesq">FILTRAR</button>
                     </form>
+
 
                 </nav>
                 <hr>
