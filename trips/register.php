@@ -1,6 +1,9 @@
 <?php
 include("../connection.php");
 
+// Serviço padrão (evita Undefined array key)
+$servicoSelecionado = $_GET['servico'] ?? "Segunda a Sexta";
+
 // Declaração da variavel para receber o ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Erro: ID não informado ou inválido.");
@@ -37,7 +40,7 @@ $result_id = mysqli_fetch_assoc($result);
     <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css?v=1.2">
     <link rel="stylesheet" href="../css/table.css?v=1.0">
-    <link rel="stylesheet" href="../css/trips.css?v=1.4">
+    <link rel="stylesheet" href="../css/trips.css?v=1.5">
 </head>
 
 <body>
@@ -114,22 +117,50 @@ $result_id = mysqli_fetch_assoc($result);
             <section class="sect-list-viag">
                 <br>
                 <table>
+                    <form method="GET">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+
+                        <select name="servico" class="selc-serv" id="id-serv">
+                            <option value="Todas" <?= ($servicoSelecionado == "Todas") ? "selected" : "" ?>>Todas</option>
+                            <option value="Segunda a Sexta" <?= ($servicoSelecionado == "Segunda a Sexta") ? "selected" : "" ?>>Segunda a Sexta</option>
+                            <option value="Sábado" <?= ($servicoSelecionado == "Sábado") ? "selected" : "" ?>>Sábado</option>
+                            <option value="Domingo e Feriado" <?= ($servicoSelecionado == "Domingo e Feriado") ? "selected" : "" ?>>Domingo e Feriado</option>
+                        </select>
+                        <button type="submit" class="btn-pesq-serv">FILTRAR</button>
+                    </form>
+
                     <caption class="cap-list-vig">Relação de viagens</caption>
                     <thead>
                         <th class="th-serv">Serviço</th>
-                        <th class="th-viag">Viagem</th>                        
+                        <th class="th-viag">Viagem</th>
                         <th class="th-sent">Sentido</th>
                         <th class="th-part">Partida</th>
                         <th class="th-acoes">Ações</th>
                     </thead>
                     <?php
+                    // Serviço padrão: Segunda a Sexta
+                    if (!isset($_GET['servico']) || $_GET['servico'] == "") {
+                        $_GET['servico'] = "Segunda a Sexta";
+                    }
+
                     // Consulta no banco de dados para exibir na tabela de viagens 
+                    $filtro_servico = "";
+
+                    $filtro_servico = "";
+
+                    if ($servicoSelecionado != "Todas") {
+                        $servico = mysqli_real_escape_string($conexao, $servicoSelecionado);
+                        $filtro_servico = "AND service_id = '$servico'";
+                    }
+
+
                     $sql = "SELECT route_id, trip_id, service_id, trip_headsign, trip_short_name, direction_id, departure_location 
                             FROM trips 
-                            WHERE route_id = $id 
+                            WHERE route_id = $id
+                            $filtro_servico
                             ORDER BY service_id DESC, direction_id ASC";
                     $result = mysqli_query($conexao, $sql);
-                 
+
                     $first_trip_id = null; // salvar a primeira viagem
 
                     while ($sql_result = mysqli_fetch_array($result)) {
@@ -145,38 +176,41 @@ $result_id = mysqli_fetch_assoc($result);
                         $sentido   = $sql_result['direction_id'];
                         $partida   = $sql_result['departure_location'];
                     ?>
-                    <tbody>
-                        <tr>
-                            <td><?= $servico ?></td>
-                            <td><?= $origem ?> - <?= $destino ?></td>                            
-                            <td><?= $sentido ?></td>
-                            <td><?= $partida ?></td>
-                            <td>
-                                <form action="delete.php" method="POST">
-                                    <input type="hidden" name="id" value="<?= $id_trip ?>">
-                                    <input type="hidden" name="id-route" value="<?= $id_route ?>">
-                                    <a href="../stop_times/register.php?id=<?= $id_trip ?>" class="a-horario" id="a-hor">PARTIDAS</a>                                    
-                                    <a href="../stop_times/maps_trips.php?id=<?= $id_trip ?>" class="a-mapa" id="a-traj">MAPA</a>                                    
-                                    <a href="edit.php?id=<?= $id_trip ?>" class="a-editar" id="a-edit">EDITAR</a>
-                                    <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
+                        <tbody>
+                            <tr>
+                                <td><?= $servico ?></td>
+                                <td><?= $origem ?> - <?= $destino ?></td>
+                                <td><?= $sentido ?></td>
+                                <td><?= $partida ?></td>
+                                <td>
+                                    <form action="delete.php" method="POST">
+                                        <input type="hidden" name="id" value="<?= $id_trip ?>">
+                                        <input type="hidden" name="id-route" value="<?= $id_route ?>">
+                                        <a href="../stop_times/register.php?id=<?= $id_trip ?>" class="a-horario" id="a-hor">PARTIDAS</a>
+                                        <a href="../stop_times/maps_trips.php?id=<?= $id_trip ?>" class="a-mapa" id="a-traj">MAPA</a>
+                                        <a href="edit.php?id=<?= $id_trip ?>" class="a-editar" id="a-edit">EDITAR</a>
+                                        <button class="btn-excluir" onclick="return deletar()">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
                     <?php } ?>
                 </table>
-                <br>        
+                <br>
                 <?php if ($first_trip_id): ?>
-                <form method="POST">
-                    <a href="../stop_routes/register.php?id=<?= $first_trip_id ?>" class="a-trajeto" id="a-traj">PONTOS DO TRAJETO</a>
-                </form>
+                    <form method="POST">
+                        <a href="../stop_routes/register.php?id=<?= $first_trip_id ?>" class="a-trajeto" id="a-traj">PONTOS DO TRAJETO</a>
+                    </form>
                 <?php endif; ?>
             </section>
 
         </main>
         <footer>
-            <p><a href="../route/list.php">< Voltar</a></p>
+            <p><a href="../route/list.php">
+                    < Voltar</a>
+            </p>
         </footer>
     </div>
 </body>
+
 </html>

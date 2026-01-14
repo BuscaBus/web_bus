@@ -15,10 +15,14 @@ if (
     $filtro_sql = "WHERE agency_name = '$filtro'";
 }
 
-// Filtro por nome da linha (GET)
+// Filtro por nome da linha ou código (GET)
 if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
     $pesquisa = mysqli_real_escape_string($conexao, $_GET['buscar']);
-    $filtro_sql .= (empty($filtro_sql) ? " WHERE " : " AND ") . "routes.route_long_name LIKE '%$pesquisa%'";
+    $filtro_sql .= (empty($filtro_sql) ? " WHERE " : " AND ") . "(
+    routes.route_long_name LIKE '%$pesquisa%' 
+    OR routes.route_short_name LIKE '%$pesquisa%'
+)";
+
 }
 
 // Filtro por Status (Todas como padrão)
