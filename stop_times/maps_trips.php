@@ -4,7 +4,7 @@ include("../connection.php");
 $trip_inicial_id = (int)($_GET['id'] ?? 0);
 
 // Dados da trip inicial
-$viagem = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT route_id, trip_headsign, trip_short_name, shape_id FROM trips WHERE trip_id = $trip_inicial_id"));
+$viagem = mysqli_fetch_assoc(mysqli_query($conexao, "SELECT route_id, service_id, trip_headsign, trip_short_name, shape_id FROM trips WHERE trip_id = $trip_inicial_id"));
 $route_id = $viagem['route_id'] ?? 0;
 
 // Todas trips da mesma rota para o select (excluindo os duplicados)
@@ -42,14 +42,14 @@ $res_trips = mysqli_query($conexao, "
         </header>
         <main>
             <section>
-                 <h3>Viagem: <?= htmlspecialchars($viagem['trip_short_name']) ?> - <?= htmlspecialchars($viagem['trip_headsign']) ?></h3>
+                 <h3>Viagem: <?= htmlspecialchars($viagem['trip_short_name']) ?> - <?= htmlspecialchars($viagem['trip_headsign']) ?> - <?= htmlspecialchars($viagem['service_id']) ?></h3>
                 <br>                
                 <label for="tripSelect">Viagem:</label>
                 <select id="tripSelect" class="selc-viag">
                     <option value="" selected disabled>Selecione uma viagem</option>
                     <?php while ($t = mysqli_fetch_assoc($res_trips)) { ?>
                         <option value="<?= $t['trip_id'] ?>">
-                            <?= $t['trip_short_name'] ?> - <?= $t['trip_headsign'] ?>
+                            <?= $t['trip_short_name'] ?> - <?= $t['trip_headsign'] ?> 
                         </option>
                     <?php } ?>
                 </select>

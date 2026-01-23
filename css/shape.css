@@ -80,3 +80,16 @@ section{
     color: inherit;
 }
 
+/* Popup do Leaflet */
+.popup-ponto {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Área com scroll das linhas */
+.popup-linhas {
+    max-height: 200px; /* ~10 linhas */
+    overflow-y: auto;
+    margin-top: 5px;
+    padding-right: 5px;
+}
