@@ -8,7 +8,6 @@ if ($_POST != NULL) {
     $filtro_sql = "WHERE agency_name ='$filtro'";
 }
 
-// xxxxx
 
 // Paginação
 $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1; //Verificar se está passando na URL a página
@@ -54,7 +53,7 @@ $total_itens = mysqli_num_rows($result_itens);
 <body>
     <div>
         <header>
-            <h1>Operadoras cadastradas</h1>
+            <h1>Operadoras</h1>
         </header>
         <main>
             <section>
